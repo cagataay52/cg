@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hesabım - PradaBet</title>
+  <style>
+    body {
+      background: #121212;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .account-box {
+      background: #222;
+      padding: 40px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px #0ff5;
+      width: 350px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #0ff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 8px #0ff;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 12px 20px;
+      background-color: #0ff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #121212;
+      font-size: 16px;
+      box-shadow: 0 0 10px #0ff;
+      transition: background-color 0.3s ease;
+      margin-top: 25px;
+    }
+
+    button:hover {
+      background-color: #08c;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="account-box">
+    <h2>Hesabım</h2>
+    <p><strong>Kullanıcı Adı:</strong> <span id="username">Yükleniyor...</span></p>
+    <p><strong>Bakiye:</strong> <span id="balance">Yükleniyor...</span> TL</p>
+    <button onclick="logout()">Çıkış Yap</button>
+  </div>
+
+  <script>
+    let kullanici = JSON.parse(localStorage.getItem('kullanici'));
+    let bakiye = parseInt(localStorage.getItem('bakiye'));
+
+    if (!kullanici) {
+      alert('Lütfen önce giriş yapınız.');
+      window.location.href = 'giris.html';
+    } else {
+      document.getElementById('username').textContent = kullanici.username;
+      document.getElementById('balance').textContent = bakiye;
+    }
+
+    function logout() {
+      localStorage.removeItem('kullanici');
+      localStorage.removeItem('bakiye');
+      alert('Başarıyla çıkış yaptınız.');
+      window.location.href = 'index.html';
+    }
+  </script>
+
+</body>
+</html>
