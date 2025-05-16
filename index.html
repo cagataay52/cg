@@ -1,137 +1,202 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <title>Yazı Tura Oyunu</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
-
-  body {
-    font-family: 'Orbitron', sans-serif;
-    background: radial-gradient(circle at top, #1a1a1a, #000);
-    color: #fff;
-    text-align: center;
-    padding-top: 50px;
-  }
-
-  .box {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 2px solid #00ffff;
-    box-shadow: 0 0 15px #00ffff88;
-    padding: 30px;
-    border-radius: 15px;
-    display: inline-block;
-    transition: transform 0.3s ease;
-  }
-
-  .box:hover {
-    transform: scale(1.02);
-  }
-
-  input, select, button {
-    margin: 10px;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 16px;
-  }
-
-  input, select {
-    width: 200px;
-    background-color: #222;
-    color: #fff;
-  }
-
-  button {
-    background-color: #00ffff;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 10px #00ffffaa;
-  }
-
-  button:hover {
-    background-color: #00cccc;
-  }
-
-  h1 {
-    font-size: 32px;
-    text-shadow: 0 0 8px #00ffff;
-    animation: glow 2s infinite alternate;
-  }
-
-  @keyframes glow {
-    from {
-      text-shadow: 0 0 8px #00ffff;
+  <meta charset="UTF-8" />
+  <title>PradaBet - Ana Sayfa</title>
+  <style>
+    /* Genel sıfırlama */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    to {
-      text-shadow: 0 0 20px #00ffff;
-    }
-  }
-</style>
 
+    body {
+      background: #121212;
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Üst araç çubuğu */
+    header {
+      background-color: #1f1f1f;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0ff;
+      letter-spacing: 2px;
+      cursor: pointer;
+    }
+
+    nav button {
+      background-color: #0ff;
+      border: none;
+      color: #121212;
+      font-weight: 600;
+      padding: 10px 18px;
+      margin-left: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    nav button:hover {
+      background-color: #08c;
+      color: white;
+    }
+
+    /* Ana içerik alanı */
+    main {
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      background: #181818;
+    }
+
+    /* Oyun kartları */
+    .game-card {
+      background: #222;
+      border-radius: 15px;
+      width: 260px;
+      box-shadow: 0 0 15px #0ff5;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+    }
+
+    .game-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #0ff;
+    }
+
+    .game-card img {
+      width: 220px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+
+    .game-card h3 {
+      color: #0ff;
+      margin-bottom: 10px;
+      font-size: 20px;
+      text-shadow: 0 0 6px #0ff;
+    }
+
+    /* Bakiye gösterimi */
+    #balance-display {
+      font-weight: 700;
+      color: #0f0;
+      margin-left: 15px;
+      font-size: 17px;
+    }
+  </style>
 </head>
 <body>
-  <div class="box">
-    <h1>🪙 Yazı-Tura Bahis Oyunu</h1>
-    <p>Bakiye: <span id="balance">0</span> TL</p>
 
-    <label>Tahmin:</label>
-    <select id="choice">
-      <option value="yazı">Yazı</option>
-      <option value="tura">Tura</option>
-    </select><br>
+  <header>
+    <div class="logo" onclick="location.href='index.html'">PradaBet</div>
+    <nav id="nav-buttons">
+      <!-- Buraya JS ile butonlar gelecek -->
+    </nav>
+  </header>
 
-    <label>Bahis:</label>
-    <input type="number" id="bet" placeholder="Örn: 100"><br>
+  <main>
+    <div class="game-card" onclick="goToGame('yazi-tura.html')">
+      <img src="https://i.imgur.com/1fYs7ZM.jpg" alt="Yazı-Tura Oyunu" />
+      <h3>Yazı-Tura</h3>
+      <p>Şansınızı deneyin, kazanın!</p>
+    </div>
 
-    <button onclick="oyna()">Oyna</button>
+    <div class="game-card" onclick="goToGame('zar.html')">
+      <img src="https://i.imgur.com/7UAv4kp.jpg" alt="Zar Oyunu" />
+      <h3>Zar Atma</h3>
+      <p>1-6 arasında tahmin edin!</p>
+    </div>
 
-    <p id="sonuc"></p>
-  </div>
+    <div class="game-card" onclick="goToGame('slot.html')">
+      <img src="https://i.imgur.com/4XQIbWe.jpg" alt="Slot Oyunu" />
+      <h3>Slot Makinesi</h3>
+      <p>3 aynı sembolü yakalayın!</p>
+    </div>
+  </main>
 
   <script>
-    let bakiye = localStorage.getItem("bakiye");
-    if (!bakiye) {
-      bakiye = 1000;
-      localStorage.setItem("bakiye", bakiye);
-    }
+    // Kullanıcı bilgisi ve bakiye (localStorage'dan alınır)
+    let kullanici = JSON.parse(localStorage.getItem('kullanici')) || null;
+    let bakiye = parseInt(localStorage.getItem('bakiye')) || 1000;
 
-    function bakiyeGuncelle() {
-      document.getElementById("balance").innerText = bakiye;
-    }
+    // Nav butonlarını güncelle
+    function guncelleNav() {
+      const nav = document.getElementById('nav-buttons');
+      nav.innerHTML = '';
 
-    function oyna() {
-      const tahmin = document.getElementById("choice").value;
-      const bahis = parseInt(document.getElementById("bet").value);
-      const sonucAlani = document.getElementById("sonuc");
+      if (kullanici) {
+        // Giriş yapılmış
+        const bakiyeSpan = document.createElement('span');
+        bakiyeSpan.id = 'balance-display';
+        bakiyeSpan.textContent = `Bakiye: ${bakiye} TL`;
+        nav.appendChild(bakiyeSpan);
 
-      if (!bahis || bahis <= 0) {
-        sonucAlani.innerText = "⚠️ Lütfen geçerli bir bahis girin.";
-        return;
-      }
+        const hesapBtn = document.createElement('button');
+        hesapBtn.textContent = 'Hesabım';
+        hesapBtn.onclick = () => location.href = 'hesabim.html';
+        nav.appendChild(hesapBtn);
 
-      if (bahis > bakiye) {
-        sonucAlani.innerText = "⚠️ Bu kadar bakiyen yok.";
-        return;
-      }
-
-      const sonuc = Math.random() < 0.5 ? "yazı" : "tura";
-
-      if (tahmin === sonuc) {
-        bakiye = parseInt(bakiye) + bahis;
-        sonucAlani.innerText = `✅ Kazandın! Sonuç: ${sonuc}`;
+        const cikisBtn = document.createElement('button');
+        cikisBtn.textContent = 'Çıkış Yap';
+        cikisBtn.onclick = () => {
+          localStorage.removeItem('kullanici');
+          localStorage.removeItem('bakiye');
+          kullanici = null;
+          bakiye = 1000;
+          localStorage.setItem('bakiye', bakiye);
+          guncelleNav();
+        };
+        nav.appendChild(cikisBtn);
       } else {
-        bakiye = parseInt(bakiye) - bahis;
-        sonucAlani.innerText = `❌ Kaybettin! Sonuç: ${sonuc}`;
-      }
+        // Giriş yapılmamış
+        const girisBtn = document.createElement('button');
+        girisBtn.textContent = 'Giriş Yap';
+        girisBtn.onclick = () => location.href = 'giris.html';
+        nav.appendChild(girisBtn);
 
-      localStorage.setItem("bakiye", bakiye);
-      bakiyeGuncelle();
+        const kayitBtn = document.createElement('button');
+        kayitBtn.textContent = 'Kayıt Ol';
+        kayitBtn.onclick = () => location.href = 'kayit.html';
+        nav.appendChild(kayitBtn);
+      }
     }
 
-    bakiyeGuncelle();
+    // Oyun kartına tıklayınca yönlendirme
+    function goToGame(url) {
+      if (!kullanici) {
+        alert('Önce giriş yapmalısınız!');
+        location.href = 'giris.html';
+        return;
+      }
+      location.href = url;
+    }
+
+    guncelleNav();
   </script>
 </body>
 </html>
