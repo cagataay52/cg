@@ -83,12 +83,20 @@
   .slide {
     flex: 0 0 100%;
     position: relative;
+
+    /* Yeni eklenenler: */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
 
   .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* veya 'cover' istersen değiştirebilirsin */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
     background-color: #0a0a0a;
   }
 
