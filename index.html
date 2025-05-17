@@ -50,6 +50,9 @@
       box-shadow: 0 0 10px #0ff3;
       cursor: pointer;
       transition: 0.3s;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
     }
 
     .game:hover {
@@ -73,9 +76,9 @@
 
 <!-- OYUNLAR -->
 <div class="games">
-  <div class="game" onclick="alert('Sweet Bonanza açılıyor...')">🎮 Sweet Bonanza</div>
-  <div class="game" onclick="alert('Aviator açılıyor...')">✈️ Aviator</div>
-  <div class="game" onclick="alert('Black Jack açılıyor...')">🃏 Black Jack</div>
+  <a href="sweet-bonanza.html" class="game">🎮 Sweet Bonanza</a>
+  <a href="aviator.html" class="game">✈️ Aviator</a>
+  <a href="blackjack.html" class="game">🃏 Black Jack</a>
 </div>
 
 <!-- JAVASCRIPT -->
@@ -90,7 +93,7 @@
   const btnKayit = document.getElementById('btnKayit');
 
   if (kullanici) {
-    welcomeMsg.textContent = `${kullanici.username} - Bakiye: ${bakiye} TL`;
+    welcomeMsg.textContent = `${kullanici.username} - Bakiye: ${bakiye || 0} TL`;
     btnHesap.style.display = 'inline-block';
     btnCikis.style.display = 'inline-block';
     btnGiris.style.display = 'none';
