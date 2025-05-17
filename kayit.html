@@ -3,153 +3,259 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PradaBet - Kayıt Ol</title>
+<title>Kayıt Ol - PradaBet</title>
 <style>
   body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #3e007c, #9c27b0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #eee;
+    margin: 0; padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
   }
-  .container {
-    background: rgba(58, 0, 108, 0.9);
-    padding: 40px 50px;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(184, 67, 243, 0.7);
-    width: 100%;
-    max-width: 400px;
+
+  .register-container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px 40px;
+    border-radius: 15px;
+    width: 360px;
+    box-shadow: 0 8px 30px rgba(184, 67, 243, 0.7);
   }
-  h2 {
-    margin-bottom: 30px;
-    font-weight: 700;
-    font-size: 28px;
+
+  .register-container h2 {
     text-align: center;
-    color: #d8b3ff;
-    text-shadow: 0 0 10px #b833ff;
-  }
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-  }
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 10px;
-    background: #6f00b3;
-    color: #eee;
-    font-size: 15px;
-    outline: none;
-    box-sizing: border-box;
-    transition: background 0.3s ease;
-  }
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  input[type="password"]:focus {
-    background: #9c27b0;
-  }
-  button {
-    width: 100%;
-    padding: 14px;
-    background: #b833ff;
-    border: none;
-    border-radius: 12px;
+    margin-bottom: 25px;
     font-weight: 700;
-    font-size: 18px;
+    color: #d471ff;
+  }
+
+  form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: #3a027a;
+    color: #eee;
+    transition: box-shadow 0.3s ease;
+  }
+
+  form input[type="text"]:focus,
+  form input[type="email"]:focus,
+  form input[type="password"]:focus {
+    box-shadow: 0 0 8px #d471ff;
+  }
+
+  .password-wrapper {
+    position: relative;
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background: transparent;
+    border: none;
+    color: #d471ff;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .password-strength {
+    font-size: 13px;
+    margin-top: -12px;
+    margin-bottom: 18px;
+    font-weight: 700;
+  }
+  .strength-weak {
+    color: #ff3b3b;
+  }
+  .strength-medium {
+    color: #ffd93b;
+  }
+  .strength-strong {
+    color: #4cff4c;
+  }
+
+  .terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .terms input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .terms label {
+    font-size: 13px;
+    color: #ccc;
+    cursor: pointer;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 30px;
+    border: none;
+    background: #b833ff;
     color: #fff;
+    font-weight: 700;
+    font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  button:hover {
-    background: #d471ff;
+  button[type="submit"]:hover {
+    background: #9a24d6;
   }
-  .alt-text {
-    margin-top: 22px;
-    font-size: 14px;
+
+  .error-msg {
+    color: #ff6b6b;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  .success-msg {
+    color: #4cff4c;
+    font-weight: 700;
     text-align: center;
-    color: #c8aaff;
-  }
-  .alt-text a {
-    color: #f5d1ff;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  .alt-text a:hover {
-    text-decoration: underline;
+    margin-top: 15px;
   }
 </style>
 </head>
 <body>
 
-<div class="container" role="main" aria-label="Kayıt Formu">
-  <h2>PradaBet Kayıt Ol</h2>
+<div class="register-container">
+  <h2>PradaBet Kayıt</h2>
   <form id="registerForm" novalidate>
-    <label for="username">Kullanıcı Adı</label>
-    <input type="text" id="username" name="username" required />
+    <label for="name">Adınız</label>
+    <input type="text" id="name" name="name" required placeholder="Adınızı girin" />
+
+    <label for="surname">Soyadınız</label>
+    <input type="text" id="surname" name="surname" required placeholder="Soyadınızı girin" />
 
     <label for="email">E-posta</label>
-    <input type="email" id="email" name="email" required />
+    <input type="email" id="email" name="email" required placeholder="E-posta adresinizi girin" />
+
+    <label for="username">Kullanıcı Adı</label>
+    <input type="text" id="username" name="username" required placeholder="Kullanıcı adı belirleyin" />
 
     <label for="password">Şifre</label>
-    <input type="password" id="password" name="password" required />
+    <div class="password-wrapper">
+      <input type="password" id="password" name="password" required placeholder="Şifre belirleyin" />
+      <button type="button" class="toggle-password" tabindex="-1">Göster</button>
+    </div>
+    <div id="passwordStrength" class="password-strength"></div>
 
-    <label for="passwordConfirm">Şifre Tekrar</label>
-    <input type="password" id="passwordConfirm" name="passwordConfirm" required />
+    <label for="confirmPassword">Şifre Tekrar</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Şifrenizi tekrar girin" />
+
+    <div class="terms">
+      <input type="checkbox" id="terms" required />
+      <label for="terms">Kullanıcı Sözleşmesini ve Gizlilik Politikasını okudum, kabul ediyorum.</label>
+    </div>
 
     <button type="submit">Kayıt Ol</button>
+    <div id="formMessage" role="alert"></div>
   </form>
-  <div class="alt-text">
-    Zaten hesabın var mı? <a href="giris.html">Giriş Yap</a>
-  </div>
 </div>
 
 <script>
   const form = document.getElementById('registerForm');
+  const togglePasswordBtn = form.querySelector('.toggle-password');
+  const passwordInput = form.password;
+  const confirmPasswordInput = form.confirmPassword;
+  const passwordStrength = document.getElementById('passwordStrength');
+  const formMessage = document.getElementById('formMessage');
 
+  // Şifre göster/gizle
+  togglePasswordBtn.addEventListener('click', () => {
+    if(passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      togglePasswordBtn.textContent = 'Gizle';
+    } else {
+      passwordInput.type = 'password';
+      togglePasswordBtn.textContent = 'Göster';
+    }
+  });
+
+  // Şifre güç kontrol fonksiyonu
+  function checkPasswordStrength(password) {
+    let strength = 0;
+    if(password.length >= 8) strength++;
+    if(/[A-Z]/.test(password)) strength++;
+    if(/[0-9]/.test(password)) strength++;
+    if(/[\W]/.test(password)) strength++;
+
+    switch(strength) {
+      case 0:
+      case 1:
+        return {text: 'Zayıf', className: 'strength-weak'};
+      case 2:
+      case 3:
+        return {text: 'Orta', className: 'strength-medium'};
+      case 4:
+        return {text: 'Güçlü', className: 'strength-strong'};
+    }
+  }
+
+  passwordInput.addEventListener('input', e => {
+    const val = e.target.value;
+    const strength = checkPasswordStrength(val);
+    if(val) {
+      passwordStrength.textContent = `Şifre Gücü: ${strength.text}`;
+      passwordStrength.className = 'password-strength ' + strength.className;
+    } else {
+      passwordStrength.textContent = '';
+      passwordStrength.className = 'password-strength';
+    }
+  });
+
+  // Form gönderme
   form.addEventListener('submit', e => {
     e.preventDefault();
+    formMessage.textContent = '';
+    formMessage.className = '';
 
-    const username = form.username.value.trim();
-    const email = form.email.value.trim();
-    const password = form.password.value;
-    const passwordConfirm = form.passwordConfirm.value;
-
-    if (!username) {
-      alert('Lütfen kullanıcı adınızı girin.');
-      form.username.focus();
-      return;
-    }
-    if (!email) {
-      alert('Lütfen e-posta adresinizi girin.');
-      form.email.focus();
-      return;
-    }
-    if (!password) {
-      alert('Lütfen şifrenizi girin.');
-      form.password.focus();
-      return;
-    }
-    if (password !== passwordConfirm) {
-      alert('Şifreler eşleşmiyor.');
-      form.passwordConfirm.focus();
+    // Basit doğrulamalar
+    if(form.password.value !== form.confirmPassword.value) {
+      formMessage.textContent = 'Şifreler eşleşmiyor!';
+      formMessage.className = 'error-msg';
+      confirmPasswordInput.focus();
       return;
     }
 
-    // Buraya gerçek kayıt işlemi için API çağrısı yapılabilir
-    alert(`Kayıt başarılı! Hoşgeldin, ${username}`);
+    if(!form.terms.checked) {
+      formMessage.textContent = 'Lütfen kullanıcı sözleşmesini kabul edin.';
+      formMessage.className = 'error-msg';
+      return;
+    }
 
-    // Örnek olarak localStorage'a kullanıcı kaydedelim
-    localStorage.setItem('kullanici', JSON.stringify({username}));
-    localStorage.setItem('bakiye', '0');
-    window.location.href = 'index.html'; // Ana sayfaya yönlendir
+    // Burada gerçek bir backend bağlantısı yapılmalı
+    // Şimdilik simülasyon:
+    formMessage.textContent = 'Kayıt başarılı! Yönlendiriliyorsunuz...';
+    formMessage.className = 'success-msg';
+
+    setTimeout(() => {
+      window.location.href = 'giris.html';
+    }, 2500);
   });
 </script>
 
