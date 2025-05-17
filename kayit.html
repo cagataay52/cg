@@ -1,108 +1,157 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Kayıt Ol - PradaBet</title>
-  <style>
-    body {
-      background: #121212;
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-
-    .register-box {
-      background: #222;
-      padding: 40px 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 20px #0ff5;
-      width: 320px;
-      text-align: center;
-    }
-
-    h2 {
-      color: #0ff;
-      margin-bottom: 30px;
-      text-shadow: 0 0 8px #0ff;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      background-color: #333;
-      color: #fff;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #0ff;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      color: #121212;
-      font-size: 16px;
-      box-shadow: 0 0 10px #0ff;
-      transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-      background-color: #08c;
-      color: white;
-    }
-
-    p {
-      margin-top: 20px;
-      font-size: 14px;
-    }
-
-    a {
-      color: #0ff;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PradaBet - Kayıt Ol</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #3e007c, #9c27b0);
+    color: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .container {
+    background: rgba(58, 0, 108, 0.9);
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(184, 67, 243, 0.7);
+    width: 100%;
+    max-width: 400px;
+  }
+  h2 {
+    margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 28px;
+    text-align: center;
+    color: #d8b3ff;
+    text-shadow: 0 0 10px #b833ff;
+  }
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #6f00b3;
+    color: #eee;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+    transition: background 0.3s ease;
+  }
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    background: #9c27b0;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #b833ff;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #d471ff;
+  }
+  .alt-text {
+    margin-top: 22px;
+    font-size: 14px;
+    text-align: center;
+    color: #c8aaff;
+  }
+  .alt-text a {
+    color: #f5d1ff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .alt-text a:hover {
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
-  <div class="register-box">
-    <h2>Kayıt Ol</h2>
-    <input type="text" id="username" placeholder="Kullanıcı Adı" />
-    <input type="password" id="password" placeholder="Şifre" />
-    <button onclick="register()">Kayıt Ol</button>
-    <p>Zaten üye misiniz? <a href="giris.html">Giriş Yap</a></p>
+
+<div class="container" role="main" aria-label="Kayıt Formu">
+  <h2>PradaBet Kayıt Ol</h2>
+  <form id="registerForm" novalidate>
+    <label for="username">Kullanıcı Adı</label>
+    <input type="text" id="username" name="username" required />
+
+    <label for="email">E-posta</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="password">Şifre</label>
+    <input type="password" id="password" name="password" required />
+
+    <label for="passwordConfirm">Şifre Tekrar</label>
+    <input type="password" id="passwordConfirm" name="passwordConfirm" required />
+
+    <button type="submit">Kayıt Ol</button>
+  </form>
+  <div class="alt-text">
+    Zaten hesabın var mı? <a href="giris.html">Giriş Yap</a>
   </div>
+</div>
 
-  <script>
-    function register() {
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
+<script>
+  const form = document.getElementById('registerForm');
 
-      if (!username || !password) {
-        alert('Lütfen kullanıcı adı ve şifrenizi girin.');
-        return;
-      }
+  form.addEventListener('submit', e => {
+    e.preventDefault();
 
-      // Kayıt işlemi (basit, kullanıcı kontrolü yok)
-      localStorage.setItem('kullanici', JSON.stringify({ username }));
+    const username = form.username.value.trim();
+    const email = form.email.value.trim();
+    const password = form.password.value;
+    const passwordConfirm = form.passwordConfirm.value;
 
-      // Başlangıç bakiyesi
-      localStorage.setItem('bakiye', '1000');
-
-      alert(`Tebrikler, ${username}! Kayıt işleminiz tamamlandı.`);
-      window.location.href = 'index.html';
+    if (!username) {
+      alert('Lütfen kullanıcı adınızı girin.');
+      form.username.focus();
+      return;
     }
-  </script>
+    if (!email) {
+      alert('Lütfen e-posta adresinizi girin.');
+      form.email.focus();
+      return;
+    }
+    if (!password) {
+      alert('Lütfen şifrenizi girin.');
+      form.password.focus();
+      return;
+    }
+    if (password !== passwordConfirm) {
+      alert('Şifreler eşleşmiyor.');
+      form.passwordConfirm.focus();
+      return;
+    }
+
+    // Buraya gerçek kayıt işlemi için API çağrısı yapılabilir
+    alert(`Kayıt başarılı! Hoşgeldin, ${username}`);
+
+    // Örnek olarak localStorage'a kullanıcı kaydedelim
+    localStorage.setItem('kullanici', JSON.stringify({username}));
+    localStorage.setItem('bakiye', '0');
+    window.location.href = 'index.html'; // Ana sayfaya yönlendir
+  });
+</script>
+
 </body>
 </html>
