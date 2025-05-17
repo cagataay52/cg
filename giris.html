@@ -16,168 +16,145 @@
     margin: 0;
   }
   .login-container {
-    background: rgba(0,0,0,0.6);
-    padding: 30px 40px;
+    background: rgba(30, 0, 60, 0.85);
+    padding: 40px 35px;
     border-radius: 15px;
+    width: 350px;
     box-shadow: 0 8px 25px rgba(184, 67, 243, 0.8);
-    width: 320px;
   }
   .login-container h2 {
-    margin-bottom: 24px;
+    margin-bottom: 25px;
     font-weight: 700;
     text-align: center;
     color: #d471ff;
   }
-  label {
+  .login-container label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
   }
-  input[type="text"], input[type="password"] {
+  .login-container input[type="text"],
+  .login-container input[type="password"] {
     width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 18px;
+    padding: 12px 15px;
     border-radius: 8px;
     border: none;
-    font-size: 16px;
+    margin-bottom: 18px;
+    font-size: 15px;
   }
-  .password-wrapper {
-    position: relative;
+  .login-container input[type="checkbox"] {
+    margin-right: 8px;
   }
-  .toggle-password {
-    position: absolute;
-    right: 12px;
-    top: 12px;
+  .login-container .show-password {
     cursor: pointer;
-    font-size: 14px;
-    color: #9c27b0;
+    font-size: 13px;
+    color: #a47aff;
     user-select: none;
   }
-  button.login-btn {
+  .login-container button {
     width: 100%;
-    background: #b833ff;
+    padding: 14px 0;
     border: none;
-    padding: 12px 0;
-    color: white;
+    border-radius: 12px;
+    background: #b833ff;
     font-weight: 700;
-    font-size: 18px;
-    border-radius: 10px;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  button.login-btn:hover {
+  .login-container button:hover {
     background: #d471ff;
   }
-  .links {
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
+  .login-footer {
+    margin-top: 18px;
+    text-align: center;
     font-size: 14px;
   }
-  .links a {
+  .login-footer a {
     color: #d471ff;
     text-decoration: none;
+    font-weight: 600;
   }
-  .links a:hover {
+  .login-footer a:hover {
     text-decoration: underline;
   }
-  .social-login {
-    margin-top: 24px;
-    text-align: center;
-  }
-  .social-login button {
-    background: #6a0dad;
-    border: none;
-    color: white;
+  .error-msg {
+    background: #b8333340;
     padding: 10px 15px;
-    margin: 0 8px;
     border-radius: 8px;
-    cursor: pointer;
+    margin-bottom: 15px;
+    color: #ff6666;
     font-weight: 600;
-    transition: background 0.3s ease;
-  }
-  .social-login button:hover {
-    background: #9c27b0;
+    display: none;
   }
 </style>
 </head>
 <body>
 
 <div class="login-container">
-  <h2>PradaBet Giriş Yap</h2>
+  <h2>PradaBet Giriş</h2>
+  <div class="error-msg" id="errorMsg"></div>
   <form id="loginForm" novalidate>
-    <label for="username">Kullanıcı Adı</label>
-    <input type="text" id="username" name="username" required placeholder="Kullanıcı adınızı girin" />
-    
+    <label for="username">Kullanıcı Adı veya Email</label>
+    <input type="text" id="username" name="username" placeholder="Kullanıcı adı veya email" required />
+
     <label for="password">Şifre</label>
-    <div class="password-wrapper">
-      <input type="password" id="password" name="password" required placeholder="Şifrenizi girin" />
-      <span class="toggle-password" id="togglePassword">Göster</span>
+    <input type="password" id="password" name="password" placeholder="Şifre" required />
+    <div>
+      <input type="checkbox" id="showPass" />
+      <label for="showPass" class="show-password">Şifreyi Göster</label>
     </div>
-    
-    <button type="submit" class="login-btn">Giriş Yap</button>
+
+    <div style="margin: 15px 0;">
+      <input type="checkbox" id="rememberMe" />
+      <label for="rememberMe">Beni Hatırla</label>
+    </div>
+
+    <button type="submit">Giriş Yap</button>
   </form>
 
-  <div class="links">
-    <a href="sifre-unuttum.html">Şifremi Unuttum?</a>
+  <div class="login-footer">
+    <a href="sifremi-unuttum.html">Şifremi Unuttum?</a> | 
     <a href="kayit.html">Kayıt Ol</a>
-  </div>
-
-  <div class="social-login">
-    <p>Ya da sosyal medya ile giriş yap:</p>
-    <button id="btnGoogle">Google</button>
-    <button id="btnFacebook">Facebook</button>
   </div>
 </div>
 
 <script>
-  const togglePassword = document.getElementById('togglePassword');
-  const passwordInput = document.getElementById('password');
-
-  togglePassword.addEventListener('click', () => {
-    if(passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      togglePassword.textContent = 'Gizle';
-    } else {
-      passwordInput.type = 'password';
-      togglePassword.textContent = 'Göster';
-    }
-  });
-
   const loginForm = document.getElementById('loginForm');
-  loginForm.addEventListener('submit', function(event) {
-    event.preventDefault();
+  const errorMsg = document.getElementById('errorMsg');
+  const showPassCheckbox = document.getElementById('showPass');
+
+  showPassCheckbox.addEventListener('change', () => {
+    const passwordInput = document.getElementById('password');
+    passwordInput.type = showPassCheckbox.checked ? 'text' : 'password';
+  });
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    errorMsg.style.display = 'none';
     const username = loginForm.username.value.trim();
-    const password = loginForm.password.value.trim();
+    const password = loginForm.password.value;
 
-    if (!username) {
-      alert('Lütfen kullanıcı adınızı girin.');
-      return;
-    }
-    if (!password) {
-      alert('Lütfen şifrenizi girin.');
+    if (!username || !password) {
+      errorMsg.textContent = 'Lütfen tüm alanları doldurun.';
+      errorMsg.style.display = 'block';
       return;
     }
 
-    // Simülasyon: Basit kullanıcı doğrulama
-    // Burada gerçek API çağrısı yapılmalı
-    if(username === 'testuser' && password === '123456') {
-      alert('Giriş başarılı! Hoşgeldiniz, ' + username);
-      // Örnek olarak localStorage'a kaydedelim
-      localStorage.setItem('kullanici', JSON.stringify({username: username}));
-      localStorage.setItem('bakiye', '1000');
-      window.location.href = 'index.html';
+    // Basit simülasyon: Kullanıcı adı "user" ve şifre "1234" ise giriş başarılı
+    if ((username === 'user' || username === 'user@example.com') && password === '1234') {
+      if(document.getElementById('rememberMe').checked) {
+        localStorage.setItem('kullanici', JSON.stringify({ username }));
+      } else {
+        sessionStorage.setItem('kullanici', JSON.stringify({ username }));
+      }
+      alert('Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...');
+      window.location.href = 'index.html'; // Ana sayfa yolunu buraya yaz
     } else {
-      alert('Kullanıcı adı veya şifre hatalı!');
+      errorMsg.textContent = 'Kullanıcı adı veya şifre hatalı.';
+      errorMsg.style.display = 'block';
     }
-  });
-
-  // Sosyal medya butonlarına basınca (örnek simülasyon)
-  document.getElementById('btnGoogle').addEventListener('click', () => {
-    alert('Google ile giriş özelliği henüz aktif değil.');
-  });
-  document.getElementById('btnFacebook').addEventListener('click', () => {
-    alert('Facebook ile giriş özelliği henüz aktif değil.');
   });
 </script>
 
