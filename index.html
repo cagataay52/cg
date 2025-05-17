@@ -89,9 +89,9 @@
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;   /* Burada contain'den cover yaptık */
     background-color: #0a0a0a;
-    filter: brightness(0.7);
+    filter: none !important; /* Filtreyi kaldırdık */
   }
 
   .slide .caption {
@@ -208,10 +208,10 @@
 <!-- Slider -->
 <div class="slider">
   <div class="slides">
-<div class="slide">
-  <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
-  <div class="caption">Hoşgeldin Bonusu %100!</div>
-</div>
+    <div class="slide">
+      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
+      <div class="caption">Hoşgeldin Bonusu %100!</div>
+    </div>
     <div class="slide">
       <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
       <div class="caption">Her Gün Yeni Turnuvalar</div>
@@ -233,10 +233,10 @@
     <img src="https://i.ibb.co/Tx7R4PKR/aviator.jpg" alt="Aviator" />
     <span>Aviator</span>
   </a>
-<a href="blackjack.html" class="game">
-  <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
-  <span>Black Jack</span>
-</a>
+  <a href="blackjack.html" class="game">
+    <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
+    <span>Black Jack</span>
+  </a>
 </div>
 
 <script>
