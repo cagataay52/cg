@@ -11,6 +11,54 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #0a0a0a;
     color: #ddd;
+    display: flex; /* Yan yana yerleşim için */
+    min-height: 100vh;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 220px;
+    background: linear-gradient(180deg, #4a0e7c, #6a0dad);
+    display: flex;
+    flex-direction: column;
+    padding: 30px 20px;
+    box-shadow: 3px 0 10px rgba(106, 13, 173, 0.7);
+  }
+
+  .sidebar h2 {
+    color: #f5f0ff;
+    font-size: 26px;
+    font-weight: 900;
+    margin-bottom: 30px;
+    letter-spacing: 1.5px;
+    text-align: center;
+  }
+
+  .sidebar nav a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 14px 20px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    transition: background 0.3s ease, color 0.3s ease;
+    display: block;
+  }
+
+  .sidebar nav a:hover {
+    background: #b833ff;
+    color: #fff;
+    box-shadow: 0 0 12px #b833ff;
+  }
+
+  /* İçerik alanı */
+  .main-content {
+    flex: 1;
+    padding: 0 20px;
+    max-width: 1000px;
+    margin: 0 auto 50px;
+    width: 100%;
   }
 
   /* Navbar */
@@ -33,18 +81,18 @@
     color: white;
   }
 
-  nav {
+  nav.header-nav {
     display: flex;
     align-items: center;
     gap: 15px;
   }
 
-  nav span#welcome-msg {
+  nav.header-nav span#welcome-msg {
     font-weight: 600;
     white-space: nowrap;
   }
 
-  nav button {
+  nav.header-nav button {
     background: rgba(255 255 255 / 0.15);
     border: none;
     border-radius: 25px;
@@ -55,7 +103,7 @@
     transition: background 0.3s ease;
   }
 
-  nav button:hover {
+  nav.header-nav button:hover {
     background: rgba(255 255 255 / 0.35);
   }
 
@@ -164,27 +212,47 @@
 
   /* Responsive (mobil uyum) */
   @media (max-width: 768px) {
+    body {
+      flex-direction: column;
+    }
+    .sidebar {
+      width: 100%;
+      flex-direction: row;
+      padding: 10px 5px;
+      overflow-x: auto;
+      box-shadow: none;
+    }
+    .sidebar h2 {
+      display: none;
+    }
+    .sidebar nav a {
+      margin: 0 12px;
+      padding: 10px 14px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    .main-content {
+      padding: 15px 10px;
+      max-width: 100%;
+      margin: 0;
+    }
     .slider {
       height: 200px;
     }
-
     .slide .caption {
       font-size: 22px;
       bottom: 15px;
       left: 20px;
     }
-
     .games {
       gap: 18px;
     }
-
     .game {
       width: 90vw;
       max-width: 320px;
       height: 150px;
       border-radius: 16px;
     }
-
     .game span {
       font-size: 18px;
       padding: 12px 18px;
@@ -194,96 +262,110 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">PradaBet</div>
-  <nav>
-    <span id="welcome-msg">Misafir</span>
-    <button id="btnHesap" style="display:none;">Hesabım</button>
-    <button id="btnCikis" style="display:none;">Çıkış Yap</button>
-    <button id="btnGiris">Giriş Yap</button>
-    <button id="btnKayit">Kayıt Ol</button>
-  </nav>
-</header>
+  <div class="sidebar">
+    <h2>Menü</h2>
+    <nav>
+      <a href="#">Canlı Casino</a>
+      <a href="#">Bahis</a>
+      <a href="#">Canlı Bahis</a>
+      <a href="#">Oyunlar</a>
+      <a href="#">Slot</a>
+      <a href="#">Kampanyalar</a>
+    </nav>
+  </div>
 
-<!-- Slider -->
-<div class="slider">
-  <div class="slides">
-    <div class="slide">
-      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
-      <div class="caption">Hoşgeldin Bonusu %100!</div>
+  <div class="main-content">
+    <header>
+      <div class="logo">PradaBet</div>
+      <nav class="header-nav">
+        <span id="welcome-msg">Misafir</span>
+        <button id="btnHesap" style="display:none;">Hesabım</button>
+        <button id="btnCikis" style="display:none;">Çıkış Yap</button>
+        <button id="btnGiris">Giriş Yap</button>
+        <button id="btnKayit">Kayıt Ol</button>
+      </nav>
+    </header>
+
+    <!-- Slider -->
+    <div class="slider">
+      <div class="slides">
+        <div class="slide">
+          <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
+          <div class="caption">Hoşgeldin Bonusu %100!</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
+          <div class="caption">Her Gün Yeni Turnuvalar</div>
+        </div>
+        <div class="slide">
+          <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
+          <div class="caption">Yüksek Kazanç Fırsatları</div>
+        </div>
+      </div>
     </div>
-    <div class="slide">
-      <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
-      <div class="caption">Her Gün Yeni Turnuvalar</div>
-    </div>
-    <div class="slide">
-      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
-      <div class="caption">Yüksek Kazanç Fırsatları</div>
+
+    <!-- Oyunlar -->
+    <div class="games">
+      <a href="sweet-bonanza.html" class="game">
+        <img src="https://i.ibb.co/Ps1SzxJR/sweetbonanza.jpg" alt="Sweet Bonanza" />
+        <span>Sweet Bonanza</span>
+      </a>
+      <a href="aviator.html" class="game">
+        <img src="https://i.ibb.co/Tx7R4PKR/aviator.jpg" alt="Aviator" />
+        <span>Aviator</span>
+      </a>
+      <a href="blackjack.html" class="game">
+        <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
+        <span>Black Jack</span>
+      </a>
     </div>
   </div>
-</div>
 
-<!-- Oyunlar -->
-<div class="games">
-  <a href="sweet-bonanza.html" class="game">
-    <img src="https://i.ibb.co/Ps1SzxJR/sweetbonanza.jpg" alt="Sweet Bonanza" />
-    <span>Sweet Bonanza</span>
-  </a>
-  <a href="aviator.html" class="game">
-    <img src="https://i.ibb.co/Tx7R4PKR/aviator.jpg" alt="Aviator" />
-    <span>Aviator</span>
-  </a>
-  <a href="blackjack.html" class="game">
-    <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
-    <span>Black Jack</span>
-  </a>
-</div>
+  <script>
+    // Sayfa yüklendiğinde slider görünür olsun
+    window.addEventListener('load', () => {
+      document.querySelector('.slider').style.visibility = 'visible';
+    });
 
-<script>
-  // Sayfa yüklendiğinde slider görünür olsun
-  window.addEventListener('load', () => {
-    document.querySelector('.slider').style.visibility = 'visible';
-  });
+    // Slider otomatik geçiş
+    const slidesContainer = document.querySelector('.slides');
+    const totalSlides = slidesContainer.children.length;
+    let currentIndex = 0;
 
-  // Slider otomatik geçiş
-  const slidesContainer = document.querySelector('.slides');
-  const totalSlides = slidesContainer.children.length;
-  let currentIndex = 0;
+    setInterval(() => {
+      currentIndex++;
+      if(currentIndex >= totalSlides) currentIndex = 0;
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }, 4000);
 
-  setInterval(() => {
-    currentIndex++;
-    if(currentIndex >= totalSlides) currentIndex = 0;
-    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }, 4000);
+    // Kullanıcı kontrolü simülasyonu
+    const kullanici = JSON.parse(localStorage.getItem('kullanici'));
+    const bakiye = localStorage.getItem('bakiye');
 
-  // Kullanıcı kontrolü simülasyonu
-  const kullanici = JSON.parse(localStorage.getItem('kullanici'));
-  const bakiye = localStorage.getItem('bakiye');
+    const welcomeMsg = document.getElementById('welcome-msg');
+    const btnHesap = document.getElementById('btnHesap');
+    const btnCikis = document.getElementById('btnCikis');
+    const btnGiris = document.getElementById('btnGiris');
+    const btnKayit = document.getElementById('btnKayit');
 
-  const welcomeMsg = document.getElementById('welcome-msg');
-  const btnHesap = document.getElementById('btnHesap');
-  const btnCikis = document.getElementById('btnCikis');
-  const btnGiris = document.getElementById('btnGiris');
-  const btnKayit = document.getElementById('btnKayit');
+    if (kullanici) {
+      welcomeMsg.textContent = `${kullanici.username} - Bakiye: ${bakiye || 0} TL`;
+      btnHesap.style.display = 'inline-block';
+      btnCikis.style.display = 'inline-block';
+      btnGiris.style.display = 'none';
+      btnKayit.style.display = 'none';
+    }
 
-  if (kullanici) {
-    welcomeMsg.textContent = `${kullanici.username} - Bakiye: ${bakiye || 0} TL`;
-    btnHesap.style.display = 'inline-block';
-    btnCikis.style.display = 'inline-block';
-    btnGiris.style.display = 'none';
-    btnKayit.style.display = 'none';
-  }
-
-  btnGiris.onclick = () => { window.location.href = 'giris.html'; };
-  btnKayit.onclick = () => { window.location.href = 'kayit.html'; };
-  btnHesap.onclick = () => { window.location.href = 'hesabim.html'; };
-  btnCikis.onclick = () => {
-    localStorage.removeItem('kullanici');
-    localStorage.removeItem('bakiye');
-    alert('Çıkış yapıldı.');
-    location.reload();
-  };
-</script>
+    btnGiris.onclick = () => { window.location.href = 'giris.html'; };
+    btnKayit.onclick = () => { window.location.href = 'kayit.html'; };
+    btnHesap.onclick = () => { window.location.href = 'hesabim.html'; };
+    btnCikis.onclick = () => {
+      localStorage.removeItem('kullanici');
+      localStorage.removeItem('bakiye');
+      alert('Çıkış yapıldı.');
+      location.reload();
+    };
+  </script>
 
 </body>
 </html>
