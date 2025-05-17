@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PradaBet - Giriş Yap</title>
 <style>
+  /* Genel body stili */
   body {
     background: linear-gradient(135deg, #3e007c, #9c27b0);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -15,24 +16,33 @@
     height: 100vh;
     margin: 0;
   }
+
+  /* Form konteyneri */
   .login-container {
     background: rgba(30, 0, 60, 0.85);
     padding: 40px 35px;
     border-radius: 15px;
     width: 350px;
+    max-width: 90vw; /* mobilde taşmayı engelle */
     box-shadow: 0 8px 25px rgba(184, 67, 243, 0.8);
   }
+
+  /* Başlık */
   .login-container h2 {
     margin-bottom: 25px;
     font-weight: 700;
     text-align: center;
     color: #d471ff;
   }
+
+  /* Form etiketleri */
   .login-container label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
   }
+
+  /* Text ve password inputları */
   .login-container input[type="text"],
   .login-container input[type="password"] {
     width: 100%;
@@ -41,16 +51,23 @@
     border: none;
     margin-bottom: 18px;
     font-size: 15px;
+    box-sizing: border-box;
   }
+
+  /* Checkboxlar */
   .login-container input[type="checkbox"] {
     margin-right: 8px;
   }
+
+  /* Şifre göster label */
   .login-container .show-password {
     cursor: pointer;
     font-size: 13px;
     color: #a47aff;
     user-select: none;
   }
+
+  /* Giriş butonu */
   .login-container button {
     width: 100%;
     padding: 14px 0;
@@ -63,22 +80,29 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
+
   .login-container button:hover {
     background: #d471ff;
   }
+
+  /* Alt linkler */
   .login-footer {
     margin-top: 18px;
     text-align: center;
     font-size: 14px;
   }
+
   .login-footer a {
     color: #d471ff;
     text-decoration: none;
     font-weight: 600;
   }
+
   .login-footer a:hover {
     text-decoration: underline;
   }
+
+  /* Hata mesajı */
   .error-msg {
     background: #b8333340;
     padding: 10px 15px;
@@ -86,7 +110,16 @@
     margin-bottom: 15px;
     color: #ff6666;
     font-weight: 600;
-    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .error-msg.show {
+    opacity: 1;
+    height: auto;
   }
 </style>
 </head>
@@ -125,24 +158,36 @@
   const errorMsg = document.getElementById('errorMsg');
   const showPassCheckbox = document.getElementById('showPass');
 
+  // Şifre göster/gizle fonksiyonu
   showPassCheckbox.addEventListener('change', () => {
     const passwordInput = document.getElementById('password');
     passwordInput.type = showPassCheckbox.checked ? 'text' : 'password';
   });
 
+  // Hata mesajı gösterme/gizleme fonksiyonları
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.classList.add('show');
+  }
+
+  function hideError() {
+    errorMsg.classList.remove('show');
+  }
+
+  // Form gönderildiğinde doğrulama
   loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    errorMsg.style.display = 'none';
+    hideError();
+
     const username = loginForm.username.value.trim();
     const password = loginForm.password.value;
 
     if (!username || !password) {
-      errorMsg.textContent = 'Lütfen tüm alanları doldurun.';
-      errorMsg.style.display = 'block';
+      showError('Lütfen tüm alanları doldurun.');
       return;
     }
 
-    // Basit simülasyon: Kullanıcı adı "user" ve şifre "1234" ise giriş başarılı
+    // Basit test: kullanıcı adı "user" veya "user@example.com" ve şifre "1234"
     if ((username === 'user' || username === 'user@example.com') && password === '1234') {
       if(document.getElementById('rememberMe').checked) {
         localStorage.setItem('kullanici', JSON.stringify({ username }));
@@ -150,10 +195,9 @@
         sessionStorage.setItem('kullanici', JSON.stringify({ username }));
       }
       alert('Giriş başarılı! Ana sayfaya yönlendiriliyorsunuz...');
-      window.location.href = 'index.html'; // Ana sayfa yolunu buraya yaz
+      window.location.href = 'index.html'; // Ana sayfa adresi
     } else {
-      errorMsg.textContent = 'Kullanıcı adı veya şifre hatalı.';
-      errorMsg.style.display = 'block';
+      showError('Kullanıcı adı veya şifre hatalı.');
     }
   });
 </script>
