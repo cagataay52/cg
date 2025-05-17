@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PradaBet - Mor Degrade Tema</title>
 <style>
-  /* --- Genel ve mevcut stil kodları --- */
+  /* Genel ayarlar */
   body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -14,6 +14,8 @@
     display: flex;
     min-height: 100vh;
   }
+
+  /* --- Sol Menü --- */
   nav.sidebar {
     width: 200px;
     background: linear-gradient(180deg, #4a0e7c, #b833ff);
@@ -41,12 +43,16 @@
     color: #1a0033;
     font-weight: 700;
   }
+
+  /* --- Ana içerik --- */
   main.content {
     flex-grow: 1;
     padding: 30px 40px 50px;
     overflow-y: auto;
-    background: rgba(0,0,0,0.25);
+    background: rgba(0, 0, 0, 0.25);
   }
+
+  /* --- Header --- */
   header {
     background: linear-gradient(90deg, #6a0dad, #b833ff);
     padding: 12px 30px;
@@ -88,8 +94,10 @@
   header nav button:hover {
     background: rgba(255 255 255 / 0.35);
   }
+
+  /* --- Slider ana kapsayıcı --- */
   .slider {
-    visibility: visible;
+    visibility: hidden;
     width: 100%;
     max-width: 1000px;
     height: 280px;
@@ -126,6 +134,8 @@
     font-weight: 700;
     text-shadow: 0 0 8px rgba(0,0,0,0.7);
   }
+
+  /* --- Oyunlar bölümü --- */
   .games {
     max-width: 1000px;
     margin: 0 auto 40px;
@@ -178,83 +188,7 @@
     text-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 
-  /* --- Canlı Sohbet --- */
-  #live-chat {
-    max-width: 1000px;
-    margin: 0 auto 40px;
-    background: rgba(255 255 255 / 0.1);
-    border-radius: 12px;
-    padding: 20px;
-    color: white;
-  }
-  #chat-box {
-    background: rgba(0 0 0 / 0.4);
-    height: 300px;
-    overflow-y: auto;
-    padding: 10px;
-    border-radius: 8px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-  #chat-input {
-    width: 100%;
-    margin-top: 10px;
-    padding: 8px 12px;
-    border-radius: 6px;
-    border: none;
-    font-size: 14px;
-  }
-  #chat-send {
-    margin-top: 8px;
-    padding: 10px 20px;
-    background: #b833ff;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-  }
-
-  /* --- Canlı Skorlar --- */
-  #live-scores {
-    max-width: 1000px;
-    margin: 0 auto 40px;
-    background: rgba(255 255 255 / 0.1);
-    border-radius: 12px;
-    padding: 20px;
-    color: white;
-  }
-  #live-scores ul {
-    list-style: none;
-    padding-left: 0;
-    font-size: 15px;
-  }
-  #live-scores li {
-    margin-bottom: 8px;
-  }
-
-  /* --- Bildirim kutusu --- */
-  #notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: #b833ffcc;
-    padding: 12px 20px;
-    border-radius: 12px;
-    color: white;
-    font-weight: 700;
-    box-shadow: 0 4px 15px #b833ffcc;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-    z-index: 150;
-  }
-  #notification.show {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* --- Responsive --- */
+  /* --- Responsive (mobil uyum) --- */
   @media (max-width: 768px) {
     nav.sidebar {
       width: 70px;
@@ -296,171 +230,123 @@
     }
     .game {
       width: 90vw;
-      max-width: 300px;
+      max-width: 320px;
+      height: 150px;
+      border-radius: 16px;
+    }
+    .game span {
+      font-size: 18px;
+      padding: 12px 18px;
     }
   }
 </style>
 </head>
 <body>
+
+<!-- Sol Menü -->
 <nav class="sidebar">
-  <a href="#">Ana Sayfa</a>
+  <a href="#">Canlı Casino</a>
+  <a href="#">Bahis</a>
+  <a href="#">Canlı Bahis</a>
   <a href="#">Oyunlar</a>
-  <a href="#">Canlı Sohbet</a>
-  <a href="#">Hesabım</a>
-  <a href="#">Ayarlar</a>
+  <a href="#">Slot</a>
+  <a href="#">Kampanyalar</a>
 </nav>
 
-<div style="flex-grow:1; display:flex; flex-direction:column;">
+<!-- Ana içerik -->
+<main class="content">
+  <!-- Üst Bar -->
   <header>
     <div class="logo">PradaBet</div>
     <nav>
-      <span id="welcome-msg">Hoşgeldin, Kullanıcı!</span>
-      <button id="btn-logout">Çıkış</button>
+      <span id="welcome-msg">Misafir</span>
+      <button id="btnHesap" style="display:none;">Hesabım</button>
+      <button id="btnCikis" style="display:none;">Çıkış Yap</button>
+      <button id="btnGiris">Giriş Yap</button>
+      <button id="btnKayit">Kayıt Ol</button>
     </nav>
   </header>
 
-  <main class="content">
-    <section class="slider">
-      <div class="slides" id="slides">
-        <div class="slide">
-          <img src="https://i.imgur.com/xNGqFQo.png" alt="Slide 1" />
-          <div class="caption">Popüler Oyunlar</div>
-        </div>
-        <div class="slide">
-          <img src="https://i.imgur.com/l84KMBf.png" alt="Slide 2" />
-          <div class="caption">Büyük Kazanma Fırsatları</div>
-        </div>
-        <div class="slide">
-          <img src="https://i.imgur.com/9gbHeIU.png" alt="Slide 3" />
-          <div class="caption">Canlı Turnuvalar</div>
-        </div>
+  <!-- Slider -->
+  <div class="slider" aria-label="Slider">
+    <div class="slides">
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="Hoşgeldin Bonusu %100!">
+        <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
+        <div class="caption">Hoşgeldin Bonusu %100!</div>
       </div>
-    </section>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="Turnuvalar">
+        <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
+        <div class="caption">Her Gün Yeni Turnuvalar</div>
+      </div>
+      <div class="slide" role="group" aria-roledescription="slide" aria-label="Yüksek Kazançlar">
+        <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
+        <div class="caption">Yüksek Kazanç Fırsatları</div>
+      </div>
+    </div>
+  </div>
 
-    <section class="games">
-      <a href="#" class="game">
-        <img src="https://images.pexels.com/photos/139829/pexels-photo-139829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Sweet Bonanza" />
-        <span>Sweet Bonanza</span>
-      </a>
-      <a href="#" class="game">
-        <img src="https://images.pexels.com/photos/1107861/pexels-photo-1107861.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Aviator" />
-        <span>Aviator</span>
-      </a>
-      <a href="#" class="game">
-        <img src="https://images.pexels.com/photos/163970/blackjack-cards-gambling-163970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Black Jack" />
-        <span>Black Jack</span>
-      </a>
-    </section>
-
-    <!-- Canlı Sohbet Bölümü -->
-    <section id="live-chat">
-      <h2>Canlı Sohbet</h2>
-      <div id="chat-box"></div>
-      <input id="chat-input" type="text" placeholder="Mesajınızı yazın..." />
-      <button id="chat-send">Gönder</button>
-    </section>
-
-    <!-- Canlı Skorlar Bölümü -->
-    <section id="live-scores">
-      <h2>Canlı Skorlar</h2>
-      <ul id="scores-list">
-        <!-- Canlı skorlar JS ile buraya gelecek -->
-      </ul>
-    </section>
-  </main>
-</div>
-
-<!-- Bildirim kutusu -->
-<div id="notification"></div>
+  <!-- Oyunlar -->
+  <div class="games">
+    <a href="sweet-bonanza.html" class="game" aria-label="Sweet Bonanza Oyunu">
+      <img src="https://i.ibb.co/Ps1SzxJR/sweetbonanza.jpg" alt="Sweet Bonanza" />
+      <span>Sweet Bonanza</span>
+    </a>
+    <a href="aviator.html" class="game" aria-label="Aviator Oyunu">
+      <img src="https://i.ibb.co/Tx7R4PKR/aviator.jpg" alt="Aviator" />
+      <span>Aviator</span>
+    </a>
+    <a href="blackjack.html" class="game" aria-label="Black Jack Oyunu">
+      <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
+      <span>Black Jack</span>
+    </a>
+  </div>
+</main>
 
 <script>
-  // Basit slider otomatik geçiş
-  const slides = document.getElementById('slides');
+  // Sayfa yüklendiğinde slider görünür olsun
+  window.addEventListener('load', () => {
+    document.querySelector('.slider').style.visibility = 'visible';
+  });
+
+  // Slider otomatik geçiş
+  const slidesContainer = document.querySelector('.slides');
+  const totalSlides = slidesContainer.children.length;
   let currentIndex = 0;
-  const totalSlides = slides.children.length;
 
   setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalSlides;
-    slides.style.transform = `translateX(-${currentIndex * 100}%)`;
-  }, 5000);
+    currentIndex++;
+    if (currentIndex >= totalSlides) currentIndex = 0;
+    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }, 4000);
 
-  // Canlı Sohbet Fonksiyonları
-  const chatBox = document.getElementById('chat-box');
-  const chatInput = document.getElementById('chat-input');
-  const chatSend = document.getElementById('chat-send');
+  // Kullanıcı kontrolü simülasyonu
+  const kullanici = JSON.parse(localStorage.getItem('kullanici'));
+  const bakiye = localStorage.getItem('bakiye');
 
-  function addChatMessage(message, fromUser = true) {
-    const msgElem = document.createElement('div');
-    msgElem.textContent = message;
-    msgElem.style.padding = '6px 12px';
-    msgElem.style.marginBottom = '6px';
-    msgElem.style.borderRadius = '8px';
-    msgElem.style.maxWidth = '70%';
-    msgElem.style.backgroundColor = fromUser ? '#9c27b0cc' : '#3e007ccc';
-    msgElem.style.alignSelf = fromUser ? 'flex-end' : 'flex-start';
-    chatBox.appendChild(msgElem);
-    chatBox.scrollTop = chatBox.scrollHeight;
+  const welcomeMsg = document.getElementById('welcome-msg');
+  const btnHesap = document.getElementById('btnHesap');
+  const btnCikis = document.getElementById('btnCikis');
+  const btnGiris = document.getElementById('btnGiris');
+  const btnKayit = document.getElementById('btnKayit');
+
+  if (kullanici && kullanici.username) {
+    welcomeMsg.textContent = `${kullanici.username} - Bakiye: ${bakiye || 0} TL`;
+    btnHesap.style.display = 'inline-block';
+    btnCikis.style.display = 'inline-block';
+    btnGiris.style.display = 'none';
+    btnKayit.style.display = 'none';
   }
 
-  chatSend.addEventListener('click', () => {
-    const msg = chatInput.value.trim();
-    if(msg) {
-      addChatMessage(msg, true);
-      chatInput.value = '';
-      // Örnek: bot'tan otomatik cevap
-      setTimeout(() => {
-        addChatMessage('Yetkili: Mesajınızı aldık, teşekkürler!', false);
-        showNotification('Yeni bir sohbet mesajınız var!');
-      }, 1500);
-    }
-  });
-  chatInput.addEventListener('keypress', (e) => {
-    if(e.key === 'Enter') {
-      chatSend.click();
-    }
-  });
-
-  // Canlı Skorlar (Örnek veri)
-  const scoresList = document.getElementById('scores-list');
-
-  const sampleScores = [
-    'Sweet Bonanza - Kazanan: 1200 ₺',
-    'Aviator - Kazanan: 890 ₺',
-    'Black Jack - Kazanan: 450 ₺',
-    'Sweet Bonanza - Kazanan: 3200 ₺',
-    'Aviator - Kazanan: 750 ₺',
-  ];
-
-  function updateScores() {
-    // Basit random gösterim için karıştırma
-    scoresList.innerHTML = '';
-    const shuffled = sampleScores.sort(() => 0.5 - Math.random());
-    shuffled.slice(0, 3).forEach(score => {
-      const li = document.createElement('li');
-      li.textContent = score;
-      scoresList.appendChild(li);
-    });
-  }
-  updateScores();
-  setInterval(updateScores, 10000); // 10 saniyede bir güncelle
-
-  // Bildirim fonksiyonu
-  const notification = document.getElementById('notification');
-  function showNotification(message, duration = 4000) {
-    notification.textContent = message;
-    notification.classList.add('show');
-    setTimeout(() => {
-      notification.classList.remove('show');
-    }, duration);
-  }
-
-  // Örnek bildirim başlat (sayfa açılır açılmaz)
-  showNotification('Hoşgeldiniz! Canlı sohbet ve skorlar aktif.');
-
-  // Çıkış butonu için örnek
-  document.getElementById('btn-logout').addEventListener('click', () => {
-    showNotification('Çıkış yaptınız. Teşekkürler!');
-  });
+  btnGiris.onclick = () => { window.location.href = 'giris.html'; };
+  btnKayit.onclick = () => { window.location.href = 'kayit.html'; };
+  btnHesap.onclick = () => { window.location.href = 'hesabim.html'; };
+  btnCikis.onclick = () => {
+    localStorage.removeItem('kullanici');
+    localStorage.removeItem('bakiye');
+    alert('Çıkış yapıldı.');
+    location.reload();
+  };
 </script>
+
 </body>
 </html>
