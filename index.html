@@ -61,6 +61,7 @@
 
   /* Slider ana kapsayıcı */
   .slider {
+    visibility: hidden; /* Başlangıçta gizli */
     width: 100%;
     max-width: 1000px;
     height: 280px;
@@ -69,7 +70,8 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(184, 67, 243, 0.7);
-    background-color: #121212;
+    background-color: #0a0a0a;
+    transition: visibility 0s linear 0.3s;
   }
 
   /* Slider içindeki resimler */
@@ -88,10 +90,8 @@
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    background-color: #121212;
-    opacity: 1 !important;
-    visibility: visible !important;
+    object-fit: contain; /* veya 'cover' istersen değiştirebilirsin */
+    background-color: #0a0a0a;
   }
 
   .slide .caption {
@@ -209,15 +209,15 @@
 <div class="slider">
   <div class="slides">
     <div class="slide">
-      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" loading="eager" />
+      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
       <div class="caption">Hoşgeldin Bonusu %100!</div>
     </div>
     <div class="slide">
-      <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" loading="eager" />
+      <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
       <div class="caption">Her Gün Yeni Turnuvalar</div>
     </div>
     <div class="slide">
-      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" loading="eager" />
+      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
       <div class="caption">Yüksek Kazanç Fırsatları</div>
     </div>
   </div>
@@ -240,6 +240,11 @@
 </div>
 
 <script>
+  // Sayfa yüklendiğinde slider görünür olsun
+  window.addEventListener('load', () => {
+    document.querySelector('.slider').style.visibility = 'visible';
+  });
+
   // Slider otomatik geçiş
   const slidesContainer = document.querySelector('.slides');
   const totalSlides = slidesContainer.children.length;
