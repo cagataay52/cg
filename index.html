@@ -63,7 +63,7 @@
   .slider {
     width: 100%;
     max-width: 1000px;
-    height: 280px;
+    height: 320px; /* Yüksekliği artırdım */
     margin: 30px auto 50px;
     position: relative;
     border-radius: 15px;
@@ -89,9 +89,9 @@
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;   /* Burada contain'den cover yaptık */
+    object-fit: contain; /* Tam görünürlük için contain */
     background-color: #0a0a0a;
-    filter: none !important; /* Filtreyi kaldırdık */
+    filter: none !important;
   }
 
   .slide .caption {
@@ -165,7 +165,7 @@
   /* Responsive (mobil uyum) */
   @media (max-width: 768px) {
     .slider {
-      height: 200px;
+      height: 240px; /* mobilde de yüksekliği artırdım */
     }
 
     .slide .caption {
