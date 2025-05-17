@@ -21,28 +21,28 @@
     border-radius: 15px;
     width: 350px;
     box-shadow: 0 8px 25px rgba(184, 67, 243, 0.8);
-    text-align: center;
   }
   .forgot-container h2 {
     margin-bottom: 25px;
     font-weight: 700;
+    text-align: center;
     color: #d471ff;
   }
-  .forgot-container label {
+  label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    text-align: left;
   }
-  .forgot-container input[type="email"] {
+  input[type="email"] {
     width: 100%;
     padding: 12px 15px;
     border-radius: 8px;
     border: none;
     margin-bottom: 18px;
     font-size: 15px;
+    box-sizing: border-box;
   }
-  .forgot-container button {
+  button {
     width: 100%;
     padding: 14px 0;
     border: none;
@@ -54,35 +54,40 @@
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  .forgot-container button:hover {
+  button:hover {
     background: #d471ff;
   }
-  .info-msg, .error-msg {
-    padding: 10px 15px;
+  .message {
+    background: #48c774cc;
+    padding: 12px 15px;
     border-radius: 8px;
     margin-bottom: 15px;
+    color: #fff;
     font-weight: 600;
     display: none;
-    text-align: left;
-  }
-  .info-msg {
-    background: #56aaff60;
-    color: #e1f0ff;
+    text-align: center;
   }
   .error-msg {
-    background: #ff6b6b60;
-    color: #ff0000;
+    background: #ff3860cc;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: 600;
+    display: none;
+    text-align: center;
   }
-  .back-login {
-    margin-top: 10px;
+  .forgot-footer {
+    margin-top: 18px;
+    text-align: center;
     font-size: 14px;
   }
-  .back-login a {
+  .forgot-footer a {
     color: #d471ff;
     text-decoration: none;
     font-weight: 600;
   }
-  .back-login a:hover {
+  .forgot-footer a:hover {
     text-decoration: underline;
   }
 </style>
@@ -91,50 +96,53 @@
 
 <div class="forgot-container">
   <h2>Şifremi Unuttum</h2>
-  <div class="info-msg" id="infoMsg"></div>
+  <div class="message" id="successMsg"></div>
   <div class="error-msg" id="errorMsg"></div>
-
   <form id="forgotForm" novalidate>
-    <label for="email">E-posta Adresiniz</label>
-    <input type="email" id="email" name="email" placeholder="email@example.com" required />
-    <button type="submit">Şifre Sıfırlama Talimatı Gönder</button>
+    <label for="email">Kayıtlı Email Adresiniz</label>
+    <input type="email" id="email" name="email" placeholder="Email adresinizi girin" required />
+    <button type="submit">Şifre Sıfırlama Linki Gönder</button>
   </form>
-
-  <div class="back-login">
-    <a href="giris.html">← Giriş sayfasına dön</a>
+  <div class="forgot-footer">
+    <a href="giris.html">Giriş Sayfasına Dön</a>
   </div>
 </div>
 
 <script>
   const forgotForm = document.getElementById('forgotForm');
-  const infoMsg = document.getElementById('infoMsg');
+  const successMsg = document.getElementById('successMsg');
   const errorMsg = document.getElementById('errorMsg');
+
+  function showSuccess(message) {
+    successMsg.textContent = message;
+    successMsg.style.display = 'block';
+    errorMsg.style.display = 'none';
+  }
+
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.style.display = 'block';
+    successMsg.style.display = 'none';
+  }
 
   forgotForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    infoMsg.style.display = 'none';
-    errorMsg.style.display = 'none';
 
     const email = forgotForm.email.value.trim();
 
-    // Basit e-posta doğrulaması
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      errorMsg.textContent = 'Lütfen e-posta adresinizi girin.';
-      errorMsg.style.display = 'block';
+      showError('Lütfen email adresinizi girin.');
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      errorMsg.textContent = 'Geçerli bir e-posta adresi girin.';
-      errorMsg.style.display = 'block';
+      showError('Geçerli bir email adresi girin.');
       return;
     }
 
-    // Simüle edilen gönderim işlemi
-    infoMsg.textContent = 'Şifre sıfırlama talimatları e-posta adresinize gönderildi.';
-    infoMsg.style.display = 'block';
-
-    // Formu temizle
+    // Simülasyon: Şifre sıfırlama linki gönderme
+    showSuccess('Şifre sıfırlama linki email adresinize gönderildi.');
     forgotForm.reset();
   });
 </script>
