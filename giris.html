@@ -6,130 +6,178 @@
 <title>PradaBet - Giriş Yap</title>
 <style>
   body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #3e007c, #9c27b0);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #eee;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
   }
-  .container {
-    background: rgba(58, 0, 108, 0.9);
-    padding: 40px 50px;
-    border-radius: 20px;
-    box-shadow: 0 6px 20px rgba(184, 67, 243, 0.7);
-    width: 100%;
-    max-width: 400px;
+  .login-container {
+    background: rgba(0,0,0,0.6);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(184, 67, 243, 0.8);
+    width: 320px;
   }
-  h2 {
-    margin-bottom: 30px;
+  .login-container h2 {
+    margin-bottom: 24px;
     font-weight: 700;
-    font-size: 28px;
     text-align: center;
-    color: #d8b3ff;
-    text-shadow: 0 0 10px #b833ff;
+    color: #d471ff;
   }
   label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
     font-weight: 600;
   }
-  input[type="text"],
-  input[type="password"] {
+  input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 20px;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    border-radius: 8px;
     border: none;
-    border-radius: 10px;
-    background: #6f00b3;
-    color: #eee;
-    font-size: 15px;
-    outline: none;
-    box-sizing: border-box;
-    transition: background 0.3s ease;
+    font-size: 16px;
   }
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    background: #9c27b0;
+  .password-wrapper {
+    position: relative;
   }
-  button {
+  .toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #9c27b0;
+    user-select: none;
+  }
+  button.login-btn {
     width: 100%;
-    padding: 14px;
     background: #b833ff;
     border: none;
-    border-radius: 12px;
+    padding: 12px 0;
+    color: white;
     font-weight: 700;
     font-size: 18px;
-    color: #fff;
+    border-radius: 10px;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  button:hover {
+  button.login-btn:hover {
     background: #d471ff;
   }
-  .alt-text {
-    margin-top: 22px;
+  .links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
     font-size: 14px;
-    text-align: center;
-    color: #c8aaff;
   }
-  .alt-text a {
-    color: #f5d1ff;
+  .links a {
+    color: #d471ff;
     text-decoration: none;
-    font-weight: 600;
   }
-  .alt-text a:hover {
+  .links a:hover {
     text-decoration: underline;
+  }
+  .social-login {
+    margin-top: 24px;
+    text-align: center;
+  }
+  .social-login button {
+    background: #6a0dad;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin: 0 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  .social-login button:hover {
+    background: #9c27b0;
   }
 </style>
 </head>
 <body>
 
-<div class="container" role="main" aria-label="Giriş Formu">
+<div class="login-container">
   <h2>PradaBet Giriş Yap</h2>
   <form id="loginForm" novalidate>
     <label for="username">Kullanıcı Adı</label>
-    <input type="text" id="username" name="username" autocomplete="username" required />
+    <input type="text" id="username" name="username" required placeholder="Kullanıcı adınızı girin" />
     
     <label for="password">Şifre</label>
-    <input type="password" id="password" name="password" autocomplete="current-password" required />
+    <div class="password-wrapper">
+      <input type="password" id="password" name="password" required placeholder="Şifrenizi girin" />
+      <span class="toggle-password" id="togglePassword">Göster</span>
+    </div>
     
-    <button type="submit">Giriş Yap</button>
+    <button type="submit" class="login-btn">Giriş Yap</button>
   </form>
-  <div class="alt-text">
-    Hesabın yok mu? <a href="kayit.html">Kayıt Ol</a>
+
+  <div class="links">
+    <a href="sifre-unuttum.html">Şifremi Unuttum?</a>
+    <a href="kayit.html">Kayıt Ol</a>
+  </div>
+
+  <div class="social-login">
+    <p>Ya da sosyal medya ile giriş yap:</p>
+    <button id="btnGoogle">Google</button>
+    <button id="btnFacebook">Facebook</button>
   </div>
 </div>
 
 <script>
-  const form = document.getElementById('loginForm');
+  const togglePassword = document.getElementById('togglePassword');
+  const passwordInput = document.getElementById('password');
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
+  togglePassword.addEventListener('click', () => {
+    if(passwordInput.type === 'password') {
+      passwordInput.type = 'text';
+      togglePassword.textContent = 'Gizle';
+    } else {
+      passwordInput.type = 'password';
+      togglePassword.textContent = 'Göster';
+    }
+  });
 
-    const username = form.username.value.trim();
-    const password = form.password.value.trim();
+  const loginForm = document.getElementById('loginForm');
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = loginForm.username.value.trim();
+    const password = loginForm.password.value.trim();
 
     if (!username) {
       alert('Lütfen kullanıcı adınızı girin.');
-      form.username.focus();
       return;
     }
     if (!password) {
       alert('Lütfen şifrenizi girin.');
-      form.password.focus();
       return;
     }
 
-    // Buraya gerçek giriş işlemi için API çağrısı yapılabilir
-    alert(`Giriş yapılıyor... \nKullanıcı: ${username}`);
-    
-    // Örnek olarak localStorage'da kullanıcı kaydedelim
-    localStorage.setItem('kullanici', JSON.stringify({username}));
-    localStorage.setItem('bakiye', '1000000');
-    window.location.href = 'index.html'; // Ana sayfaya yönlendir
+    // Simülasyon: Basit kullanıcı doğrulama
+    // Burada gerçek API çağrısı yapılmalı
+    if(username === 'testuser' && password === '123456') {
+      alert('Giriş başarılı! Hoşgeldiniz, ' + username);
+      // Örnek olarak localStorage'a kaydedelim
+      localStorage.setItem('kullanici', JSON.stringify({username: username}));
+      localStorage.setItem('bakiye', '1000');
+      window.location.href = 'index.html';
+    } else {
+      alert('Kullanıcı adı veya şifre hatalı!');
+    }
+  });
+
+  // Sosyal medya butonlarına basınca (örnek simülasyon)
+  document.getElementById('btnGoogle').addEventListener('click', () => {
+    alert('Google ile giriş özelliği henüz aktif değil.');
+  });
+  document.getElementById('btnFacebook').addEventListener('click', () => {
+    alert('Facebook ile giriş özelliği henüz aktif değil.');
   });
 </script>
 
