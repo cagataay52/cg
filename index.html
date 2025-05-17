@@ -3,208 +3,168 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PradaBet - Modern Mor Degrade Tema</title>
+<title>PradaBet - Mor Degrade Tema</title>
 <style>
-  /* --- Genel Stil ve Renkler --- */
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700&display=swap');
-
-  :root {
-    --primary-color-start: #6a0dad;
-    --primary-color-end: #b833ff;
-    --sidebar-bg-start: #4c007d;
-    --sidebar-bg-end: #9c4dff;
-    --text-color: #f0e8ff;
-    --accent-color: #d9b3ff;
-    --shadow-color: rgba(108, 0, 217, 0.3);
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
+  /* Genel ayarlar */
   body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, var(--primary-color-start), var(--primary-color-end));
-    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #3e007c, #9c27b0);
+    color: #ddd;
     display: flex;
     min-height: 100vh;
-    overflow-x: hidden;
   }
 
   /* --- Sol Menü --- */
   nav.sidebar {
-    width: 260px;
-    background: linear-gradient(180deg, var(--sidebar-bg-start), var(--sidebar-bg-end));
+    width: 200px;
+    background: linear-gradient(180deg, #4a0e7c, #b833ff);
+    color: #eee;
+    padding: 30px 0;
     display: flex;
     flex-direction: column;
-    padding: 40px 0;
-    box-shadow: 4px 0 20px var(--shadow-color);
+    gap: 18px;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 3px 0 15px rgba(148, 0, 255, 0.7);
     position: sticky;
     top: 0;
     height: 100vh;
-    font-weight: 600;
-    font-size: 18px;
   }
-
   nav.sidebar a {
-    padding: 18px 36px;
+    color: #eee;
     text-decoration: none;
-    color: var(--text-color);
-    letter-spacing: 0.05em;
-    border-left: 5px solid transparent;
-    transition: all 0.3s ease;
+    padding: 14px 25px;
+    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  nav.sidebar a:hover {
+    background: #d471ff;
+    color: #1a0033;
+    font-weight: 700;
   }
 
-  nav.sidebar a:hover,
-  nav.sidebar a.active {
-    background-color: rgba(217, 179, 255, 0.15);
-    border-left-color: var(--accent-color);
-    color: #fff;
-  }
-
-  /* --- Ana İçerik --- */
-  .main-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+  /* --- Ana içerik --- */
+  main.content {
+    flex-grow: 1;
+    padding: 30px 40px 50px;
     overflow-y: auto;
+    background: rgba(0,0,0,0.25);
   }
 
   /* --- Header --- */
   header {
-    background: linear-gradient(90deg, var(--primary-color-start), var(--primary-color-end));
-    padding: 20px 40px;
+    background: linear-gradient(90deg, #6a0dad, #b833ff);
+    padding: 12px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 4px 15px var(--shadow-color);
+    box-shadow: 0 3px 10px rgba(106, 13, 173, 0.7);
   }
-
   header .logo {
     font-weight: 700;
-    font-size: 30px;
-    letter-spacing: 0.1em;
-    color: #fff;
-    user-select: none;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: white;
   }
-
   header nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
   }
-
   header nav span#welcome-msg {
     font-weight: 600;
-    font-size: 17px;
-    user-select: none;
+    font-size: 14px;
+    white-space: nowrap;
   }
-
   header nav button {
-    background: transparent;
-    border: 2px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 8px 20px;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-
-  header nav button:hover {
-    background-color: var(--accent-color);
-    color: var(--primary-color-start);
-  }
-
-  /* --- Slider --- */
-  .slider {
-    width: 90%;
-    max-width: 980px;
-    height: 300px;
-    margin: 40px auto 60px;
+    background: rgba(255 255 255 / 0.15);
+    border: none;
     border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px var(--shadow-color);
-    background-color: #3a0073;
-    position: relative;
+    padding: 6px 16px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  header nav button:hover {
+    background: rgba(255 255 255 / 0.35);
   }
 
+  /* --- Slider ana kapsayıcı */
+  .slider {
+    visibility: hidden;
+    width: 100%;
+    max-width: 1000px;
+    height: 280px;
+    margin: 30px auto 50px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(184, 67, 243, 0.7);
+    background-color: #0a0a0a;
+    transition: visibility 0s linear 0.3s;
+  }
   .slides {
     display: flex;
     width: 300%;
     height: 100%;
     transition: transform 0.6s ease-in-out;
   }
-
   .slide {
     flex: 0 0 100%;
     position: relative;
   }
-
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.8);
-    transition: filter 0.4s ease;
+    object-fit: contain;
+    background-color: #0a0a0a;
   }
-
-  .slide:hover img {
-    filter: brightness(1);
-  }
-
   .slide .caption {
     position: absolute;
-    bottom: 30px;
-    left: 40px;
+    bottom: 25px;
+    left: 30px;
+    color: white;
     font-size: 28px;
     font-weight: 700;
-    color: #fff;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
   }
 
-  /* --- Oyunlar --- */
+  /* --- Oyunlar bölümü --- */
   .games {
-    max-width: 980px;
-    margin: 0 auto 50px;
+    max-width: 1000px;
+    margin: 0 auto 40px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 28px;
-    padding: 0 20px;
+    padding: 0 15px;
   }
-
   .game {
-    position: relative;
     width: 260px;
     height: 160px;
-    border-radius: 22px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(184, 67, 243, 0.7);
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 8px 24px var(--shadow-color);
-    background: linear-gradient(135deg, var(--sidebar-bg-end), var(--sidebar-bg-start));
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    text-decoration: none;
-    color: var(--text-color);
+    background: linear-gradient(135deg, #4a0e7c, #b833ff);
+    color: #eee;
     display: flex;
-    align-items: flex-end;
-    padding: 20px;
-    font-weight: 700;
-    font-size: 20px;
-    letter-spacing: 0.04em;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
   }
-
   .game:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 18px 38px var(--shadow-color);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 26px rgba(184, 67, 243, 0.9);
   }
-
   .game img {
     position: absolute;
     top: 0;
@@ -212,156 +172,154 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.6);
-    border-radius: 22px;
+    filter: brightness(0.55);
     transition: filter 0.3s ease;
-    z-index: 0;
+    z-index: 1;
   }
-
   .game:hover img {
-    filter: brightness(0.9);
+    filter: brightness(0.85);
   }
-
   .game span {
     position: relative;
-    z-index: 1;
-    text-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 14px 22px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 
-  /* --- Responsive --- */
-  @media (max-width: 900px) {
+  /* --- Responsive (mobil uyum) --- */
+  @media (max-width: 768px) {
     nav.sidebar {
+      width: 70px;
+      padding: 20px 0;
+      font-size: 11px;
+      gap: 12px;
+    }
+    nav.sidebar a {
+      padding: 12px 10px;
+      font-size: 11px;
+      text-align: center;
+    }
+    main.content {
+      padding: 20px 15px 30px;
+    }
+    header {
+      padding: 10px 20px;
+    }
+    header .logo {
+      font-size: 20px;
+    }
+    header nav span#welcome-msg {
       display: none;
     }
-
-    .slider {
-      width: 95%;
-      height: 220px;
-      margin: 30px auto 40px;
+    header nav button {
+      padding: 5px 10px;
+      font-size: 11px;
     }
-
+    .slider {
+      height: 200px;
+    }
     .slide .caption {
       font-size: 22px;
-      left: 25px;
-      bottom: 20px;
+      bottom: 15px;
+      left: 20px;
     }
-
     .games {
-      max-width: 95vw;
-      gap: 20px;
+      gap: 18px;
     }
-
     .game {
       width: 90vw;
       max-width: 320px;
-      height: 140px;
+      height: 150px;
+      border-radius: 16px;
+    }
+    .game span {
       font-size: 18px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    header {
-      padding: 15px 20px;
-      flex-direction: column;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    header nav {
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    header nav button {
-      padding: 7px 14px;
-      font-size: 14px;
+      padding: 12px 18px;
     }
   }
 </style>
 </head>
 <body>
 
-<nav class="sidebar" role="navigation" aria-label="Site navigation">
-  <a href="#" class="active" tabindex="1">Canlı Casino</a>
-  <a href="#" tabindex="2">Bahis</a>
-  <a href="#" tabindex="3">Canlı Bahis</a>
-  <a href="#" tabindex="4">Oyunlar</a>
-  <a href="#" tabindex="5">Slot</a>
-  <a href="#" tabindex="6">Kampanyalar</a>
+<!-- Sol Menü -->
+<nav class="sidebar">
+  <a href="#">Canlı Casino</a>
+  <a href="#">Bahis</a>
+  <a href="#">Canlı Bahis</a>
+  <a href="#">Oyunlar</a>
+  <a href="#">Slot</a>
+  <a href="#">Kampanyalar</a>
 </nav>
 
-<div class="main-container">
+<!-- Ana içerik -->
+<main class="content">
+  <!-- Üst Bar -->
   <header>
-    <div class="logo" aria-label="Site logosu">PradaBet</div>
-    <nav aria-label="Kullanıcı işlemleri">
-      <span id="welcome-msg" aria-live="polite">Misafir</span>
-      <button id="btnHesap" style="display:none;" aria-label="Hesabım sayfasına git">Hesabım</button>
-      <button id="btnCikis" style="display:none;" aria-label="Çıkış yap">Çıkış Yap</button>
-      <button id="btnGiris" aria-label="Giriş yap">Giriş Yap</button>
-      <button id="btnKayit" aria-label="Kayıt ol">Kayıt Ol</button>
+    <div class="logo">PradaBet</div>
+    <nav>
+      <span id="welcome-msg">Misafir</span>
+      <button id="btnHesap" style="display:none;">Hesabım</button>
+      <button id="btnCikis" style="display:none;">Çıkış Yap</button>
+      <button id="btnGiris">Giriş Yap</button>
+      <button id="btnKayit">Kayıt Ol</button>
     </nav>
   </header>
 
   <!-- Slider -->
-  <section class="slider" aria-roledescription="carousel" aria-label="Promosyonlar">
+  <div class="slider">
     <div class="slides">
-      <article class="slide" aria-hidden="false">
+      <div class="slide">
         <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
         <div class="caption">Hoşgeldin Bonusu %100!</div>
-      </article>
-      <article class="slide" aria-hidden="true">
+      </div>
+      <div class="slide">
         <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
         <div class="caption">Her Gün Yeni Turnuvalar</div>
-      </article>
-      <article class="slide" aria-hidden="true">
+      </div>
+      <div class="slide">
         <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
         <div class="caption">Yüksek Kazanç Fırsatları</div>
-      </article>
+      </div>
     </div>
-  </section>
+  </div>
 
   <!-- Oyunlar -->
-  <section class="games" aria-label="Popüler oyunlar">
-    <a href="sweet-bonanza.html" class="game" tabindex="7" aria-label="Sweet Bonanza oyununa git">
+  <div class="games">
+    <a href="sweet-bonanza.html" class="game">
       <img src="https://i.ibb.co/Ps1SzxJR/sweetbonanza.jpg" alt="Sweet Bonanza" />
       <span>Sweet Bonanza</span>
     </a>
-    <a href="aviator.html" class="game" tabindex="8" aria-label="Aviator oyununa git">
+    <a href="aviator.html" class="game">
       <img src="https://i.ibb.co/Tx7R4PKR/aviator.jpg" alt="Aviator" />
       <span>Aviator</span>
     </a>
-    <a href="blackjack.html" class="game" tabindex="9" aria-label="Black Jack oyununa git">
+    <a href="blackjack.html" class="game">
       <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
       <span>Black Jack</span>
     </a>
-  </section>
-</div>
+  </div>
+</main>
 
 <script>
-  // Slider Görünürlük
+  // Sayfa yüklendiğinde slider görünür olsun
   window.addEventListener('load', () => {
     document.querySelector('.slider').style.visibility = 'visible';
   });
 
   // Slider otomatik geçiş
   const slidesContainer = document.querySelector('.slides');
-  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slidesContainer.children.length;
   let currentIndex = 0;
-  const totalSlides = slides.length;
-
-  function updateAria() {
-    slides.forEach((slide, idx) => {
-      slide.setAttribute('aria-hidden', idx !== currentIndex);
-    });
-  }
 
   setInterval(() => {
-    currentIndex = (currentIndex + 1) % totalSlides;
+    currentIndex++;
+    if(currentIndex >= totalSlides) currentIndex = 0;
     slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-    updateAria();
-  }, 4500);
+  }, 4000);
 
-  // Kullanıcı durumu simülasyonu
+  // Kullanıcı kontrolü simülasyonu
   const kullanici = JSON.parse(localStorage.getItem('kullanici'));
   const bakiye = localStorage.getItem('bakiye');
 
