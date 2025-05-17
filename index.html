@@ -75,7 +75,7 @@
   /* Slider içindeki resimler */
   .slides {
     display: flex;
-    width: 300%; /* 3 resim için */
+    width: 400%; /* 4 resim için */
     height: 100%;
     transition: transform 0.6s ease-in-out;
   }
@@ -88,9 +88,8 @@
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* contain yerine cover yaptık */
+    object-fit: contain;
     background-color: #0a0a0a;
-    display: block; /* ekstra boşlukları kaldırmak için */
   }
 
   .slide .caption {
@@ -216,8 +215,12 @@
       <div class="caption">Her Gün Yeni Turnuvalar</div>
     </div>
     <div class="slide">
-      <img src="https://i.ibb.co/GQJS69qB/highprofits.jpg" alt="Yüksek Kazançlar" />
+      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
       <div class="caption">Yüksek Kazanç Fırsatları</div>
+    </div>
+    <div class="slide">
+      <img src="https://i.imageupload.app/476980f5c9e893e8d7a8.png" alt="Yeni Fırsatlar" />
+      <div class="caption">Yeni Fırsatlar</div>
     </div>
   </div>
 </div>
@@ -239,18 +242,16 @@
 </div>
 
 <script>
-  // Slider otomatik geçiş (sayfa tamamen yüklendikten sonra başlat)
-  window.addEventListener('load', () => {
-    const slidesContainer = document.querySelector('.slides');
-    const totalSlides = slidesContainer.children.length;
-    let currentIndex = 0;
+  // Slider otomatik geçiş
+  const slidesContainer = document.querySelector('.slides');
+  const totalSlides = slidesContainer.children.length;
+  let currentIndex = 0;
 
-    setInterval(() => {
-      currentIndex++;
-      if(currentIndex >= totalSlides) currentIndex = 0;
-      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-    }, 4000);
-  });
+  setInterval(() => {
+    currentIndex++;
+    if(currentIndex >= totalSlides) currentIndex = 0;
+    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }, 4000);
 
   // Kullanıcı kontrolü simülasyonu
   const kullanici = JSON.parse(localStorage.getItem('kullanici'));
