@@ -69,13 +69,13 @@
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(184, 67, 243, 0.7);
-    background-color: #0a0a0a;
+    background-color: #121212;
   }
 
   /* Slider içindeki resimler */
   .slides {
     display: flex;
-    width: 400%; /* 4 resim için */
+    width: 300%; /* 3 resim için */
     height: 100%;
     transition: transform 0.6s ease-in-out;
   }
@@ -89,7 +89,9 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background-color: #0a0a0a;
+    background-color: #121212;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .slide .caption {
@@ -207,20 +209,16 @@
 <div class="slider">
   <div class="slides">
     <div class="slide">
-      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" />
+      <img src="https://i.imageupload.app/51c25559694837960d56.png" alt="Hoşgeldin Bonusu %100!" loading="eager" />
       <div class="caption">Hoşgeldin Bonusu %100!</div>
     </div>
     <div class="slide">
-      <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" />
+      <img src="https://i.ibb.co/tMf4bLRd/tournaments.jpg" alt="Turnuvalar" loading="eager" />
       <div class="caption">Her Gün Yeni Turnuvalar</div>
     </div>
     <div class="slide">
-      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" />
+      <img src="https://i.imageupload.app/91be5125f5f9f93c9b36.png" alt="Yüksek Kazançlar" loading="eager" />
       <div class="caption">Yüksek Kazanç Fırsatları</div>
-    </div>
-    <div class="slide">
-      <img src="https://i.imageupload.app/476980f5c9e893e8d7a8.png" alt="Yeni Fırsatlar" />
-      <div class="caption">Yeni Fırsatlar</div>
     </div>
   </div>
 </div>
