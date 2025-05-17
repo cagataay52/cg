@@ -3,259 +3,191 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kayıt Ol - PradaBet</title>
+<title>PradaBet - Kayıt Ol</title>
 <style>
   body {
     background: linear-gradient(135deg, #3e007c, #9c27b0);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #eee;
-    margin: 0; padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
   }
-
   .register-container {
-    background: rgba(0, 0, 0, 0.7);
-    padding: 30px 40px;
+    background: rgba(30, 0, 60, 0.85);
+    padding: 40px 35px;
     border-radius: 15px;
-    width: 360px;
-    box-shadow: 0 8px 30px rgba(184, 67, 243, 0.7);
+    width: 380px;
+    max-width: 90vw;
+    box-shadow: 0 8px 25px rgba(184, 67, 243, 0.8);
   }
-
   .register-container h2 {
-    text-align: center;
     margin-bottom: 25px;
     font-weight: 700;
+    text-align: center;
     color: #d471ff;
   }
-
-  form label {
+  label {
     display: block;
     margin-bottom: 6px;
     font-weight: 600;
-    font-size: 14px;
   }
-
-  form input[type="text"],
-  form input[type="email"],
-  form input[type="password"] {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
     width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 18px;
+    padding: 12px 15px;
     border-radius: 8px;
     border: none;
-    outline: none;
-    font-size: 14px;
-    background: #3a027a;
-    color: #eee;
-    transition: box-shadow 0.3s ease;
-  }
-
-  form input[type="text"]:focus,
-  form input[type="email"]:focus,
-  form input[type="password"]:focus {
-    box-shadow: 0 0 8px #d471ff;
-  }
-
-  .password-wrapper {
-    position: relative;
-  }
-
-  .toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    background: transparent;
-    border: none;
-    color: #d471ff;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 14px;
-  }
-
-  .password-strength {
-    font-size: 13px;
-    margin-top: -12px;
     margin-bottom: 18px;
-    font-weight: 700;
+    font-size: 15px;
+    box-sizing: border-box;
   }
-  .strength-weak {
-    color: #ff3b3b;
+  input[type="checkbox"] {
+    margin-right: 8px;
   }
-  .strength-medium {
-    color: #ffd93b;
-  }
-  .strength-strong {
-    color: #4cff4c;
-  }
-
-  .terms {
-    display: flex;
-    align-items: center;
-    margin-bottom: 18px;
-  }
-
-  .terms input[type="checkbox"] {
-    margin-right: 10px;
-    width: 18px;
-    height: 18px;
+  .show-password {
     cursor: pointer;
-  }
-
-  .terms label {
     font-size: 13px;
-    color: #ccc;
-    cursor: pointer;
+    color: #a47aff;
+    user-select: none;
   }
-
-  button[type="submit"] {
+  button {
     width: 100%;
-    padding: 12px 0;
-    border-radius: 30px;
+    padding: 14px 0;
     border: none;
+    border-radius: 12px;
     background: #b833ff;
-    color: #fff;
     font-weight: 700;
+    color: white;
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease;
   }
-  button[type="submit"]:hover {
-    background: #9a24d6;
+  button:hover {
+    background: #d471ff;
   }
-
-  .error-msg {
-    color: #ff6b6b;
-    font-size: 13px;
-    margin-bottom: 12px;
-  }
-
-  .success-msg {
-    color: #4cff4c;
-    font-weight: 700;
+  .register-footer {
+    margin-top: 18px;
     text-align: center;
-    margin-top: 15px;
+    font-size: 14px;
+  }
+  .register-footer a {
+    color: #d471ff;
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .register-footer a:hover {
+    text-decoration: underline;
+  }
+  .error-msg {
+    background: #b8333340;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    color: #ff6666;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: block;
+    height: 0;
+    overflow: hidden;
+  }
+  .error-msg.show {
+    opacity: 1;
+    height: auto;
   }
 </style>
 </head>
 <body>
 
 <div class="register-container">
-  <h2>PradaBet Kayıt</h2>
+  <h2>PradaBet Kayıt Ol</h2>
+  <div class="error-msg" id="errorMsg"></div>
   <form id="registerForm" novalidate>
-    <label for="name">Adınız</label>
-    <input type="text" id="name" name="name" required placeholder="Adınızı girin" />
-
-    <label for="surname">Soyadınız</label>
-    <input type="text" id="surname" name="surname" required placeholder="Soyadınızı girin" />
-
-    <label for="email">E-posta</label>
-    <input type="email" id="email" name="email" required placeholder="E-posta adresinizi girin" />
-
     <label for="username">Kullanıcı Adı</label>
-    <input type="text" id="username" name="username" required placeholder="Kullanıcı adı belirleyin" />
+    <input type="text" id="username" name="username" placeholder="Kullanıcı adı" required />
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Email adresi" required />
 
     <label for="password">Şifre</label>
-    <div class="password-wrapper">
-      <input type="password" id="password" name="password" required placeholder="Şifre belirleyin" />
-      <button type="button" class="toggle-password" tabindex="-1">Göster</button>
-    </div>
-    <div id="passwordStrength" class="password-strength"></div>
+    <input type="password" id="password" name="password" placeholder="Şifre" required />
 
     <label for="confirmPassword">Şifre Tekrar</label>
-    <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Şifrenizi tekrar girin" />
+    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Şifre tekrar" required />
 
-    <div class="terms">
-      <input type="checkbox" id="terms" required />
-      <label for="terms">Kullanıcı Sözleşmesini ve Gizlilik Politikasını okudum, kabul ediyorum.</label>
+    <div>
+      <input type="checkbox" id="showPass" />
+      <label for="showPass" class="show-password">Şifreleri Göster</label>
     </div>
 
     <button type="submit">Kayıt Ol</button>
-    <div id="formMessage" role="alert"></div>
   </form>
+
+  <div class="register-footer">
+    <a href="giris.html">Zaten hesabın var mı? Giriş Yap</a>
+  </div>
 </div>
 
 <script>
-  const form = document.getElementById('registerForm');
-  const togglePasswordBtn = form.querySelector('.toggle-password');
-  const passwordInput = form.password;
-  const confirmPasswordInput = form.confirmPassword;
-  const passwordStrength = document.getElementById('passwordStrength');
-  const formMessage = document.getElementById('formMessage');
+  const registerForm = document.getElementById('registerForm');
+  const errorMsg = document.getElementById('errorMsg');
+  const showPassCheckbox = document.getElementById('showPass');
 
-  // Şifre göster/gizle
-  togglePasswordBtn.addEventListener('click', () => {
-    if(passwordInput.type === 'password') {
-      passwordInput.type = 'text';
-      togglePasswordBtn.textContent = 'Gizle';
-    } else {
-      passwordInput.type = 'password';
-      togglePasswordBtn.textContent = 'Göster';
-    }
+  showPassCheckbox.addEventListener('change', () => {
+    const pwd = document.getElementById('password');
+    const confirmPwd = document.getElementById('confirmPassword');
+    const type = showPassCheckbox.checked ? 'text' : 'password';
+    pwd.type = type;
+    confirmPwd.type = type;
   });
 
-  // Şifre güç kontrol fonksiyonu
-  function checkPasswordStrength(password) {
-    let strength = 0;
-    if(password.length >= 8) strength++;
-    if(/[A-Z]/.test(password)) strength++;
-    if(/[0-9]/.test(password)) strength++;
-    if(/[\W]/.test(password)) strength++;
-
-    switch(strength) {
-      case 0:
-      case 1:
-        return {text: 'Zayıf', className: 'strength-weak'};
-      case 2:
-      case 3:
-        return {text: 'Orta', className: 'strength-medium'};
-      case 4:
-        return {text: 'Güçlü', className: 'strength-strong'};
-    }
+  function showError(message) {
+    errorMsg.textContent = message;
+    errorMsg.classList.add('show');
   }
 
-  passwordInput.addEventListener('input', e => {
-    const val = e.target.value;
-    const strength = checkPasswordStrength(val);
-    if(val) {
-      passwordStrength.textContent = `Şifre Gücü: ${strength.text}`;
-      passwordStrength.className = 'password-strength ' + strength.className;
-    } else {
-      passwordStrength.textContent = '';
-      passwordStrength.className = 'password-strength';
-    }
-  });
+  function hideError() {
+    errorMsg.classList.remove('show');
+  }
 
-  // Form gönderme
-  form.addEventListener('submit', e => {
+  registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    formMessage.textContent = '';
-    formMessage.className = '';
+    hideError();
 
-    // Basit doğrulamalar
-    if(form.password.value !== form.confirmPassword.value) {
-      formMessage.textContent = 'Şifreler eşleşmiyor!';
-      formMessage.className = 'error-msg';
-      confirmPasswordInput.focus();
+    const username = registerForm.username.value.trim();
+    const email = registerForm.email.value.trim();
+    const password = registerForm.password.value;
+    const confirmPassword = registerForm.confirmPassword.value;
+
+    if (!username || !email || !password || !confirmPassword) {
+      showError('Lütfen tüm alanları doldurun.');
       return;
     }
 
-    if(!form.terms.checked) {
-      formMessage.textContent = 'Lütfen kullanıcı sözleşmesini kabul edin.';
-      formMessage.className = 'error-msg';
+    // Basit email format kontrolü
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showError('Geçerli bir email adresi girin.');
       return;
     }
 
-    // Burada gerçek bir backend bağlantısı yapılmalı
-    // Şimdilik simülasyon:
-    formMessage.textContent = 'Kayıt başarılı! Yönlendiriliyorsunuz...';
-    formMessage.className = 'success-msg';
+    if (password.length < 6) {
+      showError('Şifre en az 6 karakter olmalı.');
+      return;
+    }
 
-    setTimeout(() => {
-      window.location.href = 'giris.html';
-    }, 2500);
+    if (password !== confirmPassword) {
+      showError('Şifreler uyuşmuyor.');
+      return;
+    }
+
+    // Kayıt başarılı simülasyonu
+    alert('Kayıt başarılı! Giriş sayfasına yönlendiriliyorsunuz...');
+    window.location.href = 'giris.html'; // Giriş sayfası yolu
   });
 </script>
 
