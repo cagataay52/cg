@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 <head>
 <meta charset="UTF-8" />
@@ -14,187 +13,184 @@
     color: #ddd;
   }
 
-/\* Navbar \*/
-header {
-background: linear-gradient(90deg, #6a0dad, #b833ff);
-padding: 15px 30px;
-display: flex;
-justify-content: space-between;
-align-items: center;
-position: sticky;
-top: 0;
-z-index: 100;
-box-shadow: 0 3px 10px rgba(106, 13, 173, 0.7);
-}
+  /* Navbar */
+  header {
+    background: linear-gradient(90deg, #6a0dad, #b833ff);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 10px rgba(106, 13, 173, 0.7);
+  }
 
-header .logo {
-font-weight: 900;
-font-size: 28px;
-letter-spacing: 2px;
-color: white;
-}
+  header .logo {
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: white;
+  }
 
-nav {
-display: flex;
-align-items: center;
-gap: 15px;
-}
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
 
-nav span#welcome-msg {
-font-weight: 600;
-white-space: nowrap;
-}
+  nav span#welcome-msg {
+    font-weight: 600;
+    white-space: nowrap;
+  }
 
-nav button {
-background: rgba(255 255 255 / 0.15);
-border: none;
-border-radius: 25px;
-padding: 8px 18px;
-color: #fff;
-font-weight: 700;
-cursor: pointer;
-transition: background 0.3s ease;
-}
+  nav button {
+    background: rgba(255 255 255 / 0.15);
+    border: none;
+    border-radius: 25px;
+    padding: 8px 18px;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
 
-nav button\:hover {
-background: rgba(255 255 255 / 0.35);
-}
+  nav button:hover {
+    background: rgba(255 255 255 / 0.35);
+  }
 
-/\* Slider ana kapsayıcı */
-.slider {
-visibility: hidden; /* Başlangıçta gizli \*/
-width: 100%;
-max-width: 1000px;
-height: 280px;
-margin: 30px auto 50px;
-position: relative;
-border-radius: 15px;
-overflow: hidden;
-box-shadow: 0 8px 25px rgba(184, 67, 243, 0.7);
-background-color: #0a0a0a;
-transition: visibility 0s linear 0.3s;
-}
+  /* Slider ana kapsayıcı */
+  .slider {
+    visibility: hidden; /* Başlangıçta gizli */
+    width: 100%;
+    max-width: 1000px;
+    height: 280px;
+    margin: 30px auto 50px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(184, 67, 243, 0.7);
+    background-color: #0a0a0a;
+    transition: visibility 0s linear 0.3s;
+  }
 
-/\* Slider içindeki resimler */
-.slides {
-display: flex;
-width: 300%; /* 3 resim için \*/
-height: 100%;
-transition: transform 0.6s ease-in-out;
-}
+  /* Slider içindeki resimler */
+  .slides {
+    display: flex;
+    width: 300%; /* 3 resim için */
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+  }
 
-.slide {
-flex: 0 0 100%;
-position: relative;
-}
+  .slide {
+    flex: 0 0 100%;
+    position: relative;
+  }
 
-.slide img {
-width: 100%;
-height: 100%;
-object-fit: contain; /\* veya 'cover' istersen değiştirebilirsin \*/
-background-color: #0a0a0a;
-}
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* veya 'cover' istersen değiştirebilirsin */
+    background-color: #0a0a0a;
+  }
 
-.slide .caption {
-position: absolute;
-bottom: 25px;
-left: 30px;
-color: white;
-font-size: 28px;
-font-weight: 700;
-text-shadow: 0 0 8px rgba(0,0,0,0.7);
-}
+  .slide .caption {
+    position: absolute;
+    bottom: 25px;
+    left: 30px;
+    color: white;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(0,0,0,0.7);
+  }
 
-/\* Oyunlar bölümü \*/
-.games {
-max-width: 1000px;
-margin: 0 auto 40px;
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 28px;
-padding: 0 15px;
-}
+  /* Oyunlar bölümü */
+  .games {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: 0 15px;
+  }
 
-.game {
-width: 260px;
-height: 160px;
-border-radius: 20px;
-box-shadow: 0 6px 18px rgba(184, 67, 243, 0.7);
-overflow: hidden;
-cursor: pointer;
-background: linear-gradient(135deg, #4a0e7c, #b833ff);
-color: #eee;
-display: flex;
-flex-direction: column;
-justify-content: flex-end;
-position: relative;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-text-decoration: none;
-}
+  .game {
+    width: 260px;
+    height: 160px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(184, 67, 243, 0.7);
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(135deg, #4a0e7c, #b833ff);
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+  }
 
-.game\:hover {
-transform: translateY(-8px);
-box-shadow: 0 12px 26px rgba(184, 67, 243, 0.9);
-}
+  .game:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 26px rgba(184, 67, 243, 0.9);
+  }
 
-.game img {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-filter: brightness(0.55);
-transition: filter 0.3s ease;
-z-index: 1;
-}
+  .game img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: filter 0.3s ease;
+    z-index: 1;
+  }
 
-.game\:hover img {
-filter: brightness(0.85);
-}
+  .game:hover img {
+    filter: brightness(0.85);
+  }
 
-.game span {
-position: relative;
-z-index: 2;
-font-size: 22px;
-font-weight: 800;
-padding: 14px 22px;
-text-shadow: 0 0 6px rgba(0,0,0,0.8);
-}
+  .game span {
+    position: relative;
+    z-index: 2;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 14px 22px;
+    text-shadow: 0 0 6px rgba(0,0,0,0.8);
+  }
 
-/\* Responsive (mobil uyum) \*/
-@media (max-width: 768px) {
-.slider {
-height: 200px;
-}
+  /* Responsive (mobil uyum) */
+  @media (max-width: 768px) {
+    .slider {
+      height: 200px;
+    }
 
-```
-.slide .caption {
-  font-size: 22px;
-  bottom: 15px;
-  left: 20px;
-}
+    .slide .caption {
+      font-size: 22px;
+      bottom: 15px;
+      left: 20px;
+    }
 
-.games {
-  gap: 18px;
-}
+    .games {
+      gap: 18px;
+    }
 
-.game {
-  width: 90vw;
-  max-width: 320px;
-  height: 150px;
-  border-radius: 16px;
-}
+    .game {
+      width: 90vw;
+      max-width: 320px;
+      height: 150px;
+      border-radius: 16px;
+    }
 
-.game span {
-  font-size: 18px;
-  padding: 12px 18px;
-}
-```
-
-} </style>
-
+    .game span {
+      font-size: 18px;
+      padding: 12px 18px;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -210,7 +206,6 @@ height: 200px;
 </header>
 
 <!-- Slider -->
-
 <div class="slider">
   <div class="slides">
     <div class="slide">
@@ -229,7 +224,6 @@ height: 200px;
 </div>
 
 <!-- Oyunlar -->
-
 <div class="games">
   <a href="sweet-bonanza.html" class="game">
     <img src="https://i.ibb.co/Ps1SzxJR/sweetbonanza.jpg" alt="Sweet Bonanza" />
