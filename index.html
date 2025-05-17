@@ -11,18 +11,52 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: #0a0a0a;
     color: #ddd;
+    display: flex;
   }
 
-  /* Navbar */
+  /* Sol sidebar */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 220px;
+    height: 100vh;
+    background: linear-gradient(180deg, #4a0e7c, #b833ff);
+    box-shadow: 3px 0 8px rgba(184, 67, 243, 0.7);
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* header yüksekliği kadar boşluk */
+    z-index: 110;
+  }
+
+  .sidebar a {
+    color: #eee;
+    text-decoration: none;
+    padding: 16px 24px;
+    font-weight: 700;
+    font-size: 18px;
+    border-left: 5px solid transparent;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .sidebar a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left-color: #fff;
+  }
+
+  /* Header */
   header {
+    position: fixed;
+    top: 0;
+    left: 220px; /* sidebar genişliği kadar kaydır */
+    right: 0;
+    height: 60px;
     background: linear-gradient(90deg, #6a0dad, #b833ff);
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    z-index: 120;
     box-shadow: 0 3px 10px rgba(106, 13, 173, 0.7);
   }
 
@@ -59,13 +93,20 @@
     background: rgba(255 255 255 / 0.35);
   }
 
-  /* Slider ana kapsayıcı */
-  .slider {
-    visibility: hidden; /* Başlangıçta gizli */
-    width: 100%;
+  /* Ana içerik alanı (sidebar genişliği kadar padding) */
+  .content {
+    margin-left: 220px;
+    padding: 80px 30px 30px 30px; /* üstte header boşluğu için */
     max-width: 1000px;
+    width: 100%;
+  }
+
+  /* Slider */
+  .slider {
+    visibility: hidden;
+    width: 100%;
     height: 280px;
-    margin: 30px auto 50px;
+    margin-bottom: 50px;
     position: relative;
     border-radius: 15px;
     overflow: hidden;
@@ -74,10 +115,9 @@
     transition: visibility 0s linear 0.3s;
   }
 
-  /* Slider içindeki resimler */
   .slides {
     display: flex;
-    width: 300%; /* 3 resim için */
+    width: 300%;
     height: 100%;
     transition: transform 0.6s ease-in-out;
   }
@@ -90,7 +130,7 @@
   .slide img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* veya 'cover' istersen değiştirebilirsin */
+    object-fit: contain;
     background-color: #0a0a0a;
   }
 
@@ -104,15 +144,12 @@
     text-shadow: 0 0 8px rgba(0,0,0,0.7);
   }
 
-  /* Oyunlar bölümü */
+  /* Oyunlar */
   .games {
-    max-width: 1000px;
-    margin: 0 auto 40px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 28px;
-    padding: 0 15px;
   }
 
   .game {
@@ -162,37 +199,56 @@
     text-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 
-  /* Responsive (mobil uyum) */
+  /* Responsive */
   @media (max-width: 768px) {
-    .slider {
-      height: 200px;
+    body {
+      flex-direction: column;
     }
-
-    .slide .caption {
-      font-size: 22px;
-      bottom: 15px;
-      left: 20px;
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      padding-top: 0;
+      flex-direction: row;
+      box-shadow: none;
     }
-
-    .games {
-      gap: 18px;
+    .sidebar a {
+      flex: 1;
+      text-align: center;
+      padding: 14px 0;
+      border-left: none;
+      border-bottom: 3px solid transparent;
     }
-
-    .game {
-      width: 90vw;
-      max-width: 320px;
-      height: 150px;
-      border-radius: 16px;
+    .sidebar a:hover {
+      border-left: none;
+      border-bottom-color: #fff;
     }
-
-    .game span {
-      font-size: 18px;
-      padding: 12px 18px;
+    header {
+      left: 0;
+      top: 60px;
+      position: fixed;
+      width: 100%;
+    }
+    .content {
+      margin-left: 0;
+      padding: 140px 15px 30px 15px;
+      max-width: 100%;
     }
   }
 </style>
 </head>
 <body>
+
+<!-- Sol Menü -->
+<div class="sidebar">
+  <a href="#">Oyunlar</a>
+  <a href="#">Slot</a>
+  <a href="#">Canlı Casino</a>
+  <a href="#">Bahis</a>
+</div>
+
+<!-- Ana İçerik -->
+<div class="content">
 
 <header>
   <div class="logo">PradaBet</div>
@@ -237,6 +293,8 @@
     <img src="https://i.imageupload.app/df5ea1696d2dbfd597b5.png" alt="Black Jack" />
     <span>Black Jack</span>
   </a>
+</div>
+
 </div>
 
 <script>
