@@ -130,12 +130,13 @@
 /* Genel Temel */
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #121212;
   color: #eee;
 }
 
-/* Navbar */
+
 .navbar {
   position: sticky;
   top: 0;
@@ -143,7 +144,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 12px 0;      /* Yan boşluklar kaldırıldı */
+  margin: 0;            /* Margin varsa sıfırlandı */
+  width: 100%;          /* Tam genişlik */
   z-index: 100;
   box-shadow: 0 2px 6px rgba(0,0,0,0.7);
 }
