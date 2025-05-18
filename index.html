@@ -239,7 +239,246 @@
       padding: 12px 18px;
     }
   }
+</style><style>
+  /* Genel ayarlar - Koyu mod için arka plan koyu ve degrade mor tonlar */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1b003d, #5e007a); /* Daha koyu mor degrade */
+    color: #ccc; /* Açık gri yazı */
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* --- Sol Menü --- */
+  nav.sidebar {
+    width: 200px;
+    background: linear-gradient(180deg, #2e0050, #8b33c4); /* Koyu mor tonları */
+    color: #ddd;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 3px 0 15px rgba(110, 0, 170, 0.9);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+  }
+  nav.sidebar a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 14px 25px;
+    border-radius: 10px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  nav.sidebar a:hover {
+    background: #c883ff;
+    color: #2a004a;
+    font-weight: 700;
+  }
+
+  /* --- Ana içerik --- */
+  main.content {
+    flex-grow: 1;
+    padding: 30px 40px 50px;
+    overflow-y: auto;
+    background: rgba(20, 10, 40, 0.7); /* Daha koyu şeffaf zemin */
+    box-shadow: inset 0 0 60px #4a007c88;
+    border-radius: 15px;
+  }
+
+  /* --- Header --- */
+  header {
+    background: linear-gradient(90deg, #4b0077, #8b33c4);
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 15px rgba(75, 0, 119, 0.8);
+  }
+  header .logo {
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: #eee;
+  }
+  header nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header nav span#welcome-msg {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    color: #eee;
+  }
+  header nav button {
+    background: rgba(255 255 255 / 0.1);
+    border: none;
+    border-radius: 25px;
+    padding: 6px 16px;
+    color: #eee;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  header nav button:hover {
+    background: rgba(255 255 255 / 0.3);
+  }
+
+  /* --- Slider ana kapsayıcı --- */
+  .slider {
+    visibility: hidden;
+    width: 100%;
+    max-width: 1000px;
+    height: 280px;
+    margin: 30px auto 50px;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(120, 0, 210, 0.8);
+    background-color: #120027;
+    transition: visibility 0s linear 0.3s;
+  }
+  .slides {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transition: transform 0.6s ease-in-out;
+  }
+  .slide {
+    flex: 0 0 100%;
+    position: relative;
+  }
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #120027;
+  }
+  .slide .caption {
+    position: absolute;
+    bottom: 25px;
+    left: 30px;
+    color: #eee;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 0 12px rgba(75,0,130,0.9);
+  }
+
+  /* --- Oyunlar bölümü --- */
+  .games {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    padding: 0 15px;
+  }
+  .game {
+    width: 260px;
+    height: 160px;
+    border-radius: 20px;
+    box-shadow: 0 6px 22px rgba(160, 60, 255, 0.8);
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(135deg, #3a0070, #9b2ddd);
+    color: #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+  }
+  .game:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 14px 32px rgba(200, 80, 255, 1);
+  }
+  .game img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.4);
+    transition: filter 0.3s ease;
+    z-index: 1;
+  }
+  .game:hover img {
+    filter: brightness(0.75);
+  }
+  .game span {
+    position: relative;
+    z-index: 2;
+    font-size: 22px;
+    font-weight: 800;
+    padding: 14px 22px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.85);
+  }
+
+  /* --- Responsive (mobil uyum) --- */
+  @media (max-width: 768px) {
+    nav.sidebar {
+      width: 70px;
+      padding: 20px 0;
+      font-size: 11px;
+      gap: 12px;
+    }
+    nav.sidebar a {
+      padding: 12px 10px;
+      font-size: 11px;
+      text-align: center;
+    }
+    main.content {
+      padding: 20px 15px 30px;
+    }
+    header {
+      padding: 10px 20px;
+    }
+    header .logo {
+      font-size: 20px;
+    }
+    header nav span#welcome-msg {
+      display: none;
+    }
+    header nav button {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+    .slider {
+      height: 200px;
+    }
+    .slide .caption {
+      font-size: 22px;
+      bottom: 15px;
+      left: 20px;
+    }
+    .games {
+      gap: 18px;
+    }
+    .game {
+      width: 90vw;
+      max-width: 320px;
+      height: 150px;
+      border-radius: 16px;
+    }
+    .game span {
+      font-size: 18px;
+      padding: 12px 18px;
+    }
+  }
 </style>
+
 </head>
 <body>
 
