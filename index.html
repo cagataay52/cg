@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Spor Medya Ajansı V3</title>
+    <title>Sinematik Spor İçerik Motoru V4</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #FF6B00;
-            --glass-bg: rgba(20, 20, 20, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-glow: rgba(255, 107, 0, 0.2);
+            --plate-bg: rgba(15, 15, 15, 0.65);
+            --plate-border: rgba(255, 255, 255, 0.15);
         }
 
         body {
@@ -24,307 +23,236 @@
             overflow: hidden;
         }
 
-        /* --- SOL PANEL --- */
+        /* --- SOL KONTROL PANELİ --- */
         .sidebar {
             width: 450px;
             background-color: #111;
             padding: 25px;
             overflow-y: auto;
             border-right: 1px solid #222;
-            box-shadow: 10px 0 30px rgba(0,0,0,0.9);
             z-index: 10;
         }
 
-        .sidebar h2 {
-            color: var(--primary-color);
-            text-align: center;
-            font-weight: 900;
-            letter-spacing: 2px;
-            font-size: 24px;
-            text-shadow: 0 0 10px var(--glass-glow);
-        }
+        .sidebar h2 { color: var(--primary-color); text-align: center; font-weight: 900; letter-spacing: 2px; }
 
         .control-group {
-            margin-bottom: 20px;
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #2a2a2a;
+            margin-bottom: 20px; background: #1a1a1a; padding: 15px; border-radius: 12px; border: 1px solid #2a2a2a;
         }
-
-        .control-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 11px;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 800;
+        .control-group label { display: block; margin-bottom: 8px; font-size: 11px; color: #aaa; font-weight: 800; text-transform: uppercase; }
+        .control-group input[type="text"], .control-group select, .control-group textarea {
+            width: 100%; padding: 12px; background-color: #0f0f0f; border: 1px solid #333; color: white; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 14px; box-sizing: border-box;
         }
-
-        .control-group input[type="text"],
-        .control-group select,
-        .control-group textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: #0f0f0f;
-            border: 1px solid #333;
-            color: white;
-            border-radius: 8px;
-            font-family: 'Montserrat', sans-serif;
-            box-sizing: border-box;
-            font-size: 14px;
-            transition: border 0.3s;
-        }
-
-        .control-group input:focus, .control-group textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-
+        .control-group input[type="file"] { font-size: 12px; color: #888; }
+        
         button.download-btn {
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(45deg, var(--primary-color), #ff3300);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 900;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+            width: 100%; padding: 20px; background: var(--primary-color); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 900; cursor: pointer; text-transform: uppercase; margin-bottom: 40px; transition: 0.2s;
         }
-
-        button.download-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.5);
-        }
-
+        button.download-btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
         .hidden-control { display: none !important; }
 
-        /* --- SAĞ PANEL (ÖNİZLEME) --- */
+        /* --- SAĞ ÖNİZLEME PANELİ --- */
         .preview-container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-image: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
-            overflow: auto;
-            padding: 20px;
+            flex: 1; display: flex; justify-content: center; align-items: center; background: #000; overflow: auto; padding: 20px;
         }
-
         .canvas-wrapper { width: 540px; height: 675px; position: relative; }
 
-        /* Asıl Boyut (1080x1350) */
+        /* ASIL GÖRSEL 1080x1350 */
         .canvas-area {
-            width: 1080px; height: 1350px;
-            position: absolute; top: 0; left: 0;
-            transform: scale(0.5); transform-origin: top left;
-            background-color: #0a0a0a;
-            background-image: url('https://images.unsplash.com/photo-1518605368461-1ee7e5b2228e?q=80&w=2000&auto=format&fit=crop'); 
-            background-size: cover; background-position: center;
-            overflow: hidden; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            width: 1080px; height: 1350px; position: absolute; top: 0; left: 0;
+            transform: scale(0.5); transform-origin: top left; background-color: #111;
+            background-image: url('https://images.unsplash.com/photo-1574629810360-7efbb1925846?q=80&w=2000&auto=format&fit=crop'); 
+            background-size: cover; background-position: center top; overflow: hidden;
+            display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
         }
 
+        /* Karartma Sadece Alt Tarafta (Resim net görünsün diye) */
         .canvas-overlay {
             position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;
         }
+        .theme-default .canvas-overlay { background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 30%, transparent 60%); --primary-color: #FF6B00; }
+        .theme-ucl .canvas-overlay { background: linear-gradient(to top, rgba(0,15,50,0.95) 0%, rgba(0,10,40,0.4) 30%, transparent 60%); --primary-color: #0044ff; }
+        .theme-uel .canvas-overlay { background: linear-gradient(to top, rgba(50,20,0,0.95) 0%, rgba(40,15,0,0.4) 30%, transparent 60%); --primary-color: #F6821F; }
 
-        /* Gelişmiş Temalar */
-        .theme-default .canvas-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(255, 107, 0, 0.4) 100%); --primary-color: #FF6B00; }
-        .theme-ucl .canvas-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(11, 28, 92, 0.8) 100%); --primary-color: #00c3ff; }
-        .theme-uel .canvas-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(246, 130, 31, 0.6) 100%); --primary-color: #F6821F; }
-        .theme-uecl .canvas-overlay { background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 40%, rgba(0, 177, 64, 0.6) 100%); --primary-color: #00ff5c; }
-
-        /* Premium Glass Panel */
-        .glass-panel {
+        /* SİNEMATİK ALT KUTU (PLATE) */
+        .bottom-plate {
             position: relative; z-index: 2;
-            width: 900px; min-height: 550px;
-            padding: 60px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border: 1px solid var(--glass-border);
-            border-top: 2px solid rgba(255,255,255,0.3);
-            border-left: 2px solid rgba(255,255,255,0.2);
+            width: 900px; 
+            margin-bottom: 120px; /* Alttan boşluk, filigran için */
+            background: var(--plate-bg);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--plate-border);
+            border-top: 2px solid var(--primary-color);
             border-radius: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 40px rgba(255,255,255,0.02);
+            padding: 50px 40px;
             display: flex; flex-direction: column; align-items: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.7);
         }
 
-        .badge {
-            display: inline-block;
-            background: var(--primary-color); color: #fff;
-            padding: 15px 40px; border-radius: 50px;
-            font-weight: 900; font-size: 26px; letter-spacing: 4px;
-            text-transform: uppercase; margin-bottom: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* LİG LOGOSU (Kutunun üstünde duran) */
+        .league-badge-container {
+            position: absolute;
+            top: -60px; /* Kutudan dışarı taşar */
+            width: 120px; height: 120px;
+            background: #0f0f0f; /* Koyu arka plan */
+            border: 2px solid var(--plate-border);
+            border-radius: 25px;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+            overflow: hidden;
+            z-index: 5;
         }
+        .league-badge-container img { width: 80%; height: 80%; object-fit: contain; }
 
         .view-block { display: none; width: 100%; }
         .view-block.active { display: block; }
 
-        /* --- ŞABLON 1: MAÇ & İSTATİSTİK --- */
-        .match-info { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .team { display: flex; flex-direction: column; align-items: center; width: 35%; }
-        .team img { width: 220px; height: 220px; object-fit: contain; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6)); }
-        .team-name { font-size: 40px; font-weight: 900; text-transform: uppercase; text-align: center; }
-        .score-area { font-size: 130px; font-weight: 900; letter-spacing: 5px; text-shadow: 0 10px 30px rgba(0,0,0,0.8); width: 30%; text-align: center; }
+        /* --- 1. MAÇ SKORU VE GOLCÜLER --- */
+        .match-main-row {
+            display: flex; align-items: center; justify-content: center; gap: 50px; margin-top: 20px;
+        }
+        .match-logo { width: 140px; height: 140px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
+        .match-score { font-size: 160px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 10px 20px rgba(0,0,0,0.8); line-height: 1; }
+        
+        .scorers-container {
+            display: flex; justify-content: space-between; width: 80%; margin: 30px auto 0;
+            border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;
+        }
+        .scorers-col { width: 48%; font-size: 18px; font-weight: 600; line-height: 1.8; color: #ddd; }
+        .scorers-col.left { text-align: right; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px; }
+        .scorers-col.right { text-align: left; padding-left: 20px; }
+        .scorer-item span { color: var(--primary-color); font-size: 14px; margin: 0 5px; } /* Top ikonu için */
 
-        /* --- ŞABLON 2: PUAN DURUMU --- */
-        .standings-table { width: 100%; border-collapse: collapse; font-size: 32px; font-weight: 600; }
-        .standings-table th { color: var(--primary-color); border-bottom: 3px solid rgba(255,255,255,0.2); padding-bottom: 20px; text-align: center; font-weight: 900; }
-        .standings-table td { padding: 25px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; }
-        .standings-table tr:nth-child(1) td { color: var(--primary-color); font-weight: 900; font-size: 38px; } /* Lider Vurgusu */
-        .standings-table td:nth-child(2) { text-align: left; font-weight: 800; } /* Takım Adı */
-        .standings-table td:last-child { font-weight: 900; background: rgba(255,255,255,0.1); border-radius: 10px; } /* Puan */
-
-        /* --- ŞABLON 3: GÜNÜN MAÇLARI --- */
-        .fixture-list { display: flex; flex-direction: column; gap: 20px; width: 100%; }
-        .fixture-item { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); padding: 30px 50px; border-radius: 20px; border-left: 5px solid var(--primary-color); }
-        .f-team { font-size: 38px; font-weight: 800; width: 40%; }
+        /* --- 2. DİĞER ŞABLONLAR İÇİN UYUMLU TASARIMLAR --- */
+        /* Puan Durumu */
+        .standings-table { width: 100%; border-collapse: collapse; font-size: 26px; font-weight: 600; margin-top: 30px; }
+        .standings-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 20px;}
+        .standings-table td { padding: 15px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; }
+        .standings-table tr:first-child td { color: var(--primary-color); font-weight: 900; font-size: 30px; }
+        .standings-table td:nth-child(2) { text-align: left; font-weight: 800; }
+        
+        /* Fikstür */
+        .fixture-list { margin-top: 30px; display: flex; flex-direction: column; gap: 15px; }
+        .fixture-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(0,0,0,0.4); border-radius: 15px; }
+        .f-team { font-size: 28px; font-weight: 800; width: 40%; }
         .f-team.away { text-align: right; }
-        .f-time { font-size: 34px; font-weight: 900; color: var(--primary-color); background: rgba(255,255,255,0.1); padding: 10px 30px; border-radius: 15px; }
+        .f-time { font-size: 24px; font-weight: 900; color: var(--primary-color); }
 
-        /* --- ŞABLON 4: T. DİREKTÖR / AÇIKLAMA --- */
-        .manager-layout { display: flex; align-items: center; justify-content: space-between; width: 100%; position: relative; }
-        .manager-img { width: 400px; height: 500px; object-fit: contain; position: absolute; left: -80px; bottom: -60px; filter: drop-shadow(10px 0 20px rgba(0,0,0,0.6)); z-index: 5; }
-        .quote-box { width: 55%; margin-left: auto; text-align: left; }
-        .quote-icon { font-size: 120px; color: var(--primary-color); line-height: 0.5; margin-bottom: 20px; font-family: serif; opacity: 0.5; }
-        .quote-text { font-size: 42px; font-weight: 800; font-style: italic; line-height: 1.4; margin-bottom: 30px; }
-        .quote-author { font-size: 28px; font-weight: 900; color: var(--primary-color); text-transform: uppercase; }
+        /* Transfer & Manager (Kutudan Taşan Resimler) */
+        .absolute-person { position: absolute; bottom: 0; left: -20px; height: 650px; z-index: 6; filter: drop-shadow(10px 0 20px rgba(0,0,0,0.8)); object-fit: contain;}
+        .content-right-align { margin-left: 45%; text-align: left; padding-top: 40px; }
+        
+        .t-name { font-size: 60px; font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase;}
+        .t-detail { font-size: 24px; font-weight: 600; color: #ccc; margin-bottom: 10px; }
+        .t-detail span { color: var(--primary-color); font-weight: 900; }
+        
+        /* Stats */
+        .stat-row { margin-top: 30px; }
+        .stat-title { text-align: center; font-size: 20px; font-weight: 800; color: #aaa; margin-bottom: 10px; text-transform: uppercase; }
+        .stat-bar-container { display: flex; align-items: center; justify-content: space-between; }
+        .s-val { font-size: 32px; font-weight: 900; width: 10%; }
+        .s-val.r { text-align: right; }
+        .s-bar-bg { width: 75%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; display: flex; overflow: hidden; }
+        .s-bar-home { background: var(--primary-color); height: 100%; border-radius: 10px 0 0 10px;}
+        .s-bar-away { background: #666; height: 100%; border-radius: 0 10px 10px 0;}
 
-        /* --- ŞABLON 5: TRANSFER HABERİ (Here We Go) --- */
-        .transfer-layout { display: flex; flex-direction: column; align-items: center; position: relative; }
-        .transfer-img { height: 450px; object-fit: contain; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.7)); z-index: 3; margin-top: -30px; }
-        .transfer-logo { width: 180px; height: 180px; position: absolute; bottom: 100px; right: 50px; z-index: 4; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8)); }
-        .transfer-name { font-size: 70px; font-weight: 900; text-transform: uppercase; margin-top: -20px; z-index: 5; text-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        .transfer-details { display: flex; gap: 30px; margin-top: 30px; z-index: 5; }
-        .t-pill { background: rgba(0,0,0,0.6); border: 1px solid var(--primary-color); padding: 15px 30px; border-radius: 50px; font-size: 24px; font-weight: 800; color: white; }
-        .t-pill span { color: var(--primary-color); }
-
-        /* --- ŞABLON 6: MAÇ İSTATİSTİKLERİ --- */
-        .stats-comp-box { width: 100%; margin-top: 40px; }
-        .stat-comp-row { margin-bottom: 40px; }
-        .stat-comp-title { text-align: center; font-size: 24px; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; text-transform: uppercase; color: #ddd; }
-        .stat-comp-bar-area { display: flex; align-items: center; justify-content: space-between; }
-        .stat-comp-val { font-size: 38px; font-weight: 900; width: 15%; }
-        .stat-comp-val.right { text-align: right; }
-        .progress-bar-bg { width: 65%; height: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; display: flex; overflow: hidden; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
-        .progress-home { height: 100%; background: var(--primary-color); border-radius: 10px 0 0 10px; }
-        .progress-away { height: 100%; background: #555; border-radius: 0 10px 10px 0; }
-
-        .watermark { position: absolute; bottom: 40px; font-weight: 900; font-size: 26px; color: rgba(255,255,255,0.3); letter-spacing: 4px; }
+        /* FİLİGRAN */
+        .watermark { position: absolute; bottom: 40px; font-size: 36px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 5px 10px rgba(0,0,0,0.8); z-index: 2; }
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <h2>🔥 PRO MEDYA PANELİ</h2>
+        <h2>🔥 SİNEMATİK PANEL V4</h2>
         
         <div class="control-group">
             <label>Tasarım Şablonu</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="match">Maç Sonucu / Skor</option>
-                <option value="standings">Puan Durumu (Tablo)</option>
-                <option value="fixtures">Günün Maçları (Fikstür)</option>
-                <option value="manager">Teknik Direktör Sözü</option>
+                <option value="match">Maç Sonucu & Golcüler</option>
+                <option value="standings">Puan Durumu</option>
+                <option value="fixtures">Günün Maçları</option>
                 <option value="transfer">Transfer Haberi</option>
-                <option value="matchstats">Maç İstatistikleri Karşılaştırması</option>
+                <option value="stats">Maç İstatistikleri</option>
             </select>
         </div>
 
         <div class="control-group">
-            <label>Turnuva / Tema Rengi</label>
+            <label>Renk Teması</label>
             <select id="themeType" onchange="updateTheme()">
-                <option value="theme-default">Ateş (Turuncu/Siyah)</option>
+                <option value="theme-default">Standart (Turuncu)</option>
                 <option value="theme-ucl">Şampiyonlar Ligi (Mavi)</option>
                 <option value="theme-uel">Avrupa Ligi (Turuncu)</option>
-                <option value="theme-uecl">Konferans Ligi (Yeşil)</option>
             </select>
         </div>
 
         <div class="control-group">
-            <label>Kendi Arka Planını Yükle</label>
+            <label>Tam Ekran Arka Plan Yükle (Aksiyon Fotoğrafı)</label>
             <input type="file" accept="image/*" onchange="loadBg(event)">
         </div>
-
+        
         <div class="control-group">
-            <label>Üst Rozet Yazısı</label>
-            <input type="text" id="topBadgeText" value="MAÇ SONUCU" oninput="updateContent()">
+            <label>Lig / Turnuva Logosu (Kutunun Üstündeki)</label>
+            <input type="file" accept="image/*" onchange="loadImage(event, 'leagueBadgeImg')">
         </div>
 
-        <div id="teamControls" class="control-group hidden-control">
-            <label>Ev Sahibi Adı</label>
-            <input type="text" id="homeNameInput" value="EV SAHİBİ" oninput="updateContent()">
-            <label style="margin-top: 5px;">Ev Logo</label>
+        <div id="matchControls" class="control-group hidden-control">
+            <label>Ev Sahibi Logo</label>
             <input type="file" accept="image/*" onchange="loadImage(event, 'homeLogo')">
-            
-            <label style="margin-top: 15px;">Skor</label>
-            <input type="text" id="scoreInput" value="2 - 1" oninput="updateContent()">
-            
-            <label style="margin-top: 15px;">Deplasman Adı</label>
-            <input type="text" id="awayNameInput" value="DEPLASMAN" oninput="updateContent()">
-            <label style="margin-top: 5px;">Deplasman Logo</label>
+            <label style="margin-top: 10px;">Skor (Örn: 5 - 2)</label>
+            <input type="text" id="scoreInput" value="5 - 2" oninput="updateContent()">
+            <label style="margin-top: 10px;">Deplasman Logo</label>
             <input type="file" accept="image/*" onchange="loadImage(event, 'awayLogo')">
+            
+            <label style="margin-top: 20px;">Ev Sahibi Golleri</label>
+            <textarea id="homeScorersInput" rows="4" oninput="updateContent()">M. Llorente ⚽ 6', 26'
+A. Griezmann ⚽ 14', 76'
+J. Alvarez ⚽ 15', 55'</textarea>
+            
+            <label style="margin-top: 10px;">Deplasman Golleri</label>
+            <textarea id="awayScorersInput" rows="4" oninput="updateContent()">P. Porro ⚽ 20'
+D. Solanke ⚽ 82'</textarea>
+            <small style="color:#888;">* Emoji kullanarak yazabilirsiniz.</small>
         </div>
 
         <div id="standingsControls" class="control-group hidden-control">
-            <label>Verileri Girin (Sıra | Takım | O | Av | Puan)</label>
+            <label>Sıra | Takım | O | Av | P</label>
             <textarea id="standingsInput" rows="6" oninput="updateContent()">1 | Galatasaray | 8 | +15 | 22
 2 | Fenerbahçe | 8 | +12 | 20
 3 | Beşiktaş | 8 | +8 | 17
-4 | Trabzonspor | 8 | +4 | 14
-5 | Başakşehir | 8 | +2 | 13</textarea>
-            <small style="color:#888; font-size:10px;">* Her takımı alt alta, aralarına | koyarak yazın.</small>
+4 | Trabzonspor | 8 | +4 | 14</textarea>
         </div>
 
         <div id="fixturesControls" class="control-group hidden-control">
-            <label>Maçları Girin (Ev Sahibi | Saat | Deplasman)</label>
-            <textarea id="fixturesInput" rows="5" oninput="updateContent()">Galatasaray | 19:00 | Fenerbahçe
-Beşiktaş | 21:45 | Trabzonspor
-Arsenal | 22:00 | Chelsea</textarea>
-        </div>
-
-        <div id="managerControls" class="control-group hidden-control">
-            <label>Teknik Direktör / Futbolcu Resmi (PNG)</label>
-            <input type="file" accept="image/*" onchange="loadImage(event, 'managerImg')">
-            <label style="margin-top: 10px;">İsim ve Ünvan</label>
-            <input type="text" id="managerNameInput" value="JOSE MOURINHO" oninput="updateContent()">
-            <label style="margin-top: 10px;">Sözü / Açıklaması</label>
-            <textarea id="managerQuoteInput" rows="4" oninput="updateContent()">"Sahada basmadık yer bırakmadık. Bu takım şampiyon olacak!"</textarea>
+            <label>Ev | Saat | Dep</label>
+            <textarea id="fixturesInput" rows="4" oninput="updateContent()">Real Madrid | 22:00 | B. Dortmund
+Arsenal | 22:00 | PSG
+Juventus | 19:45 | Stuttgart</textarea>
         </div>
 
         <div id="transferControls" class="control-group hidden-control">
-            <label>Oyuncu Resmi (PNG)</label>
-            <input type="file" accept="image/*" onchange="loadImage(event, 'transferPlayerImg')">
-            <label style="margin-top: 10px;">Gideceği Takım Logosu</label>
-            <input type="file" accept="image/*" onchange="loadImage(event, 'transferTeamLogo')">
-            <label style="margin-top: 10px;">Oyuncu Adı</label>
-            <input type="text" id="transferNameInput" value="V. OSIMHEN" oninput="updateContent()">
-            <label style="margin-top: 10px;">Bonservis / Maaş</label>
-            <input type="text" id="transferFeeInput" value="Kiralık" oninput="updateContent()">
-            <label style="margin-top: 10px;">Sözleşme Yılı</label>
-            <input type="text" id="transferYearInput" value="2025" oninput="updateContent()">
+            <label>Oyuncu/Hoca Resmi (Arka Planı Silinmiş PNG)</label>
+            <input type="file" accept="image/*" onchange="loadImage(event, 'transferImg')">
+            <label style="margin-top: 10px;">Başlık / İsim</label>
+            <input type="text" id="tNameInput" value="V. OSIMHEN" oninput="updateContent()">
+            <label style="margin-top: 10px;">Bilgi 1 (Örn: Bedel - Kiralık)</label>
+            <input type="text" id="tDet1Input" value="Bedel | Kiralık" oninput="updateContent()">
+            <label style="margin-top: 10px;">Bilgi 2 (Örn: Sözleşme - 2025)</label>
+            <input type="text" id="tDet2Input" value="Sözleşme | 2025" oninput="updateContent()">
+            <label style="margin-top: 10px;">Açıklama</label>
+            <textarea id="tDescInput" rows="3" oninput="updateContent()">"Burada olmaktan çok mutluyum, hedefimiz şampiyonluk."</textarea>
         </div>
 
-        <div id="matchStatsControls" class="control-group hidden-control">
-            <label>1. Veri (Başlık | Ev Değeri | Dep Değeri | Ev Yüzdesi)</label>
-            <input type="text" id="stat1Input" value="TOPLA OYNAMA | %60 | %40 | 60" oninput="updateContent()">
-            <label style="margin-top: 10px;">2. Veri (Başlık | Ev Değeri | Dep Değeri | Ev Yüzdesi)</label>
-            <input type="text" id="stat2Input" value="TOPLAM ŞUT | 15 | 8 | 65" oninput="updateContent()">
-            <label style="margin-top: 10px;">3. Veri (Başlık | Ev Değeri | Dep Değeri | Ev Yüzdesi)</label>
-            <input type="text" id="stat3Input" value="İSABETLİ PAS | 450 | 320 | 58" oninput="updateContent()">
-            <small style="color:#888; font-size:10px;">* Çubuk grafiği oranlamak için sonuna Ev Sahibi'nin tahmini yüzdesini (örn: 60) yazın.</small>
+        <div id="statsControls" class="control-group hidden-control">
+            <label>1. Veri (Başlık | Ev | Dep | EvYüzde)</label>
+            <input type="text" id="s1Input" value="TOPLA OYNAMA | %60 | %40 | 60" oninput="updateContent()">
+            <label style="margin-top: 10px;">2. Veri</label>
+            <input type="text" id="s2Input" value="TOPLAM ŞUT | 15 | 8 | 65" oninput="updateContent()">
+            <label style="margin-top: 10px;">3. Veri</label>
+            <input type="text" id="s3Input" value="İSABETLİ PAS | 450 | 320 | 58" oninput="updateContent()">
         </div>
 
         <div class="control-group">
-            <label>Sayfa Adın / Filigran</label>
-            <input type="text" id="watermarkInput" value="@SPORSAYFAN" oninput="updateContent()">
+            <label>Sayfa / Filigran Adı</label>
+            <input type="text" id="watermarkInput" value="mackolik" oninput="updateContent()">
         </div>
 
         <button class="download-btn" onclick="downloadImage()">📸 GÖRSELİ İNDİR (HD)</button>
@@ -335,78 +263,59 @@ Arsenal | 22:00 | Chelsea</textarea>
             <div class="canvas-area theme-default" id="exportCanvas">
                 <div class="canvas-overlay"></div>
                 
-                <div class="glass-panel">
-                    <div class="badge" id="displayBadge">MAÇ SONUCU</div>
-                    
+                <div class="bottom-plate">
+                    <div class="league-badge-container">
+                        <img id="leagueBadgeImg" src="https://upload.wikimedia.org/wikipedia/tr/thumb/b/b8/UEFA_%C5%9Eampiyonlar_Ligi_logosu.svg/1200px-UEFA_%C5%9Eampiyonlar_Ligi_logosu.svg.png">
+                    </div>
+
                     <div id="view-match" class="view-block active">
-                        <div class="match-info">
-                            <div class="team">
-                                <img id="homeLogo" src="https://cdn-icons-png.flaticon.com/512/1975/1975003.png" alt="Home">
-                                <div class="team-name" id="displayHomeName">EV SAHİBİ</div>
-                            </div>
-                            <div class="score-area" id="displayScore">2 - 1</div>
-                            <div class="team">
-                                <img id="awayLogo" src="https://cdn-icons-png.flaticon.com/512/1975/1975003.png" alt="Away">
-                                <div class="team-name" id="displayAwayName">DEPLASMAN</div>
-                            </div>
+                        <div class="match-main-row">
+                            <img id="homeLogo" class="match-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Atletico_Madrid_2017_logo.svg/1200px-Atletico_Madrid_2017_logo.svg.png">
+                            <div class="match-score" id="displayScore">5 - 2</div>
+                            <img id="awayLogo" class="match-logo" src="https://upload.wikimedia.org/wikipedia/tr/thumb/6/6d/Tottenham_Hotspur.svg/1200px-Tottenham_Hotspur.svg.png">
+                        </div>
+                        
+                        <div class="scorers-container">
+                            <div class="scorers-col left" id="displayHomeScorers"></div>
+                            <div class="scorers-col right" id="displayAwayScorers"></div>
                         </div>
                     </div>
 
                     <div id="view-standings" class="view-block">
                         <table class="standings-table">
                             <thead><tr><th>#</th><th>TAKIM</th><th>O</th><th>AV</th><th>P</th></tr></thead>
-                            <tbody id="displayStandingsBody"></tbody>
+                            <tbody id="displayStandings"></tbody>
                         </table>
                     </div>
 
                     <div id="view-fixtures" class="view-block">
-                        <div class="fixture-list" id="displayFixturesList"></div>
-                    </div>
-
-                    <div id="view-manager" class="view-block">
-                        <div class="manager-layout">
-                            <img id="managerImg" src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" class="manager-img">
-                            <div class="quote-box">
-                                <div class="quote-icon">"</div>
-                                <div class="quote-text" id="displayManagerQuote">"Sahada basmadık yer bırakmadık. Bu takım şampiyon olacak!"</div>
-                                <div class="quote-author" id="displayManagerName">JOSE MOURINHO</div>
-                            </div>
-                        </div>
+                        <div class="fixture-list" id="displayFixtures"></div>
                     </div>
 
                     <div id="view-transfer" class="view-block">
-                        <div class="transfer-layout">
-                            <img id="transferPlayerImg" src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" class="transfer-img">
-                            <img id="transferTeamLogo" src="https://cdn-icons-png.flaticon.com/512/1975/1975003.png" class="transfer-logo">
-                            <div class="transfer-name" id="displayTransferName">V. OSIMHEN</div>
-                            <div class="transfer-details">
-                                <div class="t-pill">Bedel: <span id="displayTransferFee">Kiralık</span></div>
-                                <div class="t-pill">Sözleşme: <span id="displayTransferYear">2025</span></div>
-                            </div>
+                        <img id="transferImg" class="absolute-person" src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png">
+                        
+                        <div class="content-right-align">
+                            <div class="t-name" id="displayTName">V. OSIMHEN</div>
+                            <div class="t-detail" id="displayTDet1">Bedel: <span>Kiralık</span></div>
+                            <div class="t-detail" id="displayTDet2">Sözleşme: <span>2025</span></div>
+                            <div style="font-size:22px; font-style:italic; margin-top:20px; line-height:1.4;" id="displayTDesc">"Burada olmaktan çok mutluyum."</div>
                         </div>
                     </div>
 
-                    <div id="view-matchstats" class="view-block">
-                        <div style="display:flex; justify-content:space-between; padding:0 100px; margin-bottom:20px;">
-                            <img id="statHomeLogo" src="https://cdn-icons-png.flaticon.com/512/1975/1975003.png" style="width:120px; height:120px; object-fit:contain;">
-                            <div style="font-size:60px; font-weight:900;">İSTATİSTİKLER</div>
-                            <img id="statAwayLogo" src="https://cdn-icons-png.flaticon.com/512/1975/1975003.png" style="width:120px; height:120px; object-fit:contain;">
-                        </div>
-                        
-                        <div class="stats-comp-box" id="displayStatsBox">
-                            </div>
+                    <div id="view-stats" class="view-block">
+                        <div id="displayStatsList"></div>
                     </div>
 
                 </div>
-                <div class="watermark" id="displayWatermark">@SPORSAYFAN</div>
+
+                <div class="watermark" id="displayWatermark">mackolik</div>
             </div>
         </div>
     </div>
 
     <script>
-        window.onload = function() { 
-            updateTemplateUI(); // Arayüzü başlat
-        };
+        window.onload = function() { updateTemplateUI(); };
 
         function loadBg(event) {
             const reader = new FileReader();
@@ -416,138 +325,95 @@ Arsenal | 22:00 | Chelsea</textarea>
 
         function loadImage(event, imgId) {
             const reader = new FileReader();
-            reader.onload = function() { 
-                document.getElementById(imgId).src = reader.result; 
-                // İstatistik sayfasındaki logoları da eşitle
-                if(imgId === 'homeLogo') document.getElementById('statHomeLogo').src = reader.result;
-                if(imgId === 'awayLogo') document.getElementById('statAwayLogo').src = reader.result;
-            };
+            reader.onload = function() { document.getElementById(imgId).src = reader.result; };
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
 
         function updateContent() {
-            // Ortak
-            document.getElementById('displayBadge').innerText = document.getElementById('topBadgeText').value;
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // Maç
-            document.getElementById('displayHomeName').innerText = document.getElementById('homeNameInput').value;
-            document.getElementById('displayAwayName').innerText = document.getElementById('awayNameInput').value;
+            // Maç Skor & Golcüler
             document.getElementById('displayScore').innerText = document.getElementById('scoreInput').value;
+            document.getElementById('displayHomeScorers').innerHTML = document.getElementById('homeScorersInput').value.replace(/\n/g, '<br>');
+            document.getElementById('displayAwayScorers').innerHTML = document.getElementById('awayScorersInput').value.replace(/\n/g, '<br>');
 
-            // Puan Durumu (Satırları Parçala)
+            // Puan Durumu
             const stText = document.getElementById('standingsInput').value;
             let stHtml = '';
             stText.split('\n').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
-                if(cols.length >= 5) {
-                    stHtml += `<tr><td>${cols[0]}</td><td>${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
-                }
+                if(cols.length >= 5) stHtml += `<tr><td>${cols[0]}</td><td>${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
             });
-            document.getElementById('displayStandingsBody').innerHTML = stHtml;
+            document.getElementById('displayStandings').innerHTML = stHtml;
 
             // Fikstür
             const fixText = document.getElementById('fixturesInput').value;
             let fixHtml = '';
             fixText.split('\n').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
-                if(cols.length >= 3) {
-                    fixHtml += `<div class="fixture-item"><div class="f-team">${cols[0]}</div><div class="f-time">${cols[1]}</div><div class="f-team away">${cols[2]}</div></div>`;
-                }
+                if(cols.length >= 3) fixHtml += `<div class="fixture-item"><div class="f-team">${cols[0]}</div><div class="f-time">${cols[1]}</div><div class="f-team away">${cols[2]}</div></div>`;
             });
-            document.getElementById('displayFixturesList').innerHTML = fixHtml;
+            document.getElementById('displayFixtures').innerHTML = fixHtml;
 
-            // T. Direktör
-            document.getElementById('displayManagerName').innerText = document.getElementById('managerNameInput').value;
-            document.getElementById('displayManagerQuote').innerText = document.getElementById('managerQuoteInput').value;
+            // Transfer / Haber
+            document.getElementById('displayTName').innerText = document.getElementById('tNameInput').value;
+            const det1 = document.getElementById('tDet1Input').value.split('|');
+            if(det1.length>1) document.getElementById('displayTDet1').innerHTML = `${det1[0]}: <span>${det1[1]}</span>`;
+            const det2 = document.getElementById('tDet2Input').value.split('|');
+            if(det2.length>1) document.getElementById('displayTDet2').innerHTML = `${det2[0]}: <span>${det2[1]}</span>`;
+            document.getElementById('displayTDesc').innerText = document.getElementById('tDescInput').value;
 
-            // Transfer
-            document.getElementById('displayTransferName').innerText = document.getElementById('transferNameInput').value;
-            document.getElementById('displayTransferFee').innerText = document.getElementById('transferFeeInput').value;
-            document.getElementById('displayTransferYear').innerText = document.getElementById('transferYearInput').value;
-
-            // İstatistikler
+            // Stats
             let statsHtml = '';
             for(let i=1; i<=3; i++) {
-                const val = document.getElementById('stat' + i + 'Input').value;
+                const val = document.getElementById('s' + i + 'Input').value;
                 const cols = val.split('|').map(c => c.trim());
                 if(cols.length >= 4) {
                     statsHtml += `
-                    <div class="stat-comp-row">
-                        <div class="stat-comp-title">${cols[0]}</div>
-                        <div class="stat-comp-bar-area">
-                            <div class="stat-comp-val">${cols[1]}</div>
-                            <div class="progress-bar-bg">
-                                <div class="progress-home" style="width:${cols[3]}%"></div>
-                                <div class="progress-away" style="width:${100 - parseInt(cols[3])}%"></div>
+                    <div class="stat-row">
+                        <div class="stat-title">${cols[0]}</div>
+                        <div class="stat-bar-container">
+                            <div class="s-val">${cols[1]}</div>
+                            <div class="s-bar-bg">
+                                <div class="s-bar-home" style="width:${cols[3]}%"></div>
+                                <div class="s-bar-away" style="width:${100 - parseInt(cols[3])}%"></div>
                             </div>
-                            <div class="stat-comp-val right">${cols[2]}</div>
+                            <div class="s-val r">${cols[2]}</div>
                         </div>
                     </div>`;
                 }
             }
-            document.getElementById('displayStatsBox').innerHTML = statsHtml;
+            document.getElementById('displayStatsList').innerHTML = statsHtml;
         }
 
         function updateTheme() {
-            const theme = document.getElementById('themeType').value;
-            document.getElementById('exportCanvas').className = 'canvas-area ' + theme;
+            document.getElementById('exportCanvas').className = 'canvas-area ' + document.getElementById('themeType').value;
         }
 
         function updateTemplateUI() {
             const template = document.getElementById('templateType').value;
             
-            // Tüm view ve kontrolleri gizle
             document.querySelectorAll('.view-block').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.sidebar .control-group').forEach(el => {
-                if(el.id) el.classList.add('hidden-control'); // ID'si olanları (özel alanları) gizle
-            });
+            document.getElementById('matchControls').classList.add('hidden-control');
+            document.getElementById('standingsControls').classList.add('hidden-control');
+            document.getElementById('fixturesControls').classList.add('hidden-control');
+            document.getElementById('transferControls').classList.add('hidden-control');
+            document.getElementById('statsControls').classList.add('hidden-control');
 
-            // Seçilene göre göster
-            if (template === 'match') {
-                document.getElementById('view-match').classList.add('active');
-                document.getElementById('teamControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "MAÇ SONUCU";
-            } 
-            else if (template === 'standings') {
-                document.getElementById('view-standings').classList.add('active');
-                document.getElementById('standingsControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "PUAN DURUMU";
-            }
-            else if (template === 'fixtures') {
-                document.getElementById('view-fixtures').classList.add('active');
-                document.getElementById('fixturesControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "GÜNÜN MAÇLARI";
-            }
-            else if (template === 'manager') {
-                document.getElementById('view-manager').classList.add('active');
-                document.getElementById('managerControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "MAÇ SONU AÇIKLAMASI";
-            }
-            else if (template === 'transfer') {
-                document.getElementById('view-transfer').classList.add('active');
-                document.getElementById('transferControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "ANLAŞMA SAĞLANDI";
-            }
-            else if (template === 'matchstats') {
-                document.getElementById('view-matchstats').classList.add('active');
-                document.getElementById('teamControls').classList.remove('hidden-control'); // Logolar için
-                document.getElementById('matchStatsControls').classList.remove('hidden-control');
-                document.getElementById('topBadgeText').value = "MAÇ İSTATİSTİKLERİ";
-            }
+            if (template === 'match') { document.getElementById('view-match').classList.add('active'); document.getElementById('matchControls').classList.remove('hidden-control'); }
+            else if (template === 'standings') { document.getElementById('view-standings').classList.add('active'); document.getElementById('standingsControls').classList.remove('hidden-control'); }
+            else if (template === 'fixtures') { document.getElementById('view-fixtures').classList.add('active'); document.getElementById('fixturesControls').classList.remove('hidden-control'); }
+            else if (template === 'transfer') { document.getElementById('view-transfer').classList.add('active'); document.getElementById('transferControls').classList.remove('hidden-control'); }
+            else if (template === 'stats') { document.getElementById('view-stats').classList.add('active'); document.getElementById('statsControls').classList.remove('hidden-control'); }
             
             updateContent();
         }
 
         function downloadImage() {
             const element = document.getElementById('exportCanvas');
-            html2canvas(element, { 
-                scale: 1.5, // 1620x2025 Ultra HD Kalite
-                useCORS: true,
-                backgroundColor: "#050505"
-            }).then(canvas => {
+            html2canvas(element, { scale: 1.5, useCORS: true, backgroundColor: "#050505" }).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'Pro_Spor_Gonderisi.png';
+                link.download = 'Sinematik_Gonderi.png';
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
