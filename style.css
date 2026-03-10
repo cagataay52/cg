@@ -1,191 +1,99 @@
-/* Genel Modül Ayarları */
-.glass-module {
-    background: rgba(20, 20, 20, 0.45);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 94, 0, 0.25);
-    border-radius: 24px;
-    padding: 30px;
-    margin-bottom: 40px;
-    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.6);
+/* Instagram Feed Container */
+.ig-feed-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Temel Ultra Glassmorphism Yapısı */
+.ig-post {
+    width: 400px;
+    height: 400px; /* Kare Instagram Post formatı */
+    background: linear-gradient(145deg, rgba(20,20,20,0.5) 0%, rgba(5,5,5,0.8) 100%);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 94, 0, 0.3);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
     position: relative;
     overflow: hidden;
-}
-
-.orange-text {
-    color: #ff5e00;
-    font-weight: bold;
-}
-
-/* 1. Maç Sonucu Kartı CSS */
-.match-result-card {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto 40px auto;
-}
-
-.league-badge {
-    display: inline-block;
-    background: rgba(255, 94, 0, 0.15);
-    color: #ff5e00;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(255, 94, 0, 0.3);
-}
-
-.teams-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.team {
-    flex: 1;
-}
-
-.team-logo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin: 0 auto 10px auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
-
-.score-board {
-    flex: 1;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8);
     display: flex;
     flex-direction: column;
 }
 
-.status {
-    color: #aaaaaa;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-}
-
-.score {
-    font-size: 3.5rem;
-    font-weight: 900;
-    color: #ff5e00;
-    text-shadow: 0 0 15px rgba(255, 94, 0, 0.4);
-    margin: 5px 0;
-}
-
-.half-time {
-    color: #888888;
-    font-size: 0.9rem;
-}
-
-.goal-scorers {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    color: #cccccc;
-}
-
-.brand-footer {
-    margin-top: 20px;
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.2);
-    letter-spacing: 5px;
-}
-
-/* 2. Puan Durumu Tablosu CSS */
-.standings-card {
-    max-width: 400px;
-    margin: 0 auto 40px auto;
-}
-
-.module-title {
-    margin-top: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 15px;
-}
-
-.glass-table {
-    width: 100%;
-    border-collapse: collapse;
-    text-align: left;
-}
-
-.glass-table th {
-    color: #888888;
-    font-weight: normal;
-    padding: 10px 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.glass-table td {
-    padding: 15px 5px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.points {
-    color: #ff5e00;
-    font-weight: bold;
-    font-size: 1.1rem;
-}
-
-.highlight-row {
-    background: linear-gradient(90deg, rgba(255, 94, 0, 0.1) 0%, transparent 100%);
-    border-left: 3px solid #ff5e00;
-}
-
-/* 3. Maçın Yıldızı Kartı CSS */
-.mvp-card {
-    max-width: 350px;
-    margin: 0 auto;
-    background: linear-gradient(135deg, rgba(20,20,20,0.6) 0%, rgba(40,15,0,0.6) 100%);
-}
-
-.mvp-header {
+/* Atmosferik İç Işıklar */
+.glow-orb {
     position: absolute;
-    top: -15px;
-    right: -20px;
-    background: #ff5e00;
-    color: white;
-    padding: 30px 40px 10px 20px;
-    transform: rotate(45deg);
-    font-weight: bold;
-    font-size: 0.8rem;
-    box-shadow: 0 0 15px rgba(255, 94, 0, 0.5);
-}
-
-.mvp-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 10px;
-}
-
-.player-placeholder {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
-    background: radial-gradient(circle, #ff5e00 0%, #000000 100%);
-    border: 3px solid rgba(255, 255, 255, 0.2);
+    filter: blur(60px);
+    z-index: 0;
 }
+.orange-top { top: -50px; right: -50px; background: rgba(255, 94, 0, 0.6); }
+.dark-red-bottom { bottom: -50px; left: -50px; background: rgba(180, 20, 0, 0.5); }
 
-.player-stats h2 {
-    margin: 0 0 10px 0;
-}
+/* İçerikleri Işığın Üstünde Tutmak İçin */
+.ig-post > * { z-index: 1; position: relative; }
 
-.stat-row {
-    display: flex;
-    justify-content: space-between;
-    width: 120px;
-    margin-bottom: 5px;
-    font-size: 0.9rem;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+/* 1. TRANSFER KARTI STİLLERİ */
+.transfer-card { padding: 30px; justify-content: space-between; }
+.post-header { display: flex; justify-content: space-between; align-items: center; }
+.badge { background: #ff5e00; color: #fff; padding: 5px 12px; border-radius: 12px; font-weight: 800; font-size: 0.75rem; letter-spacing: 1px; }
+.pulse-badge { box-shadow: 0 0 15px rgba(255, 94, 0, 0.6); animation: pulse 2s infinite; }
+.logo-skoragi { font-weight: 900; color: rgba(255,255,255,0.3); letter-spacing: 2px; }
+
+.transfer-visual { display: flex; justify-content: center; align-items: center; margin: 20px 0; }
+.transfer-path { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.4); padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); }
+.club-logo { width: 50px; height: 50px; border-radius: 50%; background: #222; display: flex; justify-content: center; align-items: center; font-weight: bold; border: 2px solid #444; }
+.new-club { border-color: #ff5e00; box-shadow: 0 0 20px rgba(255, 94, 0, 0.4); }
+.arrow-glass { color: #ff5e00; font-size: 1.5rem; }
+
+.player-name { font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 900; text-align: center; background: -webkit-linear-gradient(#fff, #aaa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.glass-pill-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+.glass-pill { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 94, 0, 0.2); padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; color: #ccc; }
+.status-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; position: relative; margin-top: 10px; }
+.status-fill { height: 100%; background: #ff5e00; border-radius: 10px; box-shadow: 0 0 10px #ff5e00; }
+.status-text { position: absolute; right: 0; top: -20px; font-size: 0.7rem; color: #ff5e00; font-weight: bold; }
+
+/* 2. MAÇ GÜNÜ STİLLERİ */
+.matchday-card { padding: 30px; align-items: center; text-align: center; }
+.match-title { color: #888; font-size: 0.9rem; letter-spacing: 3px; margin-bottom: 30px; margin-top: 10px; }
+.versus-arena { display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.big-logo { width: 90px; height: 90px; border-radius: 50%; background: #111; border: 2px solid rgba(255,255,255,0.1); display: flex; justify-content: center; align-items: center; font-size: 1.5rem; font-weight: bold; }
+.glow-logo { box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); }
+.fb-logo { border-color: rgba(255, 94, 0, 0.5); box-shadow: 0 0 40px rgba(255, 94, 0, 0.3); }
+.vs-glass { background: rgba(255, 94, 0, 0.1); border: 1px solid rgba(255, 94, 0, 0.3); width: 50px; height: 50px; border-radius: 15px; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #ff5e00; transform: rotate(45deg); }
+.vs-glass span { transform: rotate(-45deg); }
+.match-details-glass { width: 100%; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; border: 1px solid rgba(255,255,255,0.05); }
+.detail-item { font-size: 0.85rem; color: #bbb; text-align: left; display: flex; align-items: center; gap: 8px; }
+
+/* 3. AÇIKLAMA / ALINTI STİLLERİ */
+.quote-card { padding: 40px; justify-content: center; }
+.quote-icon { font-size: 6rem; color: rgba(255, 94, 0, 0.2); position: absolute; top: 10px; left: 20px; line-height: 1; font-family: serif; }
+.quote-text { font-size: 1.3rem; font-weight: 500; line-height: 1.6; color: #eee; margin-bottom: 30px; position: relative; z-index: 2; font-style: italic; }
+.quote-author { display: flex; align-items: center; gap: 15px; border-top: 1px solid rgba(255, 94, 0, 0.2); padding-top: 20px; }
+.author-pic { width: 60px; height: 60px; border-radius: 50%; background: #333; border: 2px solid #ff5e00; }
+.author-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #ff5e00; }
+.author-info span { font-size: 0.8rem; color: #888; }
+
+/* 4. İLK 11 SAHA STİLLERİ */
+.lineup-card { padding: 20px; }
+.lineup-header { text-align: center; color: #ff5e00; font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; }
+.pitch-container { flex: 1; background: linear-gradient(0deg, rgba(255,94,0,0.05) 0%, rgba(0,0,0,0.4) 100%); border: 1px solid rgba(255,255,255,0.05); border-radius: 20px; display: flex; flex-direction: column; justify-content: space-evenly; padding: 10px 0; position: relative; }
+/* Saha çizgileri illüzyonu */
+.pitch-container::before { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(255,255,255,0.05); }
+.pitch-container::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.05); }
+.pitch-row { display: flex; justify-content: center; gap: 20px; width: 100%; z-index: 2; }
+.player-node { background: rgba(20,20,20,0.8); border: 1px solid rgba(255, 94, 0, 0.4); padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; color: #fff; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+.number { color: #ff5e00; font-weight: 900; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 6px; }
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 94, 0, 0.8); }
+    100% { transform: scale(1); }
 }
