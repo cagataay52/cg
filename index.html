@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - Haber Şablonlu V19</title>
+    <title>Skor Ağı İçerik Motoru - V19 Haber Sürümü</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -48,14 +48,14 @@
 
         .canvas-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; transition: background 0.3s; }
         .mode-bottom .canvas-overlay { background: linear-gradient(to top, var(--overlay-dark) 0%, var(--overlay-light) 40%, transparent 70%); }
-        .mode-center .canvas-overlay { background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, var(--overlay-dark) 100%); }
+        .mode-center .canvas-overlay { background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, var(--overlay-dark) 100%); }
         .mode-side .canvas-overlay { background: linear-gradient(to right, var(--overlay-dark) 0%, var(--overlay-light) 45%, transparent 75%); }
 
         /* --- DÜZEN YÖNETİCİLERİ --- */
         .layout-wrapper { position: absolute; z-index: 2; display: none; }
         .layout-wrapper.active { display: flex; }
         
-        .plate-bottom { position: absolute; left: 0; right: 0; margin: 0 auto; width: 900px; background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 3px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
+        .plate-bottom { position: absolute; left: 0; right: 0; margin: 0 auto; width: 900px; background: var(--plate-bg); backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 3px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
         .format-post .plate-bottom { bottom: 120px; }
         .format-story .plate-bottom { bottom: 250px; }
         
@@ -67,6 +67,19 @@
         .compact-padding { padding: 30px 40px !important; } 
         
         .plate-side { top: 0; left: 0; width: 100%; height: 100%; }
+        
+        /* 📰 YENİ HABER LAYOUT'U (PLATE-NEWS) */
+        .plate-news { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; height: fit-content; width: 960px; background: rgba(15,15,15,0.8); backdrop-filter: blur(30px); border: 1px solid var(--plate-border); border-radius: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.9); display: flex; flex-direction: column; overflow: hidden; }
+        .news-header-bar { background: var(--primary-color); padding: 20px 40px; display: flex; align-items: center; gap: 20px; }
+        .news-flashing-dot { width: 25px; height: 25px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px rgba(255,255,255,0.8); }
+        .news-badge-text { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: 4px; text-transform: uppercase; }
+        .news-content-area { display: flex; padding: 50px 40px; gap: 40px; align-items: center; }
+        .news-image-container { width: 360px; height: 360px; flex-shrink: 0; border-radius: 20px; overflow: hidden; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.5); background: #000; }
+        .news-image-container img { width: 100%; height: 100%; object-fit: cover; }
+        .news-text-wrapper { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+        .news-title-text { font-size: 44px; font-weight: 900; line-height: 1.2; text-transform: uppercase; color: #fff; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .news-body-text { font-size: 24px; font-weight: 600; line-height: 1.6; color: #ccc; }
+
         .view-block { display: none; width: 100%; }
         .view-block.active { display: block; }
 
@@ -113,11 +126,6 @@
         .injury-list span.reason { color: #ff3333; font-style: italic; font-size: 24px; margin-left: 10px; }
         .injury-icon { font-size: 60px; text-align: center; margin-bottom: -10px; }
 
-        /* YENİ EKLENEN HABER ŞABLONU CSS */
-        .news-badge { display: inline-block; background: var(--primary-color); color: white; padding: 12px 30px; border-radius: 30px; font-weight: 900; font-size: 24px; letter-spacing: 2px; margin-bottom: 25px; text-transform: uppercase; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .news-title { font-size: 56px; font-weight: 900; line-height: 1.2; margin-bottom: 25px; text-transform: uppercase; text-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; }
-        .news-body { font-size: 28px; font-weight: 600; color: #ddd; line-height: 1.6; text-align: center; }
-
         .center-title { font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); }
         .standings-table { width: 100%; border-collapse: collapse; font-size: 28px; font-weight: 600; }
         .standings-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 22px; text-align: center; }
@@ -132,7 +140,6 @@
         .f-team.away { justify-content: flex-end; }
         .f-time { font-size: 28px; font-weight: 900; color: var(--primary-color); background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; }
 
-        /* SIKIŞTIRMA (20 TAKIM İÇİN) */
         .compact-mode .center-title { font-size: 38px; margin-bottom: 15px; }
         .compact-mode .standings-table { font-size: 21px; }
         .compact-mode .standings-table th { padding-bottom: 8px; font-size: 18px; }
@@ -148,7 +155,6 @@
         .tr-detail { font-size: 26px; font-weight: 600; color: #ddd; margin-bottom: 12px; }
         .tr-detail span { color: var(--primary-color); font-weight: 900; }
 
-        /* Filigran */
         .watermark { position: absolute; font-size: 36px; font-weight: 900; left: 0; right: 0; margin: 0 auto; z-index: 10; width: 100%; text-align: center; letter-spacing: 2px; text-shadow: 0 5px 10px rgba(0,0,0,0.8);}
         .format-post .watermark { bottom: 40px; }
         .format-story .watermark { bottom: 80px; }
@@ -170,16 +176,16 @@
         <div class="control-group">
             <label>Tasarım Şablonu</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="standings">1. Puan Durumu (20 Takım) 📊</option>
-                <option value="fixtures">2. Günün Maçları 🗓️</option>
-                <option value="match">3. Maç Sonucu</option>
-                <option value="stats">4. Maç İstatistikleri</option>
-                <option value="motm">5. Maçın Adamı (MVP) 🌟</option>
-                <option value="quote">6. Flaş Röportaj 🎙️</option>
-                <option value="lineup">7. İlk 11 Kadrolar 📋</option>
-                <option value="injury">8. Sakatlık Raporu 🚑</option>
-                <option value="transfer">9. Transfer Haberi 🤝</option>
-                <option value="news">10. Haber / Son Dakika 📰</option>
+                <option value="news">1. Haber / Son Dakika 📰</option>
+                <option value="standings">2. Puan Durumu (20 Takım) 📊</option>
+                <option value="fixtures">3. Günün Maçları 🗓️</option>
+                <option value="match">4. Maç Sonucu</option>
+                <option value="stats">5. Maç İstatistikleri</option>
+                <option value="motm">6. Maçın Adamı (MVP) 🌟</option>
+                <option value="quote">7. Flaş Röportaj 🎙️</option>
+                <option value="lineup">8. İlk 11 Kadrolar 📋</option>
+                <option value="injury">9. Sakatlık Raporu 🚑</option>
+                <option value="transfer">10. Transfer Haberi 🤝</option>
             </select>
         </div>
 
@@ -196,6 +202,17 @@
         <div class="control-group">
             <label>Arka Plan Fotoğrafı Yükle</label>
             <input type="file" accept="image/*" onchange="loadBg(event)">
+        </div>
+
+        <div id="newsControls" class="control-group hidden-control">
+            <label>Üst Etiket (Örn: SON DAKİKA veya ÖZEL HABER)</label>
+            <input type="text" id="newsBadgeInput" value="SON DAKİKA" oninput="updateContent()">
+            <label style="margin-top: 10px;">Haber Görseli Yükle (Kare veya Dikdörtgen Fotoğraf)</label>
+            <input type="file" accept="image/*" onchange="loadImage(event, 'newsImg')">
+            <label style="margin-top: 10px;">Haber Başlığı</label>
+            <input type="text" id="newsTitleInput" value="MOURINHO'DAN FLAŞ SÖZLER!" oninput="updateContent()">
+            <label style="margin-top: 10px;">Haber Metni</label>
+            <textarea id="newsBodyInput" rows="5" oninput="updateContent()">Tecrübeli teknik adam, maç sonu basın toplantısında transfer iddialarına yanıt verdi: "Şu an sadece şampiyonluğa odaklandık, başka bir şey düşünmüyoruz."</textarea>
         </div>
 
         <div id="teamLogosControl" class="control-group hidden-control">
@@ -219,7 +236,6 @@
 8 | Antalyaspor | 8 | -2 | 9
 9 | Alanyaspor | 8 | -3 | 8
 10 | Göztepe | 8 | -4 | 7</textarea>
-            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">10 takımdan fazlasını otomatik algılar ve "Sıkıştırma" moduna geçer.</small>
         </div>
 
         <div id="fixturesControls" class="control-group hidden-control">
@@ -286,15 +302,6 @@ Nelsson | Kırmızı Kart</textarea>
             <label style="margin-top: 10px;">Açıklama</label><textarea id="trDescInput" rows="2" oninput="updateContent()">"Anlaşma tamamlandı."</textarea>
         </div>
 
-        <div id="newsControls" class="control-group hidden-control">
-            <label>Üst Etiket (Örn: SON DAKİKA)</label>
-            <input type="text" id="newsBadgeInput" value="SON DAKİKA" oninput="updateContent()">
-            <label style="margin-top: 10px;">Haber Başlığı</label>
-            <input type="text" id="newsTitleInput" value="YENİ TEKNİK DİREKTÖR BELLİ OLDU!" oninput="updateContent()">
-            <label style="margin-top: 10px;">Haber Metni</label>
-            <textarea id="newsBodyInput" rows="5" oninput="updateContent()">Kulüpten yapılan resmi açıklamaya göre, önümüzdeki 3 sezon boyunca takımı tecrübeli çalıştırıcı yönetecek. İmza töreni yarın saat 14:00'te stadyumda gerçekleştirilecek.</textarea>
-        </div>
-
         <div class="control-group">
             <label>Sayfa / Filigran Adı</label>
             <input type="text" id="watermarkInput" value="Skor Ağı" oninput="updateContent()">
@@ -324,23 +331,32 @@ Nelsson | Kırmızı Kart</textarea>
                     <div id="view-quote" class="view-block"><div class="quote-container"><div class="quote-icon">"</div><div class="quote-text" id="displayQuoteText">"Sahada basmadık yer bırakmadık."</div><div><span class="quote-author" id="displayQuoteAuthor">OKAN BURUK</span><span class="quote-role" id="displayQuoteRole">| Teknik Direktör</span></div></div></div>
                 </div>
 
-                <div id="layout-center" class="layout-wrapper plate-center active">
-                    
-                    <div id="view-standings" class="view-block active"><div class="center-title">PUAN DURUMU</div><table class="standings-table"><thead><tr><th>#</th><th>TAKIM</th><th>O</th><th>AV</th><th>P</th></tr></thead><tbody id="displayStandings"></tbody></table></div>
+                <div id="layout-center" class="layout-wrapper plate-center">
+                    <div id="view-standings" class="view-block"><div class="center-title">PUAN DURUMU</div><table class="standings-table"><thead><tr><th>#</th><th>TAKIM</th><th>O</th><th>AV</th><th>P</th></tr></thead><tbody id="displayStandings"></tbody></table></div>
                     <div id="view-fixtures" class="view-block"><div class="center-title">GÜNÜN MAÇLARI</div><div class="fixture-list" id="displayFixtures"></div></div>
                     <div id="view-lineup" class="view-block"><div class="center-title">İLK 11'LER</div><div class="lineup-container"><div class="lineup-col"><img id="homeLogo2" class="lineup-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Atletico_Madrid_2017_logo.svg/200px-Atletico_Madrid_2017_logo.svg.png" crossorigin="anonymous"><div class="lineup-list" id="displayHomeLineup"></div></div><div class="lineup-col"><img id="awayLogo2" class="lineup-logo" src="https://upload.wikimedia.org/wikipedia/tr/thumb/6/6d/Tottenham_Hotspur.svg/200px-Tottenham_Hotspur.svg.png" crossorigin="anonymous"><div class="lineup-list" id="displayAwayLineup"></div></div></div></div>
                     <div id="view-injury" class="view-block"><div class="injury-icon">⚠️</div><div class="injury-title" id="displayInjuryTitle">KAMP KADROSUNDA YOK</div><div class="injury-list" id="displayInjuryList"></div></div>
-                    
-                    <div id="view-news" class="view-block">
-                        <div class="news-badge" id="displayNewsBadge">SON DAKİKA</div>
-                        <div class="news-title" id="displayNewsTitle">YENİ TEKNİK DİREKTÖR BELLİ OLDU!</div>
-                        <div class="news-body" id="displayNewsBody">Kulüpten yapılan resmi açıklamaya göre...</div>
-                    </div>
                 </div>
 
                 <div id="layout-side" class="layout-wrapper plate-side">
                     <img id="transferPlayerImg" class="transfer-player-img" src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" crossorigin="anonymous">
                     <div class="transfer-glass-box" id="view-transfer"><div class="tr-tag" id="displayTrTag">ÖZEL HABER</div><div class="tr-name" id="displayTrName">V. OSIMHEN</div><div class="tr-detail" id="displayTrDet1">Bedel: <span>Kiralık</span></div><div class="tr-detail" id="displayTrDet2">Sözleşme: <span>2025</span></div><div style="font-size:24px; font-style:italic; margin-top:25px; line-height:1.5;" id="displayTrDesc">"Anlaşma tamamlandı."</div></div>
+                </div>
+
+                <div id="layout-news" class="layout-wrapper plate-news active">
+                    <div class="news-header-bar">
+                        <div class="news-flashing-dot"></div>
+                        <div class="news-badge-text" id="displayNewsBadge">SON DAKİKA</div>
+                    </div>
+                    <div class="news-content-area">
+                        <div class="news-image-container">
+                            <img id="newsImg" src="https://images.unsplash.com/photo-1518605368461-1ee7e5b2228e?q=80&w=1000&auto=format&fit=crop" crossorigin="anonymous">
+                        </div>
+                        <div class="news-text-wrapper">
+                            <div class="news-title-text" id="displayNewsTitle">MOURINHO'DAN FLAŞ SÖZLER!</div>
+                            <div class="news-body-text" id="displayNewsBody">Tecrübeli teknik adam, maç sonu basın toplantısında transfer iddialarına yanıt verdi.</div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="watermark" id="displayWatermark">Skor Ağı</div>
@@ -432,6 +448,7 @@ Nelsson | Kırmızı Kart</textarea>
                 else if(type === 'awayLogo') { document.getElementById('awayLogo1').src = reader.result; document.getElementById('awayLogo2').src = reader.result; }
                 else if(type === 'leagueBadgeImg') { document.getElementById('leagueBadgeImg').src = reader.result; }
                 else if(type === 'transferPlayerImg') { document.getElementById('transferPlayerImg').src = reader.result; }
+                else if(type === 'newsImg') { document.getElementById('newsImg').src = reader.result; }
             };
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
@@ -447,12 +464,17 @@ Nelsson | Kırmızı Kart</textarea>
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // 1. Maç
+            // 1. Haber
+            document.getElementById('displayNewsBadge').innerText = document.getElementById('newsBadgeInput').value;
+            document.getElementById('displayNewsTitle').innerText = document.getElementById('newsTitleInput').value;
+            document.getElementById('displayNewsBody').innerHTML = document.getElementById('newsBodyInput').value.replace(/\n/g, '<br>');
+
+            // 2. Maç
             document.getElementById('displayScore').innerText = document.getElementById('scoreInput').value;
             document.getElementById('displayHomeScorers').innerHTML = document.getElementById('homeScorersInput').value.replace(/\n/g, '<br>');
             document.getElementById('displayAwayScorers').innerHTML = document.getElementById('awayScorersInput').value.replace(/\n/g, '<br>');
 
-            // 2. İstatistik
+            // 3. İstatistik
             let statsHtml = '';
             for(let i=1; i<=3; i++) {
                 const val = document.getElementById('s' + i + 'Input').value.split('|').map(c => c.trim());
@@ -460,7 +482,7 @@ Nelsson | Kırmızı Kart</textarea>
             }
             document.getElementById('displayStatsList').innerHTML = statsHtml;
 
-            // 3. MOTM
+            // 4. MOTM
             document.getElementById('displayMotmName').innerText = document.getElementById('motmNameInput').value;
             document.getElementById('displayMotmRating').innerText = document.getElementById('motmRatingInput').value;
             let motmHtml = '';
@@ -470,20 +492,20 @@ Nelsson | Kırmızı Kart</textarea>
             }
             document.getElementById('displayMotmStats').innerHTML = motmHtml;
 
-            // 4. Quote
+            // 5. Quote
             document.getElementById('displayQuoteText').innerText = document.getElementById('quoteTextInput').value;
             document.getElementById('displayQuoteAuthor').innerText = document.getElementById('quoteAuthorInput').value;
             const role = document.getElementById('quoteRoleInput').value; document.getElementById('displayQuoteRole').innerText = role ? `| ${role}` : "";
 
-            // 5. İlk 11
+            // 6. İlk 11
             let hLineup = ''; document.getElementById('homeLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) hLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else hLineup += `<div>${row}</div>`; }); document.getElementById('displayHomeLineup').innerHTML = hLineup;
             let aLineup = ''; document.getElementById('awayLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) aLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else aLineup += `<div>${row}</div>`; }); document.getElementById('displayAwayLineup').innerHTML = aLineup;
 
-            // 6. Sakatlık
+            // 7. Sakatlık
             document.getElementById('displayInjuryTitle').innerText = document.getElementById('injuryTitleInput').value;
             let injHtml = ''; document.getElementById('injuryListInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) injHtml += `<div>❌ ${p[0].trim()} <span class="reason">(${p[1].trim()})</span></div>`; }); document.getElementById('displayInjuryList').innerHTML = injHtml;
 
-            // 7. Puan Durumu
+            // 8. Puan Durumu
             let stHtml = '';
             let stRows = document.getElementById('standingsInput').value.split('\n').filter(r => r.trim() !== '');
             stRows.forEach(row => {
@@ -494,7 +516,7 @@ Nelsson | Kırmızı Kart</textarea>
             if (stRows.length > 10) { document.getElementById('view-standings').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
             else { document.getElementById('view-standings').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
 
-            // 8. Fikstür
+            // 9. Fikstür
             let fixHtml = '';
             document.getElementById('fixturesInput').value.split('\n').filter(r => r.trim() !== '').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
@@ -502,17 +524,12 @@ Nelsson | Kırmızı Kart</textarea>
             });
             document.getElementById('displayFixtures').innerHTML = fixHtml;
 
-            // 9. Transfer
+            // 10. Transfer
             document.getElementById('displayTrTag').innerText = document.getElementById('trTagInput').value;
             document.getElementById('displayTrName').innerText = document.getElementById('trNameInput').value;
             const det1 = document.getElementById('trDet1Input').value.split('|'); if(det1.length>1) document.getElementById('displayTrDet1').innerHTML = `${det1[0]}: <span>${det1[1]}</span>`;
             const det2 = document.getElementById('trDet2Input').value.split('|'); if(det2.length>1) document.getElementById('displayTrDet2').innerHTML = `${det2[0]}: <span>${det2[1]}</span>`;
             document.getElementById('displayTrDesc').innerText = document.getElementById('trDescInput').value;
-
-            // 10. Haber (YENİ EKLENTİ)
-            document.getElementById('displayNewsBadge').innerText = document.getElementById('newsBadgeInput').value;
-            document.getElementById('displayNewsTitle').innerText = document.getElementById('newsTitleInput').value;
-            document.getElementById('displayNewsBody').innerHTML = document.getElementById('newsBodyInput').value.replace(/\n/g, '<br>');
         }
 
         function updateTheme() {
@@ -544,20 +561,13 @@ Nelsson | Kırmızı Kart</textarea>
                 document.getElementById('layout-bottom').classList.add('active');
                 document.getElementById('view-' + template).classList.add('active');
                 document.getElementById(template + 'Controls').classList.remove('hidden-control');
-                
-                if(template === 'quote' || template === 'motm') {
-                    document.getElementById('leagueBadgeDisplay').style.display = 'none';
-                } else {
-                    document.getElementById('teamLogosControl').classList.remove('hidden-control');
-                    document.getElementById('leagueBadgeDisplay').style.display = 'flex';
-                }
+                if(template === 'quote' || template === 'motm') { document.getElementById('leagueBadgeDisplay').style.display = 'none'; } else { document.getElementById('teamLogosControl').classList.remove('hidden-control'); document.getElementById('leagueBadgeDisplay').style.display = 'flex'; }
             } 
-            else if (['lineup', 'injury', 'standings', 'fixtures', 'news'].includes(template)) {
+            else if (['lineup', 'injury', 'standings', 'fixtures'].includes(template)) {
                 canvas.className = `canvas-area ${formatCls} ${theme} mode-center`;
                 document.getElementById('layout-center').classList.add('active');
                 document.getElementById('view-' + template).classList.add('active');
                 document.getElementById(template + 'Controls').classList.remove('hidden-control');
-                
                 if(template === 'lineup') document.getElementById('teamLogosControl').classList.remove('hidden-control');
                 if(template === 'injury') document.getElementById('layout-center').classList.add('injury-mode');
             }
@@ -567,10 +577,15 @@ Nelsson | Kırmızı Kart</textarea>
                 document.getElementById('view-transfer').classList.add('active');
                 document.getElementById('transferControls').classList.remove('hidden-control');
             }
+            else if (template === 'news') {
+                canvas.className = `canvas-area ${formatCls} ${theme} mode-center`;
+                document.getElementById('layout-news').classList.add('active');
+                document.getElementById('newsControls').classList.remove('hidden-control');
+            }
             updateContent();
         }
 
-        // 🚀 KESİNTİSİZ İNDİRME FONKSİYONU (Kesilme Hatası Çözüldü!)
+        // İNDİRME FONKSİYONU
         function downloadImage() {
             const btn = document.getElementById('dlBtn');
             const originalText = btn.innerText;
@@ -588,23 +603,12 @@ Nelsson | Kırmızı Kart</textarea>
 
             setTimeout(() => {
                 html2canvas(element, { 
-                    scale: 1.5, 
-                    width: targetWidth,
-                    height: targetHeight,
-                    windowWidth: targetWidth,
-                    windowHeight: targetHeight,
-                    x: 0,
-                    y: 0,
-                    scrollX: 0,
-                    scrollY: 0,
-                    useCORS: true, 
-                    allowTaint: true,
-                    backgroundColor: "#050505" 
+                    scale: 1.5, width: targetWidth, height: targetHeight,
+                    windowWidth: targetWidth, windowHeight: targetHeight,
+                    x: 0, y: 0, scrollX: 0, scrollY: 0, useCORS: true, allowTaint: true, backgroundColor: "#050505" 
                 }).then(canvas => {
                     element.style.transform = originalTransform;
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-
+                    btn.innerText = originalText; btn.disabled = false;
                     const link = document.createElement('a');
                     link.download = format === 'story' ? 'SkorAgi_Story.png' : 'SkorAgi_Post.png';
                     link.href = canvas.toDataURL('image/png');
