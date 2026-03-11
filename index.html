@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Özgün Spor İçerik Motoru V5</title>
+    <title>Özgün Spor İçerik Motoru V5.1</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -11,7 +11,6 @@
             --primary-color: #FF6B00;
             --plate-bg: rgba(15, 15, 15, 0.65);
             --plate-border: rgba(255, 255, 255, 0.15);
-            /* Temaya göre değişecek karartma renkleri */
             --overlay-dark: rgba(0, 0, 0, 0.95);
             --overlay-light: rgba(0, 0, 0, 0.4);
         }
@@ -59,18 +58,15 @@
 
         /* --- AKILLI KARARTMA (OVERLAY) SİSTEMİ --- */
         .canvas-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1; transition: background 0.3s; }
-        /* Maç/İstatistik (Aşağıdan yukarı) */
         .mode-bottom .canvas-overlay { background: linear-gradient(to top, var(--overlay-dark) 0%, var(--overlay-light) 30%, transparent 60%); }
-        /* Puan/Fikstür (Kenarlardan ortaya) */
         .mode-center .canvas-overlay { background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, var(--overlay-dark) 100%); }
-        /* Transfer (Soldan sağa) */
         .mode-side .canvas-overlay { background: linear-gradient(to right, var(--overlay-dark) 0%, var(--overlay-light) 45%, transparent 75%); }
 
         /* DÜZEN (LAYOUT) YÖNETİCİLERİ */
         .layout-wrapper { position: absolute; z-index: 2; display: none; }
         .layout-wrapper.active { display: flex; }
 
-        /* 1. ALT PANEL DÜZENİ (Aynen korundu) */
+        /* 1. ALT PANEL DÜZENİ */
         .plate-bottom {
             bottom: 120px; left: 50%; transform: translateX(-50%); width: 900px; 
             background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
@@ -84,19 +80,19 @@
         }
         .league-badge-container img { width: 80%; height: 80%; object-fit: contain; }
 
-        /* 2. MERKEZ PANEL DÜZENİ (Puan Durumu & Fikstür) */
+        /* 2. MERKEZ PANEL DÜZENİ */
         .plate-center {
             top: 50%; left: 50%; transform: translate(-50%, -50%); width: 920px;
-            max-height: 1100px; /* İstediğin kadar takım sığsın diye esnek */
+            max-height: 1100px; 
             background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
             border: 1px solid var(--plate-border); border-top: 5px solid var(--primary-color);
             border-radius: 40px; padding: 60px 50px; flex-direction: column;
             box-shadow: 0 40px 80px rgba(0,0,0,0.8); overflow: hidden;
         }
 
-        /* 3. YAN PANEL DÜZENİ (Transfer) */
+        /* 3. YAN PANEL DÜZENİ (HATA BURADAYDI, DÜZELTİLDİ) */
         .plate-side {
-            top: 0; left: 0; width: 100%; height: 100%; display: block !important;
+            top: 0; left: 0; width: 100%; height: 100%;
         }
 
         .view-block { display: none; width: 100%; }
@@ -104,7 +100,7 @@
 
         /* --- İÇERİK TASARIMLARI --- */
 
-        /* Maç Sonucu (Alt Panel) */
+        /* Maç Sonucu */
         .match-main-row { display: flex; align-items: center; justify-content: center; gap: 50px; margin-top: 20px; }
         .match-logo { width: 140px; height: 140px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
         .match-score { font-size: 160px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 10px 20px rgba(0,0,0,0.8); line-height: 1; }
@@ -113,7 +109,7 @@
         .scorers-col.left { text-align: right; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 20px; }
         .scorers-col.right { text-align: left; padding-left: 20px; }
         
-        /* Maç İstatistikleri (Alt Panel) */
+        /* Maç İstatistikleri */
         .stat-row { margin-top: 30px; }
         .stat-title { text-align: center; font-size: 20px; font-weight: 800; color: #aaa; margin-bottom: 10px; text-transform: uppercase; }
         .stat-bar-container { display: flex; align-items: center; justify-content: space-between; }
@@ -123,7 +119,7 @@
         .s-bar-home { background: var(--primary-color); height: 100%; border-radius: 10px 0 0 10px;}
         .s-bar-away { background: #666; height: 100%; border-radius: 0 10px 10px 0;}
 
-        /* Puan Durumu (Merkez Panel) */
+        /* Puan Durumu */
         .center-title { font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; }
         .standings-table { width: 100%; border-collapse: collapse; font-size: 28px; font-weight: 600; }
         .standings-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 22px; text-align: center; }
@@ -131,14 +127,14 @@
         .standings-table tr:first-child td { color: var(--primary-color); font-weight: 900; font-size: 34px; }
         .standings-table td:nth-child(2) { text-align: left; font-weight: 800; }
 
-        /* Fikstür (Merkez Panel) */
+        /* Fikstür */
         .fixture-list { display: flex; flex-direction: column; gap: 20px; }
         .fixture-item { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; background: rgba(0,0,0,0.5); border-radius: 20px; border-left: 4px solid var(--primary-color); }
         .f-team { font-size: 32px; font-weight: 800; width: 40%; }
         .f-team.away { text-align: right; }
         .f-time { font-size: 28px; font-weight: 900; color: var(--primary-color); background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; }
 
-        /* Transfer (Yan Panel / Side Plate) */
+        /* Transfer */
         .transfer-player-img { position: absolute; bottom: 0; right: -50px; height: 1100px; z-index: 5; object-fit: contain; filter: drop-shadow(-15px 0 30px rgba(0,0,0,0.7)); }
         .transfer-glass-box {
             position: absolute; bottom: 150px; left: 60px; width: 550px; z-index: 6;
@@ -158,7 +154,7 @@
 <body>
 
     <div class="sidebar">
-        <h2>🔥 ÖZGÜN PANEL V5</h2>
+        <h2>🔥 ÖZGÜN PANEL V5.1</h2>
         
         <div class="control-group">
             <label>Tasarım Şablonu (Layout)</label>
@@ -388,7 +384,6 @@ Monaco | 19:45 | Kızılyıldız</textarea>
 
         function updateTheme() {
             const canvas = document.getElementById('exportCanvas');
-            // Mevcut layout modunu koru, temayı değiştir
             const currentMode = Array.from(canvas.classList).find(cls => cls.startsWith('mode-'));
             canvas.className = `canvas-area ${document.getElementById('themeType').value} ${currentMode}`;
         }
@@ -404,7 +399,6 @@ Monaco | 19:45 | Kızılyıldız</textarea>
             document.querySelectorAll('.layout-wrapper').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-block').forEach(el => el.classList.remove('active'));
 
-            // Temayı koruyarak Modu (Karartma yönünü) değiştir
             const theme = document.getElementById('themeType').value;
 
             if (template === 'match' || template === 'stats') {
@@ -423,7 +417,7 @@ Monaco | 19:45 | Kızılyıldız</textarea>
             else if (template === 'standings' || template === 'fixtures') {
                 canvas.className = `canvas-area ${theme} mode-center`;
                 document.getElementById('layout-center').classList.add('active');
-                document.getElementById('leagueBadgeControl').classList.add('hidden-control'); // Ortada logoya gerek yok
+                document.getElementById('leagueBadgeControl').classList.add('hidden-control'); 
                 
                 if(template === 'standings') {
                     document.getElementById('view-standings').classList.add('active');
@@ -436,7 +430,7 @@ Monaco | 19:45 | Kızılyıldız</textarea>
             else if (template === 'transfer') {
                 canvas.className = `canvas-area ${theme} mode-side`;
                 document.getElementById('layout-side').classList.add('active');
-                document.getElementById('view-transfer').classList.add('active'); // div id display için kullanıldı
+                document.getElementById('view-transfer').classList.add('active'); 
                 document.getElementById('transferControls').classList.remove('hidden-control');
                 document.getElementById('leagueBadgeControl').classList.add('hidden-control');
             }
