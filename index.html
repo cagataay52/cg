@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - V22 Kusursuz Tasarım</title>
+    <title>Skor Ağı İçerik Motoru - V23 Krallık Sürümü</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -75,7 +75,7 @@
         /* --- İÇERİK TASARIMLARI --- */
         .center-title { font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); }
         
-        /* 🏆 EŞLEŞMELER (MATCHUPS) - UZUN İSİM SORUNU ÇÖZÜLDÜ! */
+        /* Eşleşmeler (Matchups) */
         .matchup-list { display: flex; flex-direction: column; gap: 20px; width: 100%; }
         .matchup-card { display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
         .m-team { display: flex; align-items: center; gap: 15px; width: 42%; }
@@ -85,6 +85,25 @@
         .m-team:not(.away) .m-name { text-align: left; }
         .m-team.away .m-name { text-align: right; }
         .m-vs { font-size: 22px; font-weight: 900; color: #fff; background: var(--primary-color); padding: 10px 20px; border-radius: 12px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; flex-shrink: 0; z-index: 2;}
+
+        /* Futbolcu Karşılaştırma (YENİ) */
+        .comp-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px; width: 100%; }
+        .comp-player { display: flex; flex-direction: column; align-items: center; width: 40%; }
+        .comp-img { width: 180px; height: 180px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); margin-bottom: 10px; }
+        .comp-name { font-size: 36px; font-weight: 900; text-transform: uppercase; text-align: center; text-shadow: 0 5px 10px rgba(0,0,0,0.5); }
+        .comp-vs { font-size: 48px; font-weight: 900; color: var(--primary-color); text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .comp-stats-container { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+        .comp-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: rgba(0,0,0,0.4); border-radius: 15px; }
+        .comp-val { font-size: 36px; font-weight: 900; width: 25%; text-align: center; }
+        .comp-lbl { font-size: 20px; font-weight: 800; color: var(--primary-color); width: 50%; text-align: center; letter-spacing: 2px; }
+
+        /* Krallık (Top Scorers - YENİ) */
+        .scorers-table { width: 100%; border-collapse: collapse; font-size: 28px; font-weight: 600; }
+        .scorers-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 22px; text-align: center; text-transform: uppercase; }
+        .scorers-table td { padding: 18px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; vertical-align: middle; }
+        .scorers-table tr:first-child td { color: var(--primary-color); font-weight: 900; font-size: 34px; }
+        .scorer-player { text-align: left !important; font-weight: 800; }
+        .scorer-team { display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 24px;}
 
         /* Maç Sonucu */
         .match-main-row { display: flex; align-items: center; justify-content: center; gap: 50px; margin-top: 20px; }
@@ -159,13 +178,15 @@
         .f-team.away { justify-content: flex-end; }
         .f-time { font-size: 28px; font-weight: 900; color: var(--primary-color); background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; }
 
+        /* SIKIŞTIRMA (20 TAKIM İÇİN) - Puan ve Krallık için ortak */
         .compact-mode .center-title { font-size: 38px; margin-bottom: 15px; }
-        .compact-mode .standings-table { font-size: 21px; }
-        .compact-mode .standings-table th { padding-bottom: 8px; font-size: 18px; }
-        .compact-mode .standings-table td { padding: 9px 10px; }
-        .compact-mode .standings-table tr:first-child td { font-size: 26px; }
+        .compact-mode .standings-table, .compact-mode .scorers-table { font-size: 21px; }
+        .compact-mode .standings-table th, .compact-mode .scorers-table th { padding-bottom: 8px; font-size: 18px; }
+        .compact-mode .standings-table td, .compact-mode .scorers-table td { padding: 9px 10px; }
+        .compact-mode .standings-table tr:first-child td, .compact-mode .scorers-table tr:first-child td { font-size: 26px; }
         .compact-mode .team-cell { gap: 10px; }
         .compact-mode .table-logo { width: 32px; height: 32px; }
+        .compact-mode .scorer-team { font-size: 18px; }
 
         /* Transfer */
         .transfer-player-img { position: absolute; bottom: 0; right: -50px; height: 1100px; z-index: 5; object-fit: contain; filter: drop-shadow(-15px 0 30px rgba(0,0,0,0.7)); }
@@ -197,17 +218,17 @@
         <div class="control-group">
             <label>Tasarım Şablonu</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="matchups">1. Turnuva Eşleşmeleri 🏆</option>
-                <option value="news">2. Haber / Son Dakika 📰</option>
-                <option value="standings">3. Puan Durumu (20 Takım) 📊</option>
-                <option value="fixtures">4. Günün Maçları 🗓️</option>
-                <option value="match">5. Maç Sonucu</option>
-                <option value="stats">6. Maç İstatistikleri</option>
-                <option value="motm">7. Maçın Adamı (MVP) 🌟</option>
-                <option value="quote">8. Flaş Röportaj 🎙️</option>
-                <option value="lineup">9. İlk 11 Kadrolar 📋</option>
-                <option value="injury">10. Sakatlık Raporu 🚑</option>
-                <option value="transfer">11. Transfer Haberi 🤝</option>
+                <option value="topscorers">1. Gol / Asist Krallığı 👑</option> <option value="comparison">2. Futbolcu Karşılaştırma 🆚</option> <option value="matchups">3. Turnuva Eşleşmeleri 🏆</option>
+                <option value="news">4. Haber / Son Dakika 📰</option>
+                <option value="standings">5. Puan Durumu (20 Takım) 📊</option>
+                <option value="fixtures">6. Günün Maçları 🗓️</option>
+                <option value="match">7. Maç Sonucu</option>
+                <option value="stats">8. Maç İstatistikleri</option>
+                <option value="motm">9. Maçın Adamı (MVP) 🌟</option>
+                <option value="quote">10. Flaş Röportaj 🎙️</option>
+                <option value="lineup">11. İlk 11 Kadrolar 📋</option>
+                <option value="injury">12. Sakatlık Raporu 🚑</option>
+                <option value="transfer">13. Transfer Haberi 🤝</option>
             </select>
         </div>
 
@@ -224,6 +245,36 @@
         <div class="control-group">
             <label>Arka Plan Fotoğrafı Yükle</label>
             <input type="file" accept="image/*" onchange="loadBg(event)">
+        </div>
+
+        <div id="topscorersControls" class="control-group hidden-control">
+            <label>Üst Başlık</label>
+            <input type="text" id="topScorersTitleInput" value="GOL KRALLIĞI" oninput="updateContent()">
+            <label style="margin-top: 10px;">Liste (Sıra | İsim | Takım Adı | İstatistik)</label>
+            <textarea id="topScorersInput" rows="8" oninput="updateContent()">1 | Mauro Icardi | Galatasaray | 25
+2 | Edin Dzeko | Fenerbahçe | 21
+3 | Rey Manaj | Sivasspor | 18
+4 | Mame Thiam | Kasımpaşa | 15
+5 | Krzysztof Piatek | Başakşehir | 14</textarea>
+            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Sistem takım isimlerini okuyup logolarını otomatik ekler!</small>
+        </div>
+
+        <div id="comparisonControls" class="control-group hidden-control">
+            <label>1. Oyuncu Adı</label>
+            <input type="text" id="compP1NameInput" value="ICARDI" oninput="updateContent()">
+            <label style="margin-top: 5px;">1. Oyuncu Resmi / Takım Logosu</label>
+            <input type="file" accept="image/*" onchange="loadImage(event, 'compP1Img')">
+            <hr style="border-color:#333; margin: 15px 0;">
+            <label>2. Oyuncu Adı</label>
+            <input type="text" id="compP2NameInput" value="DZEKO" oninput="updateContent()">
+            <label style="margin-top: 5px;">2. Oyuncu Resmi / Takım Logosu</label>
+            <input type="file" accept="image/*" onchange="loadImage(event, 'compP2Img')">
+            <hr style="border-color:#333; margin: 15px 0;">
+            <label>Karşılaştırma Verileri (Değer 1 | Başlık | Değer 2)</label>
+            <textarea id="compStatsInput" rows="5" oninput="updateContent()">25 | GOL | 21
+8 | ASİST | 6
+34 | MAÇ | 36
+8.2 | REYTİNG | 7.9</textarea>
         </div>
 
         <div id="teamLogosControl" class="control-group hidden-control">
@@ -243,7 +294,6 @@
 Arsenal | VS | Bayern Münih
 Galatasaray | VS | Milan
 PSG | VS | Barcelona</textarea>
-            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Logolar otomatik çekilir. Ortadaki "VS" yerine tarih de yazabilirsiniz.</small>
         </div>
 
         <div id="newsControls" class="control-group hidden-control">
@@ -362,7 +412,31 @@ Nelsson | Kırmızı Kart</textarea>
 
                 <div id="layout-center" class="layout-wrapper plate-center active">
                     
-                    <div id="view-matchups" class="view-block active">
+                    <div id="view-topscorers" class="view-block active">
+                        <div class="center-title" id="displayTopScorersTitle">GOL KRALLIĞI</div>
+                        <table class="scorers-table">
+                            <thead><tr><th>#</th><th>OYUNCU</th><th>TAKIM</th><th>İSTATİSTİK</th></tr></thead>
+                            <tbody id="displayTopScorers"></tbody>
+                        </table>
+                    </div>
+
+                    <div id="view-comparison" class="view-block">
+                        <div class="center-title">OYUNCU KARŞILAŞTIRMASI</div>
+                        <div class="comp-header">
+                            <div class="comp-player">
+                                <img id="compP1Img" class="comp-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Galatasaray_Sports_Club_Logo.png/200px-Galatasaray_Sports_Club_Logo.png" crossorigin="anonymous">
+                                <div class="comp-name" id="displayCompP1Name">ICARDI</div>
+                            </div>
+                            <div class="comp-vs">VS</div>
+                            <div class="comp-player">
+                                <div class="comp-name" id="displayCompP2Name">DZEKO</div>
+                                <img id="compP2Img" class="comp-img" src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/200px-Fenerbah%C3%A7e_SK.png" crossorigin="anonymous">
+                            </div>
+                        </div>
+                        <div class="comp-stats-container" id="displayCompStats"></div>
+                    </div>
+
+                    <div id="view-matchups" class="view-block">
                         <div class="center-title" id="displayMatchupsTitle">ÇEYREK FİNAL EŞLEŞMELERİ</div>
                         <div class="matchup-list" id="displayMatchups"></div>
                     </div>
@@ -392,7 +466,9 @@ Nelsson | Kırmızı Kart</textarea>
     </div>
 
     <script>
+        // 💾 MANUEL LOGO VERİTABANI
         let manualLogos = {};
+
         function getTeamLogo(name) {
             let lowerName = name.toLocaleLowerCase('tr-TR').trim();
             if (manualLogos[lowerName]) return manualLogos[lowerName];
@@ -468,6 +544,7 @@ Nelsson | Kırmızı Kart</textarea>
         window.onload = function() { updateTemplateUI(); };
         function insertIcon(icon, targetId) { const input = document.getElementById(targetId); input.value += " " + icon; updateContent(); }
         function loadBg(event) { const reader = new FileReader(); reader.onload = function() { document.getElementById('exportCanvas').style.backgroundImage = `url('${reader.result}')`; }; if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]); }
+        
         function loadImage(event, type) {
             const reader = new FileReader();
             reader.onload = function() { 
@@ -476,6 +553,8 @@ Nelsson | Kırmızı Kart</textarea>
                 else if(type === 'leagueBadgeImg') { document.getElementById('leagueBadgeImg').src = reader.result; }
                 else if(type === 'transferPlayerImg') { document.getElementById('transferPlayerImg').src = reader.result; }
                 else if(type === 'newsImg') { document.getElementById('newsImg').src = reader.result; }
+                else if(type === 'compP1Img') { document.getElementById('compP1Img').src = reader.result; } // Karşılaştırma Player 1
+                else if(type === 'compP2Img') { document.getElementById('compP2Img').src = reader.result; } // Karşılaştırma Player 2
             };
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
@@ -491,7 +570,36 @@ Nelsson | Kırmızı Kart</textarea>
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // YENİ DÜZELTİLMİŞ EŞLEŞMELER (MATCHUPS)
+            // 👑 YENİ: GOL/ASİST KRALLIĞI (Akıllı Logolu)
+            if(document.getElementById('topScorersTitleInput')) {
+                document.getElementById('displayTopScorersTitle').innerText = document.getElementById('topScorersTitleInput').value;
+                let tsHtml = '';
+                let tsRows = document.getElementById('topScorersInput').value.split('\n').filter(r => r.trim() !== '');
+                tsRows.forEach(row => {
+                    const cols = row.split('|').map(c => c.trim());
+                    if(cols.length >= 4) {
+                        tsHtml += `<tr><td>${cols[0]}</td><td class="scorer-player">${cols[1]}</td><td><div class="scorer-team"><img src="${getTeamLogo(cols[2])}" crossorigin="anonymous" class="table-logo"> ${cols[2]}</div></td><td>${cols[3]}</td></tr>`;
+                    }
+                });
+                document.getElementById('displayTopScorers').innerHTML = tsHtml;
+                // 10'dan fazlaysa sıkıştır
+                if(tsRows.length > 10) { document.getElementById('view-topscorers').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
+                else if(document.getElementById('templateType').value === 'topscorers') { document.getElementById('view-topscorers').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
+            }
+
+            // 🆚 YENİ: OYUNCU KARŞILAŞTIRMASI
+            if(document.getElementById('compP1NameInput')) {
+                document.getElementById('displayCompP1Name').innerText = document.getElementById('compP1NameInput').value;
+                document.getElementById('displayCompP2Name').innerText = document.getElementById('compP2NameInput').value;
+                let compHtml = '';
+                document.getElementById('compStatsInput').value.split('\n').filter(r => r.trim() !== '').forEach(row => {
+                    const cols = row.split('|').map(c => c.trim());
+                    if(cols.length >= 3) { compHtml += `<div class="comp-row"><div class="comp-val">${cols[0]}</div><div class="comp-lbl">${cols[1]}</div><div class="comp-val">${cols[2]}</div></div>`; }
+                });
+                document.getElementById('displayCompStats').innerHTML = compHtml;
+            }
+            
+            // Eşleşmeler
             if(document.getElementById('matchupsTitleInput')) {
                 document.getElementById('displayMatchupsTitle').innerText = document.getElementById('matchupsTitleInput').value;
                 let muHtml = '';
@@ -563,8 +671,8 @@ Nelsson | Kırmızı Kart</textarea>
                 if(cols.length >= 5) stHtml += `<tr><td>${cols[0]}</td><td class="team-cell"><img src="${getTeamLogo(cols[1])}" crossorigin="anonymous" class="table-logo"> ${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
             });
             document.getElementById('displayStandings').innerHTML = stHtml;
-            if (stRows.length > 10) { document.getElementById('view-standings').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
-            else { document.getElementById('view-standings').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
+            if (stRows.length > 10 && document.getElementById('templateType').value === 'standings') { document.getElementById('view-standings').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
+            else if(document.getElementById('templateType').value === 'standings') { document.getElementById('view-standings').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
 
             // Fikstür
             let fixHtml = '';
@@ -597,7 +705,7 @@ Nelsson | Kırmızı Kart</textarea>
                 if(el.id && el.id !== 'formatType' && el.id !== 'themeType') el.classList.add('hidden-control');
             });
             const manualLogoPanel = document.querySelector('.manual-logo-panel');
-            if(['standings', 'fixtures', 'matchups'].includes(template)) { manualLogoPanel.style.display = 'block'; } else { manualLogoPanel.style.display = 'none'; }
+            if(['standings', 'fixtures', 'matchups', 'topscorers'].includes(template)) { manualLogoPanel.style.display = 'block'; } else { manualLogoPanel.style.display = 'none'; }
             
             document.querySelectorAll('.layout-wrapper').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-block').forEach(el => el.classList.remove('active'));
@@ -613,7 +721,7 @@ Nelsson | Kırmızı Kart</textarea>
                 document.getElementById(template + 'Controls').classList.remove('hidden-control');
                 if(template === 'quote' || template === 'motm') { document.getElementById('leagueBadgeDisplay').style.display = 'none'; } else { document.getElementById('teamLogosControl').classList.remove('hidden-control'); document.getElementById('leagueBadgeDisplay').style.display = 'flex'; }
             } 
-            else if (['lineup', 'injury', 'standings', 'fixtures', 'matchups'].includes(template)) {
+            else if (['lineup', 'injury', 'standings', 'fixtures', 'matchups', 'comparison', 'topscorers'].includes(template)) {
                 canvas.className = `canvas-area ${formatCls} ${theme} mode-center`;
                 document.getElementById('layout-center').classList.add('active');
                 document.getElementById('view-' + template).classList.add('active');
@@ -635,6 +743,7 @@ Nelsson | Kırmızı Kart</textarea>
             updateContent();
         }
 
+        // İNDİRME FONKSİYONU
         function downloadImage() {
             const btn = document.getElementById('dlBtn');
             const originalText = btn.innerText;
