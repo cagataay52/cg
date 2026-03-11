@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - Kusursuz İndirme</title>
+    <title>Skor Ağı İçerik Motoru - HATASIZ ÇIKTI SÜRÜMÜ</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -51,18 +51,19 @@
         .mode-center .canvas-overlay { background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, var(--overlay-dark) 100%); }
         .mode-side .canvas-overlay { background: linear-gradient(to right, var(--overlay-dark) 0%, var(--overlay-light) 45%, transparent 75%); }
 
-        /* --- ŞABLON DÜZENLERİ (LAYOUT) --- */
+        /* --- DÜZEN YÖNETİCİLERİ (KESİLME HATASI BURADA DÜZELTİLDİ - TRANSLATE İPTAL) --- */
         .layout-wrapper { position: absolute; z-index: 2; display: none; }
         .layout-wrapper.active { display: flex; }
         
-        .plate-bottom { left: 50%; transform: translateX(-50%); width: 900px; background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 3px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
+        .plate-bottom { position: absolute; left: 0; right: 0; margin: 0 auto; width: 900px; background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 3px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
         .format-post .plate-bottom { bottom: 120px; }
         .format-story .plate-bottom { bottom: 250px; }
         
-        .league-badge-container { position: absolute; top: -60px; width: 120px; height: 120px; background: #0f0f0f; border: 2px solid var(--plate-border); border-radius: 25px; display: flex; justify-content: center; align-items: center; box-shadow: 0 15px 30px rgba(0,0,0,0.8); z-index: 5; overflow:hidden;}
+        .league-badge-container { position: absolute; top: -60px; left: 0; right: 0; margin: 0 auto; width: 120px; height: 120px; background: #0f0f0f; border: 2px solid var(--plate-border); border-radius: 25px; display: flex; justify-content: center; align-items: center; box-shadow: 0 15px 30px rgba(0,0,0,0.8); z-index: 5; overflow:hidden;}
         .league-badge-container img { width: 80%; height: 80%; object-fit: contain; }
         
-        .plate-center { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 920px; max-height: 94%; background: var(--plate-bg); backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 5px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; box-shadow: 0 40px 80px rgba(0,0,0,0.8); overflow: hidden; transition: padding 0.3s; }
+        /* Center panel hatası margin auto ile çözüldü */
+        .plate-center { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; height: fit-content; width: 920px; max-height: 94%; background: var(--plate-bg); backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 5px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; box-shadow: 0 40px 80px rgba(0,0,0,0.8); overflow: hidden; transition: padding 0.3s; }
         .injury-mode { border-top: 5px solid #ff3333 !important; }
         .compact-padding { padding: 30px 40px !important; } 
         
@@ -143,7 +144,8 @@
         .tr-detail { font-size: 26px; font-weight: 600; color: #ddd; margin-bottom: 12px; }
         .tr-detail span { color: var(--primary-color); font-weight: 900; }
 
-        .watermark { position: absolute; font-size: 36px; font-weight: 900; z-index: 10; width: 100%; text-align: center; letter-spacing: 2px; text-shadow: 0 5px 10px rgba(0,0,0,0.8);}
+        /* Filigran */
+        .watermark { position: absolute; font-size: 36px; font-weight: 900; left: 0; right: 0; margin: 0 auto; z-index: 10; width: 100%; text-align: center; letter-spacing: 2px; text-shadow: 0 5px 10px rgba(0,0,0,0.8);}
         .format-post .watermark { bottom: 40px; }
         .format-story .watermark { bottom: 80px; }
     </style>
@@ -226,7 +228,11 @@ Juventus | 19:30 | Milan</textarea>
             <label>Skor (Örn: 5 - 2)</label>
             <input type="text" id="scoreInput" value="5 - 2" oninput="updateContent()">
             <label style="margin-top: 20px;">Ev Sahibi Olayları</label>
-            <div class="icon-btn-group"><button class="icon-btn" onclick="insertIcon('⚽', 'homeScorersInput')">⚽</button><button class="icon-btn" onclick="insertIcon('🟨', 'homeScorersInput')">🟨</button><button class="icon-btn" onclick="insertIcon('🟥', 'homeScorersInput')">🟥</button></div>
+            <div class="icon-btn-group">
+                <button class="icon-btn" onclick="insertIcon('⚽', 'homeScorersInput')">⚽</button>
+                <button class="icon-btn" onclick="insertIcon('🟨', 'homeScorersInput')">🟨</button>
+                <button class="icon-btn" onclick="insertIcon('🟥', 'homeScorersInput')">🟥</button>
+            </div>
             <textarea id="homeScorersInput" rows="3" oninput="updateContent()">M. Llorente ⚽ 6'</textarea>
             <label style="margin-top: 10px;">Deplasman Olayları</label>
             <div class="icon-btn-group"><button class="icon-btn" onclick="insertIcon('⚽', 'awayScorersInput')">⚽</button></div>
@@ -419,10 +425,13 @@ Nelsson | Kırmızı Kart</textarea>
 
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
+            
+            // 1. Maç
             document.getElementById('displayScore').innerText = document.getElementById('scoreInput').value;
             document.getElementById('displayHomeScorers').innerHTML = document.getElementById('homeScorersInput').value.replace(/\n/g, '<br>');
             document.getElementById('displayAwayScorers').innerHTML = document.getElementById('awayScorersInput').value.replace(/\n/g, '<br>');
 
+            // 2. İstatistik
             let statsHtml = '';
             for(let i=1; i<=3; i++) {
                 const val = document.getElementById('s' + i + 'Input').value.split('|').map(c => c.trim());
@@ -430,6 +439,7 @@ Nelsson | Kırmızı Kart</textarea>
             }
             document.getElementById('displayStatsList').innerHTML = statsHtml;
 
+            // 3. MOTM
             document.getElementById('displayMotmName').innerText = document.getElementById('motmNameInput').value;
             document.getElementById('displayMotmRating').innerText = document.getElementById('motmRatingInput').value;
             let motmHtml = '';
@@ -439,16 +449,20 @@ Nelsson | Kırmızı Kart</textarea>
             }
             document.getElementById('displayMotmStats').innerHTML = motmHtml;
 
+            // 4. Quote
             document.getElementById('displayQuoteText').innerText = document.getElementById('quoteTextInput').value;
             document.getElementById('displayQuoteAuthor').innerText = document.getElementById('quoteAuthorInput').value;
             const role = document.getElementById('quoteRoleInput').value; document.getElementById('displayQuoteRole').innerText = role ? `| ${role}` : "";
 
+            // 5. İlk 11
             let hLineup = ''; document.getElementById('homeLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) hLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else hLineup += `<div>${row}</div>`; }); document.getElementById('displayHomeLineup').innerHTML = hLineup;
             let aLineup = ''; document.getElementById('awayLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) aLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else aLineup += `<div>${row}</div>`; }); document.getElementById('displayAwayLineup').innerHTML = aLineup;
 
+            // 6. Sakatlık
             document.getElementById('displayInjuryTitle').innerText = document.getElementById('injuryTitleInput').value;
             let injHtml = ''; document.getElementById('injuryListInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) injHtml += `<div>❌ ${p[0].trim()} <span class="reason">(${p[1].trim()})</span></div>`; }); document.getElementById('displayInjuryList').innerHTML = injHtml;
 
+            // 7. Puan Durumu (AKILLI SIKIŞTIRMA SİSTEMLİ)
             let stHtml = '';
             let stRows = document.getElementById('standingsInput').value.split('\n').filter(r => r.trim() !== '');
             stRows.forEach(row => {
@@ -459,6 +473,7 @@ Nelsson | Kırmızı Kart</textarea>
             if (stRows.length > 10) { document.getElementById('view-standings').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
             else { document.getElementById('view-standings').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
 
+            // 8. Fikstür
             let fixHtml = '';
             document.getElementById('fixturesInput').value.split('\n').filter(r => r.trim() !== '').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
@@ -466,6 +481,7 @@ Nelsson | Kırmızı Kart</textarea>
             });
             document.getElementById('displayFixtures').innerHTML = fixHtml;
 
+            // 9. Transfer
             document.getElementById('displayTrTag').innerText = document.getElementById('trTagInput').value;
             document.getElementById('displayTrName').innerText = document.getElementById('trNameInput').value;
             const det1 = document.getElementById('trDet1Input').value.split('|'); if(det1.length>1) document.getElementById('displayTrDet1').innerHTML = `${det1[0]}: <span>${det1[1]}</span>`;
@@ -483,12 +499,16 @@ Nelsson | Kırmızı Kart</textarea>
         function updateTemplateUI() {
             const template = document.getElementById('templateType').value;
             const canvas = document.getElementById('exportCanvas');
-            document.querySelectorAll('.sidebar .control-group').forEach(el => { if(el.id && el.id !== 'formatType' && el.id !== 'themeType') el.classList.add('hidden-control'); });
+            
+            document.querySelectorAll('.sidebar .control-group').forEach(el => {
+                if(el.id && el.id !== 'formatType' && el.id !== 'themeType') el.classList.add('hidden-control');
+            });
             const manualLogoPanel = document.querySelector('.manual-logo-panel');
             if(template === 'standings' || template === 'fixtures') { manualLogoPanel.style.display = 'block'; } else { manualLogoPanel.style.display = 'none'; }
             document.querySelectorAll('.layout-wrapper').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-block').forEach(el => el.classList.remove('active'));
             document.getElementById('layout-center').classList.remove('injury-mode');
+
             const theme = document.getElementById('themeType').value;
             const formatCls = Array.from(canvas.classList).find(cls => cls.startsWith('format-'));
 
@@ -516,33 +536,40 @@ Nelsson | Kırmızı Kart</textarea>
             updateContent();
         }
 
-        // 🚀 KESİNTİSİZ VE HATASIZ İNDİRME FONKSİYONU 🚀
+        // 🚀 KESİNTİSİZ İNDİRME FONKSİYONU (Kesilme Hatası Çözüldü!)
         function downloadImage() {
             const btn = document.getElementById('dlBtn');
             const originalText = btn.innerText;
-            btn.innerText = "⏳ GÖRSEL HAZIRLANIYOR...";
+            btn.innerText = "⏳ HAZIRLANIYOR...";
             btn.disabled = true;
 
             const element = document.getElementById('exportCanvas');
             const format = document.getElementById('formatType').value;
-            
             const targetWidth = 1080;
             const targetHeight = format === 'story' ? 1920 : 1350;
 
-            // HTML2Canvas'in css transform scale yüzünden görselleri kırpmasını (kaydırmasını) engelleyen kritik hamle:
-            element.style.setProperty('transform', 'scale(1)', 'important');
+            // HTML2Canvas bug'ını çözmek için ekranı başa al ve küçültmeyi iptal et
+            window.scrollTo(0, 0);
+            const originalTransform = element.style.transform;
+            element.style.transform = 'scale(1)';
 
             setTimeout(() => {
                 html2canvas(element, { 
-                    scale: 1.5, // 1620p Ultra HD çıktı
+                    scale: 1.5, 
                     width: targetWidth,
                     height: targetHeight,
+                    windowWidth: targetWidth,
+                    windowHeight: targetHeight,
+                    x: 0,
+                    y: 0,
+                    scrollX: 0,
+                    scrollY: 0,
                     useCORS: true, 
                     allowTaint: true,
                     backgroundColor: "#050505" 
                 }).then(canvas => {
-                    // İşlem bitince orjinal boyuta (önizleme moduna) geri döndür
-                    element.style.removeProperty('transform');
+                    // İşlem bitince orjinal boyuta geri döndür
+                    element.style.transform = originalTransform;
                     btn.innerText = originalText;
                     btn.disabled = false;
 
@@ -552,11 +579,11 @@ Nelsson | Kırmızı Kart</textarea>
                     link.click();
                 }).catch(err => {
                     console.error("İndirme Hatası:", err);
-                    element.style.removeProperty('transform');
+                    element.style.transform = originalTransform;
                     btn.innerText = "HATA OLUŞTU!";
                     setTimeout(() => { btn.innerText = originalText; btn.disabled = false; }, 2000);
                 });
-            }, 150); // Ekranın render edilmesi için çok ufak bir bekleme
+            }, 300);
         }
     </script>
 </body>
