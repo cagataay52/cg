@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - V23 Krallık Sürümü</title>
+    <title>Skor Ağı İçerik Motoru - V24 Simetrik Sürüm</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -86,7 +86,7 @@
         .m-team.away .m-name { text-align: right; }
         .m-vs { font-size: 22px; font-weight: 900; color: #fff; background: var(--primary-color); padding: 10px 20px; border-radius: 12px; text-transform: uppercase; letter-spacing: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); text-align: center; flex-shrink: 0; z-index: 2;}
 
-        /* Futbolcu Karşılaştırma (YENİ) */
+        /* Futbolcu Karşılaştırma - DÜZELTİLDİ */
         .comp-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 20px; margin-bottom: 20px; width: 100%; }
         .comp-player { display: flex; flex-direction: column; align-items: center; width: 40%; }
         .comp-img { width: 180px; height: 180px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); margin-bottom: 10px; }
@@ -97,7 +97,7 @@
         .comp-val { font-size: 36px; font-weight: 900; width: 25%; text-align: center; }
         .comp-lbl { font-size: 20px; font-weight: 800; color: var(--primary-color); width: 50%; text-align: center; letter-spacing: 2px; }
 
-        /* Krallık (Top Scorers - YENİ) */
+        /* Krallık (Top Scorers) */
         .scorers-table { width: 100%; border-collapse: collapse; font-size: 28px; font-weight: 600; }
         .scorers-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 22px; text-align: center; text-transform: uppercase; }
         .scorers-table td { padding: 18px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); text-align: center; vertical-align: middle; }
@@ -218,7 +218,9 @@
         <div class="control-group">
             <label>Tasarım Şablonu</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="topscorers">1. Gol / Asist Krallığı 👑</option> <option value="comparison">2. Futbolcu Karşılaştırma 🆚</option> <option value="matchups">3. Turnuva Eşleşmeleri 🏆</option>
+                <option value="comparison">1. Futbolcu Karşılaştırma 🆚</option>
+                <option value="topscorers">2. Gol / Asist Krallığı 👑</option>
+                <option value="matchups">3. Turnuva Eşleşmeleri 🏆</option>
                 <option value="news">4. Haber / Son Dakika 📰</option>
                 <option value="standings">5. Puan Durumu (20 Takım) 📊</option>
                 <option value="fixtures">6. Günün Maçları 🗓️</option>
@@ -247,18 +249,6 @@
             <input type="file" accept="image/*" onchange="loadBg(event)">
         </div>
 
-        <div id="topscorersControls" class="control-group hidden-control">
-            <label>Üst Başlık</label>
-            <input type="text" id="topScorersTitleInput" value="GOL KRALLIĞI" oninput="updateContent()">
-            <label style="margin-top: 10px;">Liste (Sıra | İsim | Takım Adı | İstatistik)</label>
-            <textarea id="topScorersInput" rows="8" oninput="updateContent()">1 | Mauro Icardi | Galatasaray | 25
-2 | Edin Dzeko | Fenerbahçe | 21
-3 | Rey Manaj | Sivasspor | 18
-4 | Mame Thiam | Kasımpaşa | 15
-5 | Krzysztof Piatek | Başakşehir | 14</textarea>
-            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Sistem takım isimlerini okuyup logolarını otomatik ekler!</small>
-        </div>
-
         <div id="comparisonControls" class="control-group hidden-control">
             <label>1. Oyuncu Adı</label>
             <input type="text" id="compP1NameInput" value="ICARDI" oninput="updateContent()">
@@ -275,6 +265,18 @@
 8 | ASİST | 6
 34 | MAÇ | 36
 8.2 | REYTİNG | 7.9</textarea>
+        </div>
+
+        <div id="topscorersControls" class="control-group hidden-control">
+            <label>Üst Başlık</label>
+            <input type="text" id="topScorersTitleInput" value="GOL KRALLIĞI" oninput="updateContent()">
+            <label style="margin-top: 10px;">Liste (Sıra | İsim | Takım Adı | İstatistik)</label>
+            <textarea id="topScorersInput" rows="8" oninput="updateContent()">1 | Mauro Icardi | Galatasaray | 25
+2 | Edin Dzeko | Fenerbahçe | 21
+3 | Rey Manaj | Sivasspor | 18
+4 | Mame Thiam | Kasımpaşa | 15
+5 | Krzysztof Piatek | Başakşehir | 14</textarea>
+            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Sistem takım isimlerini okuyup logolarını otomatik ekler!</small>
         </div>
 
         <div id="teamLogosControl" class="control-group hidden-control">
@@ -412,7 +414,7 @@ Nelsson | Kırmızı Kart</textarea>
 
                 <div id="layout-center" class="layout-wrapper plate-center active">
                     
-                    <div id="view-topscorers" class="view-block active">
+                    <div id="view-topscorers" class="view-block">
                         <div class="center-title" id="displayTopScorersTitle">GOL KRALLIĞI</div>
                         <table class="scorers-table">
                             <thead><tr><th>#</th><th>OYUNCU</th><th>TAKIM</th><th>İSTATİSTİK</th></tr></thead>
@@ -420,7 +422,7 @@ Nelsson | Kırmızı Kart</textarea>
                         </table>
                     </div>
 
-                    <div id="view-comparison" class="view-block">
+                    <div id="view-comparison" class="view-block active">
                         <div class="center-title">OYUNCU KARŞILAŞTIRMASI</div>
                         <div class="comp-header">
                             <div class="comp-player">
@@ -429,8 +431,8 @@ Nelsson | Kırmızı Kart</textarea>
                             </div>
                             <div class="comp-vs">VS</div>
                             <div class="comp-player">
-                                <div class="comp-name" id="displayCompP2Name">DZEKO</div>
                                 <img id="compP2Img" class="comp-img" src="https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbah%C3%A7e_SK.png/200px-Fenerbah%C3%A7e_SK.png" crossorigin="anonymous">
+                                <div class="comp-name" id="displayCompP2Name">DZEKO</div>
                             </div>
                         </div>
                         <div class="comp-stats-container" id="displayCompStats"></div>
@@ -553,8 +555,8 @@ Nelsson | Kırmızı Kart</textarea>
                 else if(type === 'leagueBadgeImg') { document.getElementById('leagueBadgeImg').src = reader.result; }
                 else if(type === 'transferPlayerImg') { document.getElementById('transferPlayerImg').src = reader.result; }
                 else if(type === 'newsImg') { document.getElementById('newsImg').src = reader.result; }
-                else if(type === 'compP1Img') { document.getElementById('compP1Img').src = reader.result; } // Karşılaştırma Player 1
-                else if(type === 'compP2Img') { document.getElementById('compP2Img').src = reader.result; } // Karşılaştırma Player 2
+                else if(type === 'compP1Img') { document.getElementById('compP1Img').src = reader.result; } 
+                else if(type === 'compP2Img') { document.getElementById('compP2Img').src = reader.result; } 
             };
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
         }
@@ -570,7 +572,7 @@ Nelsson | Kırmızı Kart</textarea>
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // 👑 YENİ: GOL/ASİST KRALLIĞI (Akıllı Logolu)
+            // Krallık
             if(document.getElementById('topScorersTitleInput')) {
                 document.getElementById('displayTopScorersTitle').innerText = document.getElementById('topScorersTitleInput').value;
                 let tsHtml = '';
@@ -582,12 +584,11 @@ Nelsson | Kırmızı Kart</textarea>
                     }
                 });
                 document.getElementById('displayTopScorers').innerHTML = tsHtml;
-                // 10'dan fazlaysa sıkıştır
                 if(tsRows.length > 10) { document.getElementById('view-topscorers').classList.add('compact-mode'); document.getElementById('layout-center').classList.add('compact-padding'); } 
                 else if(document.getElementById('templateType').value === 'topscorers') { document.getElementById('view-topscorers').classList.remove('compact-mode'); document.getElementById('layout-center').classList.remove('compact-padding'); }
             }
 
-            // 🆚 YENİ: OYUNCU KARŞILAŞTIRMASI
+            // Karşılaştırma
             if(document.getElementById('compP1NameInput')) {
                 document.getElementById('displayCompP1Name').innerText = document.getElementById('compP1NameInput').value;
                 document.getElementById('displayCompP2Name').innerText = document.getElementById('compP2NameInput').value;
