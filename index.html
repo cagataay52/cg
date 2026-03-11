@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - Tam Sürüm</title>
+    <title>Skor Ağı İçerik Motoru - 20 Takım Destekli</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -59,8 +59,9 @@
         .league-badge-container { position: absolute; top: -60px; width: 120px; height: 120px; background: #0f0f0f; border: 2px solid var(--plate-border); border-radius: 25px; display: flex; justify-content: center; align-items: center; box-shadow: 0 15px 30px rgba(0,0,0,0.8); z-index: 5; overflow:hidden;}
         .league-badge-container img { width: 80%; height: 80%; object-fit: contain; }
         
-        .plate-center { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 920px; max-height: 1400px; background: var(--plate-bg); backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 5px solid var(--primary-color); border-radius: 40px; padding: 60px 50px; flex-direction: column; box-shadow: 0 40px 80px rgba(0,0,0,0.8); overflow: hidden; }
+        .plate-center { top: 50%; left: 50%; transform: translate(-50%, -50%); width: 920px; max-height: 94%; background: var(--plate-bg); backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 5px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; box-shadow: 0 40px 80px rgba(0,0,0,0.8); overflow: hidden; transition: padding 0.3s; }
         .injury-mode { border-top: 5px solid #ff3333 !important; }
+        .compact-padding { padding: 30px 40px !important; } /* 20 Takım İçin Sıkışık Padding */
         
         .plate-side { top: 0; left: 0; width: 100%; height: 100%; }
         .view-block { display: none; width: 100%; }
@@ -115,7 +116,7 @@
         .injury-list span.reason { color: #ff3333; font-style: italic; font-size: 24px; margin-left: 10px; }
         .injury-icon { font-size: 60px; text-align: center; margin-bottom: -10px; }
 
-        /* Puan Durumu & Fikstür */
+        /* --- PUAN DURUMU & FİKSTÜR (STANDART MOD) --- */
         .center-title { font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); }
         .standings-table { width: 100%; border-collapse: collapse; font-size: 28px; font-weight: 600; }
         .standings-table th { color: #888; border-bottom: 2px solid rgba(255,255,255,0.1); padding-bottom: 15px; font-size: 22px; text-align: center; }
@@ -129,6 +130,15 @@
         .f-team { font-size: 32px; font-weight: 800; width: 40%; display: flex; align-items: center; gap: 15px; }
         .f-team.away { justify-content: flex-end; }
         .f-time { font-size: 28px; font-weight: 900; color: var(--primary-color); background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 12px; }
+
+        /* 🧠 AKILLI SIKIŞTIRMA (COMPACT MODE) - 20 TAKIM İÇİN */
+        .compact-mode .center-title { font-size: 38px; margin-bottom: 15px; }
+        .compact-mode .standings-table { font-size: 21px; }
+        .compact-mode .standings-table th { padding-bottom: 8px; font-size: 18px; }
+        .compact-mode .standings-table td { padding: 9px 10px; }
+        .compact-mode .standings-table tr:first-child td { font-size: 26px; }
+        .compact-mode .team-cell { gap: 10px; }
+        .compact-mode .table-logo { width: 32px; height: 32px; }
 
         /* Transfer */
         .transfer-player-img { position: absolute; bottom: 0; right: -50px; height: 1100px; z-index: 5; object-fit: contain; filter: drop-shadow(-15px 0 30px rgba(0,0,0,0.7)); }
@@ -160,7 +170,7 @@
         <div class="control-group">
             <label>Tasarım Şablonu (Tam Koleksiyon)</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="standings">1. Puan Durumu (Logolu) 📊</option>
+                <option value="standings">1. Puan Durumu (20 Takım) 📊</option>
                 <option value="fixtures">2. Günün Maçları (Logolu) 🗓️</option>
                 <option value="match">3. Maç Sonucu</option>
                 <option value="stats">4. Maç İstatistikleri</option>
@@ -198,12 +208,17 @@
 
         <div id="standingsControls" class="control-group hidden-control">
             <label>Puan Durumu (Sıra | Takım | O | Av | P)</label>
-            <textarea id="standingsInput" rows="7" oninput="updateContent()">1 | Galatasaray | 8 | +15 | 22
+            <textarea id="standingsInput" rows="12" oninput="updateContent()">1 | Galatasaray | 8 | +15 | 22
 2 | Fenerbahçe | 8 | +12 | 20
 3 | Beşiktaş | 8 | +8 | 17
 4 | Trabzonspor | 8 | +4 | 14
-5 | Arsenal | 8 | +10 | 18
-6 | Real Madrid | 8 | +8 | 15</textarea>
+5 | Başakşehir | 8 | +2 | 13
+6 | Kasımpaşa | 8 | 0 | 12
+7 | Sivasspor | 8 | -1 | 10
+8 | Antalyaspor | 8 | -2 | 9
+9 | Alanyaspor | 8 | -3 | 8
+10 | Göztepe | 8 | -4 | 7</textarea>
+            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Sistem 10 takımdan fazlasını otomatik algılar ve "Süper Sıkıştırma" moduna geçer.</small>
         </div>
 
         <div id="fixturesControls" class="control-group hidden-control">
@@ -254,7 +269,7 @@ Juventus | 19:30 | Milan</textarea>
             <label>Açıklama / Söz</label>
             <textarea id="quoteTextInput" rows="4" oninput="updateContent()">"Sahada basmadık yer bırakmadık."</textarea>
             <label style="margin-top: 10px;">Söyleyen Kişi</label>
-            <input type="text" id="quoteAuthorInput" value="JOSE MOURINHO" oninput="updateContent()">
+            <input type="text" id="quoteAuthorInput" value="OKAN BURUK" oninput="updateContent()">
             <label style="margin-top: 10px;">Ünvan</label>
             <input type="text" id="quoteRoleInput" value="Teknik Direktör" oninput="updateContent()">
         </div>
@@ -403,17 +418,10 @@ Nelsson | Kırmızı Kart</textarea>
         // 🛡️ AKILLI LOGO SİSTEMİ (ÖNCE MANUEL, SONRA WİKİ)
         function getTeamLogo(name) {
             let lowerName = name.toLocaleLowerCase('tr-TR').trim();
-            
-            // 1. Kullanıcı kendi yüklediyse onu kullan
-            if (manualLogos[lowerName]) {
-                return manualLogos[lowerName];
-            }
-            
-            // 2. Yüklemediyse WSRV proxy ile wiki kütüphanesinden al
+            if (manualLogos[lowerName]) return manualLogos[lowerName];
             return "https://wsrv.nl/?url=" + getWikipediaPath(lowerName) + "&w=150&output=png"; 
         }
 
-        // Wikipedia Path Bulucu (Dev Veritabanı)
         function getWikipediaPath(lowerName) {
             const wikis = {
                 // Türkiye
@@ -473,7 +481,7 @@ Nelsson | Kırmızı Kart</textarea>
             return "cdn-icons-png.flaticon.com/512/1975/1975003.png"; 
         }
 
-        // ➕ MANUEL LOGO YÜKLEME FONKSİYONU
+        // ➕ MANUEL LOGO YÜKLEME
         function uploadManualLogo(event) {
             const teamName = document.getElementById('manualTeamName').value.trim();
             if (!teamName) { alert("Önce Puan Durumu / Fikstür kutusundaki takımın adını BİREBİR aynı yazın!"); return; }
@@ -483,7 +491,7 @@ Nelsson | Kırmızı Kart</textarea>
                 const lowerName = teamName.toLocaleLowerCase('tr-TR');
                 manualLogos[lowerName] = reader.result; 
                 document.getElementById('manualTeamName').value = ''; 
-                alert(`${teamName} logosu manuel olarak eklendi!`);
+                alert(`${teamName} logosu eklendi!`);
                 updateContent(); 
             };
             if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
@@ -551,17 +559,27 @@ Nelsson | Kırmızı Kart</textarea>
             document.getElementById('displayInjuryTitle').innerText = document.getElementById('injuryTitleInput').value;
             let injHtml = ''; document.getElementById('injuryListInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) injHtml += `<div>❌ ${p[0].trim()} <span class="reason">(${p[1].trim()})</span></div>`; }); document.getElementById('displayInjuryList').innerHTML = injHtml;
 
-            // 7. Puan Durumu (Manuel Destekli)
+            // 7. Puan Durumu (AKILLI SIKIŞTIRMA SİSTEMLİ)
             let stHtml = '';
-            document.getElementById('standingsInput').value.split('\n').forEach(row => {
+            let stRows = document.getElementById('standingsInput').value.split('\n').filter(r => r.trim() !== '');
+            stRows.forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
                 if(cols.length >= 5) stHtml += `<tr><td>${cols[0]}</td><td class="team-cell"><img src="${getTeamLogo(cols[1])}" crossorigin="anonymous" class="table-logo"> ${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
             });
             document.getElementById('displayStandings').innerHTML = stHtml;
 
-            // 8. Fikstür (Manuel Destekli)
+            // 10 Takımdan fazlaysa sıkılaştırılmış görünüme geç
+            if (stRows.length > 10) {
+                document.getElementById('view-standings').classList.add('compact-mode');
+                document.getElementById('layout-center').classList.add('compact-padding');
+            } else {
+                document.getElementById('view-standings').classList.remove('compact-mode');
+                document.getElementById('layout-center').classList.remove('compact-padding');
+            }
+
+            // 8. Fikstür
             let fixHtml = '';
-            document.getElementById('fixturesInput').value.split('\n').forEach(row => {
+            document.getElementById('fixturesInput').value.split('\n').filter(r => r.trim() !== '').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
                 if(cols.length >= 3) fixHtml += `<div class="fixture-item"><div class="f-team"><img src="${getTeamLogo(cols[0])}" crossorigin="anonymous" class="table-logo"> ${cols[0]}</div><div class="f-time">${cols[1]}</div><div class="f-team away">${cols[2]} <img src="${getTeamLogo(cols[2])}" crossorigin="anonymous" class="table-logo"></div></div>`;
             });
@@ -589,7 +607,7 @@ Nelsson | Kırmızı Kart</textarea>
             document.querySelectorAll('.sidebar .control-group').forEach(el => {
                 if(el.id && el.id !== 'formatType' && el.id !== 'themeType') el.classList.add('hidden-control');
             });
-            // Manuel logo paneli tablolarda gözüksün
+            
             const manualLogoPanel = document.querySelector('.manual-logo-panel');
             if(template === 'standings' || template === 'fixtures') {
                 manualLogoPanel.style.display = 'block';
