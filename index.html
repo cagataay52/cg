@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEGA Spor İçerik Motoru V13 - Kusursuz Sürüm</title>
+    <title>OMEGA Spor İçerik Motoru V14 - Kesintisiz Sürüm</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -24,7 +24,7 @@
         button.download-btn:hover { filter: brightness(1.2); transform: translateY(-2px); }
         .hidden-control { display: none !important; }
 
-        /* --- SAĞ ÖNİZLEME PANELİ & FORMATLAR --- */
+        /* --- SAĞ ÖNİZLEME & FORMATLAR --- */
         .preview-container { flex: 1; display: flex; justify-content: center; align-items: center; background: #000; overflow: auto; padding: 20px; }
         .canvas-wrapper { position: relative; transition: all 0.3s ease; }
         .wrapper-post { width: 540px; height: 675px; } 
@@ -33,7 +33,7 @@
         .format-post { width: 1080px; height: 1350px; transform: scale(0.5); }
         .format-story { width: 1080px; height: 1920px; transform: scale(0.4); }
 
-        /* --- TEMALAR & KARARTMA --- */
+        /* --- TEMALAR --- */
         .theme-default { --primary-color: #FF6B00; --overlay-dark: rgba(0,0,0,0.95); --overlay-light: rgba(0,0,0,0.4); }
         .theme-ucl { --primary-color: #00c3ff; --overlay-dark: rgba(0,15,40,0.95); --overlay-light: rgba(0,10,30,0.4); }
         .theme-uel { --primary-color: #F6821F; --overlay-dark: rgba(40,15,0,0.95); --overlay-light: rgba(30,10,0,0.4); }
@@ -44,7 +44,7 @@
         .mode-center .canvas-overlay { background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, var(--overlay-dark) 100%); }
         .mode-side .canvas-overlay { background: linear-gradient(to right, var(--overlay-dark) 0%, var(--overlay-light) 45%, transparent 75%); }
 
-        /* --- DÜZEN YÖNETİCİLERİ --- */
+        /* --- LAYOUT --- */
         .layout-wrapper { position: absolute; z-index: 2; display: none; }
         .layout-wrapper.active { display: flex; }
         .plate-bottom { left: 50%; transform: translateX(-50%); width: 900px; background: var(--plate-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid var(--plate-border); border-top: 3px solid var(--primary-color); border-radius: 40px; padding: 50px 40px; flex-direction: column; align-items: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); }
@@ -58,7 +58,7 @@
         .view-block { display: none; width: 100%; }
         .view-block.active { display: block; }
 
-        /* --- İÇERİK TASARIMLARI --- */
+        /* --- İÇERİKLER --- */
         .match-main-row { display: flex; align-items: center; justify-content: center; gap: 50px; margin-top: 20px; }
         .match-logo { width: 140px; height: 140px; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5)); }
         .match-score { font-size: 160px; font-weight: 900; letter-spacing: -2px; text-shadow: 0 10px 20px rgba(0,0,0,0.8); line-height: 1; }
@@ -130,7 +130,7 @@
 <body>
 
     <div class="sidebar">
-        <h2>🌍 MEGA PANEL V13</h2>
+        <h2>🌍 MEGA PANEL V14</h2>
         
         <div class="control-group" style="border-color: var(--primary-color);">
             <label style="color: var(--primary-color);">Görsel Formatı</label>
@@ -218,7 +218,7 @@
 
         <div id="quoteControls" class="control-group hidden-control">
             <label>Açıklama / Söz</label>
-            <textarea id="quoteTextInput" rows="4" oninput="updateContent()">"Avrupa'nın en büyük kupasını alacağız."</textarea>
+            <textarea id="quoteTextInput" rows="4" oninput="updateContent()">"Sahada basmadık yer bırakmadık."</textarea>
             <label style="margin-top: 10px;">Söyleyen Kişi</label>
             <input type="text" id="quoteAuthorInput" value="JOSE MOURINHO" oninput="updateContent()">
             <label style="margin-top: 10px;">Ünvan</label>
@@ -248,8 +248,8 @@ Nelsson | Kırmızı Kart</textarea>
 2 | Fenerbahçe | 8 | +12 | 20
 3 | Beşiktaş | 8 | +8 | 17
 4 | Trabzonspor | 8 | +4 | 14
-5 | Real Madrid | 8 | +10 | 18
-6 | Arsenal | 8 | +8 | 15</textarea>
+5 | Arsenal | 8 | +10 | 18
+6 | Real Madrid | 8 | +8 | 15</textarea>
         </div>
 
         <div id="fixturesControls" class="control-group hidden-control">
@@ -289,14 +289,14 @@ Juventus | 19:30 | Milan</textarea>
                 
                 <div id="layout-bottom" class="layout-wrapper plate-bottom active">
                     <div class="league-badge-container" id="leagueBadgeDisplay">
-                        <img id="leagueBadgeImg" src="https://upload.wikimedia.org/wikipedia/tr/thumb/b/b8/UEFA_%C5%9Eampiyonlar_Ligi_logosu.svg/1200px-UEFA_%C5%9Eampiyonlar_Ligi_logosu.svg.png" crossorigin="anonymous">
+                        <img id="leagueBadgeImg" src="https://wsrv.nl/?url=upload.wikimedia.org/wikipedia/tr/b/b8/UEFA_%C5%9Eampiyonlar_Ligi_logosu.svg&w=150&output=png" crossorigin="anonymous">
                     </div>
 
                     <div id="view-match" class="view-block active">
                         <div class="match-main-row">
-                            <img id="homeLogo1" class="match-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Atletico_Madrid_2017_logo.svg/1200px-Atletico_Madrid_2017_logo.svg.png" crossorigin="anonymous">
+                            <img id="homeLogo1" class="match-logo" src="https://wsrv.nl/?url=upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg&w=200&output=png" crossorigin="anonymous">
                             <div class="match-score" id="displayScore">5 - 2</div>
-                            <img id="awayLogo1" class="match-logo" src="https://upload.wikimedia.org/wikipedia/tr/thumb/6/6d/Tottenham_Hotspur.svg/1200px-Tottenham_Hotspur.svg.png" crossorigin="anonymous">
+                            <img id="awayLogo1" class="match-logo" src="https://wsrv.nl/?url=upload.wikimedia.org/wikipedia/tr/6/6d/Tottenham_Hotspur.svg&w=200&output=png" crossorigin="anonymous">
                         </div>
                         <div class="scorers-container">
                             <div class="scorers-col left" id="displayHomeScorers"></div>
@@ -329,8 +329,8 @@ Juventus | 19:30 | Milan</textarea>
                     <div id="view-lineup" class="view-block">
                         <div class="center-title">İLK 11'LER</div>
                         <div class="lineup-container">
-                            <div class="lineup-col"><img id="homeLogo2" class="lineup-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Atletico_Madrid_2017_logo.svg/1200px-Atletico_Madrid_2017_logo.svg.png" crossorigin="anonymous"><div class="lineup-list" id="displayHomeLineup"></div></div>
-                            <div class="lineup-col"><img id="awayLogo2" class="lineup-logo" src="https://upload.wikimedia.org/wikipedia/tr/thumb/6/6d/Tottenham_Hotspur.svg/1200px-Tottenham_Hotspur.svg.png" crossorigin="anonymous"><div class="lineup-list" id="displayAwayLineup"></div></div>
+                            <div class="lineup-col"><img id="homeLogo2" class="lineup-logo" src="https://wsrv.nl/?url=upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg&w=200&output=png" crossorigin="anonymous"><div class="lineup-list" id="displayHomeLineup"></div></div>
+                            <div class="lineup-col"><img id="awayLogo2" class="lineup-logo" src="https://wsrv.nl/?url=upload.wikimedia.org/wikipedia/tr/6/6d/Tottenham_Hotspur.svg&w=200&output=png" crossorigin="anonymous"><div class="lineup-list" id="displayAwayLineup"></div></div>
                         </div>
                     </div>
 
@@ -355,7 +355,7 @@ Juventus | 19:30 | Milan</textarea>
                 </div>
 
                 <div id="layout-side" class="layout-wrapper plate-side">
-                    <img id="transferPlayerImg" class="transfer-player-img" src="https://cdn-icons-png.flaticon.com/512/3048/3048122.png" crossorigin="anonymous">
+                    <img id="transferPlayerImg" class="transfer-player-img" src="https://wsrv.nl/?url=cdn-icons-png.flaticon.com/512/3048/3048122.png&w=800&output=png" crossorigin="anonymous">
                     <div class="transfer-glass-box" id="view-transfer">
                         <div class="tr-tag" id="displayTrTag">ÖZEL HABER</div>
                         <div class="tr-name" id="displayTrName">V. OSIMHEN</div>
@@ -371,56 +371,75 @@ Juventus | 19:30 | Milan</textarea>
     </div>
 
     <script>
-        // 🌍 DEV VERİTABANI (Düzeltilmiş Orijinal PNG Linkleri)
+        // 🌍 DEV VERİTABANI - HTTP ve HTTPS Kısımlarını Kaldırdım (Sadece Host Path var)
         const teamLogos = {
             // TÜRKİYE
-            "galatasaray, gs": "https://upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png",
-            "fenerbahçe, fenerbahce, fb": "https://upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png",
-            "beşiktaş, besiktas, bjk": "https://upload.wikimedia.org/wikipedia/commons/0/08/Be%C5%9Fikta%C5%9F_Logo_Be%C5%9Fikta%C5%9F_Amblem_Be%C5%9Fikta%C5%9F_BJK.png",
-            "trabzonspor, ts": "https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png",
-            "başakşehir, basaksehir": "https://upload.wikimedia.org/wikipedia/tr/b/b3/Medipol_Ba%C5%9Fak%C5%9Fehir_FK_logosu.png",
-            "kasımpaşa, kasimpasa": "https://upload.wikimedia.org/wikipedia/tr/1/1a/Kasimpa%C5%9Fa_SK_logo.png",
-            "sivasspor": "https://upload.wikimedia.org/wikipedia/tr/9/90/Sivasspor.png",
-            "antalyaspor": "https://upload.wikimedia.org/wikipedia/tr/c/cd/Antalyaspor_logo.png",
-            "alanyaspor": "https://upload.wikimedia.org/wikipedia/tr/6/67/Alanyaspor_logo.png",
-            "adana demirspor, ads": "https://upload.wikimedia.org/wikipedia/tr/2/2f/Adanademirspor.png",
-            "göztepe, goztepe": "https://upload.wikimedia.org/wikipedia/tr/4/4b/Goztepe_logo.png",
-            "samsunspor": "https://upload.wikimedia.org/wikipedia/tr/c/cd/Samsunspor_logo.png",
-            "kocaelispor": "https://upload.wikimedia.org/wikipedia/tr/4/4c/Kocaelispor_logosu.png",
-            "sakaryaspor": "https://upload.wikimedia.org/wikipedia/tr/b/b0/Sakaryaspor.png",
-            "ankaragücü, ankaragucu": "https://upload.wikimedia.org/wikipedia/tr/0/05/MKE_Ankarag%C3%BCc%C3%BC_logo.png",
-            "gençlerbirliği, genclerbirligi": "https://upload.wikimedia.org/wikipedia/tr/7/76/Gen%C3%A7lerbirli%C4%9Fi_SK_logo.png",
-            "eyüpspor, eyupspor": "https://upload.wikimedia.org/wikipedia/tr/8/87/Ey%C3%BCpspor_logo.png",
+            "galatasaray, gs": "upload.wikimedia.org/wikipedia/commons/f/f6/Galatasaray_Sports_Club_Logo.png",
+            "fenerbahçe, fenerbahce, fb": "upload.wikimedia.org/wikipedia/tr/8/86/Fenerbah%C3%A7e_SK.png",
+            "beşiktaş, besiktas, bjk": "upload.wikimedia.org/wikipedia/commons/0/08/Be%C5%9Fikta%C5%9F_Logo_Be%C5%9Fikta%C5%9F_Amblem_Be%C5%9Fikta%C5%9F_BJK.png",
+            "trabzonspor, ts": "upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png",
+            "başakşehir, basaksehir": "upload.wikimedia.org/wikipedia/tr/b/b3/Medipol_Ba%C5%9Fak%C5%9Fehir_FK_logosu.png",
+            "kasımpaşa, kasimpasa": "upload.wikimedia.org/wikipedia/tr/1/1a/Kasimpa%C5%9Fa_SK_logo.png",
+            "sivasspor": "upload.wikimedia.org/wikipedia/tr/9/90/Sivasspor.png",
+            "antalyaspor": "upload.wikimedia.org/wikipedia/tr/c/cd/Antalyaspor_logo.png",
+            "alanyaspor": "upload.wikimedia.org/wikipedia/tr/6/67/Alanyaspor_logo.png",
+            "adana demirspor, ads": "upload.wikimedia.org/wikipedia/tr/2/2f/Adanademirspor.png",
+            "göztepe, goztepe": "upload.wikimedia.org/wikipedia/tr/4/4b/Goztepe_logo.png",
+            "samsunspor": "upload.wikimedia.org/wikipedia/tr/c/cd/Samsunspor_logo.png",
+            "kocaelispor": "upload.wikimedia.org/wikipedia/tr/4/4c/Kocaelispor_logosu.png",
+            "sakaryaspor": "upload.wikimedia.org/wikipedia/tr/b/b0/Sakaryaspor.png",
+            "ankaragücü, ankaragucu": "upload.wikimedia.org/wikipedia/tr/0/05/MKE_Ankarag%C3%BCc%C3%BC_logo.png",
+            "gençlerbirliği, genclerbirligi": "upload.wikimedia.org/wikipedia/tr/7/76/Gen%C3%A7lerbirli%C4%9Fi_SK_logo.png",
+            "eyüpspor, eyupspor": "upload.wikimedia.org/wikipedia/tr/8/87/Ey%C3%BCpspor_logo.png",
 
             // İNGİLTERE 
-            "arsenal": "https://upload.wikimedia.org/wikipedia/tr/e/e0/Arsenal_FC.png",
-            "manchester city, man city": "https://upload.wikimedia.org/wikipedia/tr/f/f6/Manchester_City.png",
-            "manchester united, man united, m. united": "https://upload.wikimedia.org/wikipedia/tr/b/b6/Manchester_United_FC_logo.png",
-            "liverpool": "https://upload.wikimedia.org/wikipedia/tr/3/3f/Liverpool_FC_logo.png",
-            "chelsea": "https://upload.wikimedia.org/wikipedia/tr/0/07/Chelsea_FC_logo.png",
-            "aston villa": "https://upload.wikimedia.org/wikipedia/tr/6/69/Aston_Villa_logo.png",
+            "arsenal": "upload.wikimedia.org/wikipedia/en/5/53/Arsenal_FC.svg",
+            "manchester city, man city": "upload.wikimedia.org/wikipedia/en/e/eb/Manchester_City_FC_badge.svg",
+            "manchester united, man united, m. united": "upload.wikimedia.org/wikipedia/en/7/7a/Manchester_United_FC_crest.svg",
+            "liverpool": "upload.wikimedia.org/wikipedia/en/0/0c/Liverpool_FC.svg",
+            "chelsea": "upload.wikimedia.org/wikipedia/en/c/cc/Chelsea_FC.svg",
+            "tottenham, spurs": "upload.wikimedia.org/wikipedia/en/b/b4/Tottenham_Hotspur.svg",
+            "newcastle, newcastle united": "upload.wikimedia.org/wikipedia/en/5/56/Newcastle_United_Logo.svg",
+            "aston villa": "upload.wikimedia.org/wikipedia/en/9/9f/Aston_Villa_logo.svg",
 
             // İSPANYA
-            "real madrid": "https://upload.wikimedia.org/wikipedia/tr/9/98/Real_Madrid.png",
-            "barcelona, barça, barca": "https://upload.wikimedia.org/wikipedia/tr/9/9f/FC_Barcelona.png",
-            "sevilla": "https://upload.wikimedia.org/wikipedia/tr/4/46/Sevilla_FC_logo.png",
-            "valencia": "https://upload.wikimedia.org/wikipedia/tr/a/a4/Valencia_CF_logo.png",
-            "villarreal": "https://upload.wikimedia.org/wikipedia/tr/b/b3/Villarreal_CF_logo.png",
+            "real madrid": "upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+            "barcelona, barça, barca": "upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+            "atletico madrid, a. madrid": "upload.wikimedia.org/wikipedia/en/f/f4/Atletico_Madrid_2017_logo.svg",
+            "sevilla": "upload.wikimedia.org/wikipedia/en/3/3b/Sevilla_FC_logo.svg",
 
-            // DİĞERLERİ
-            "atalanta": "https://upload.wikimedia.org/wikipedia/tr/e/e0/Atalanta_BC_logo.png",
-            "lyon": "https://upload.wikimedia.org/wikipedia/tr/7/77/Olympique_Lyonnais_logo.png",
-            "monaco": "https://upload.wikimedia.org/wikipedia/tr/e/e9/AS_Monaco_FC_logo.png",
-            "lille": "https://upload.wikimedia.org/wikipedia/tr/6/6f/Lille_OSC_logo.png"
+            // İTALYA
+            "juventus, juve": "upload.wikimedia.org/wikipedia/commons/1/15/Juventus_FC_2017_logo.svg",
+            "inter, inter milan": "upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg",
+            "milan, ac milan": "upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg",
+            "napoli": "upload.wikimedia.org/wikipedia/commons/2/28/SSC_Napoli_Logo.svg",
+            "roma": "upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo_%282017%29.svg",
+
+            // ALMANYA
+            "bayern münih, bayern munich, bayern": "upload.wikimedia.org/wikipedia/commons/1/1b/FC_Bayern_M%C3%BCnchen_logo_%282017%29.svg",
+            "dortmund, borussia dortmund, bvb": "upload.wikimedia.org/wikipedia/commons/6/67/Borussia_Dortmund_logo.svg",
+            "leverkusen, bayer leverkusen": "upload.wikimedia.org/wikipedia/en/5/59/Bayer_04_Leverkusen_logo.svg",
+
+            // FRANSA & DİĞERLERİ
+            "psg, paris saint-germain": "upload.wikimedia.org/wikipedia/en/a/a7/Paris_Saint-Germain_F.C..svg",
+            "marsilya, marseille": "upload.wikimedia.org/wikipedia/en/4/43/Olympique_de_Marseille_logo.svg",
+            "ajax": "upload.wikimedia.org/wikipedia/en/7/79/Ajax_Amsterdam_logo.svg",
+            "benfica": "upload.wikimedia.org/wikipedia/en/a/a2/SL_Benfica_logo.svg",
+            "porto": "upload.wikimedia.org/wikipedia/en/f/f1/FC_Porto_logo.svg"
         };
 
+        // 🛡️ MÜKEMMEL PROXY SİSTEMİ (wsrv.nl) - Wikipedia'nın yasaklarını siler atar!
         function getTeamLogo(name) {
             let lowerName = name.toLocaleLowerCase('tr-TR').trim();
             for (let keys in teamLogos) {
                 let aliases = keys.split(',');
-                for (let alias of aliases) { if (lowerName === alias.trim() || lowerName.includes(alias.trim())) { return teamLogos[keys]; } }
+                for (let alias of aliases) { 
+                    if (lowerName === alias.trim() || lowerName.includes(alias.trim())) { 
+                        return "https://wsrv.nl/?url=" + teamLogos[keys] + "&w=150&output=png"; 
+                    } 
+                }
             }
-            return "https://cdn-icons-png.flaticon.com/512/1975/1975003.png"; 
+            return "https://wsrv.nl/?url=cdn-icons-png.flaticon.com/512/1975/1975003.png&w=150"; 
         }
 
         window.onload = function() { updateTemplateUI(); };
@@ -449,12 +468,12 @@ Juventus | 19:30 | Milan</textarea>
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // 1. Maç
+            // Maç
             document.getElementById('displayScore').innerText = document.getElementById('scoreInput').value;
             document.getElementById('displayHomeScorers').innerHTML = document.getElementById('homeScorersInput').value.replace(/\n/g, '<br>');
             document.getElementById('displayAwayScorers').innerHTML = document.getElementById('awayScorersInput').value.replace(/\n/g, '<br>');
 
-            // 2. İstatistik
+            // İstatistik
             let statsHtml = '';
             for(let i=1; i<=3; i++) {
                 const val = document.getElementById('s' + i + 'Input').value.split('|').map(c => c.trim());
@@ -462,7 +481,7 @@ Juventus | 19:30 | Milan</textarea>
             }
             document.getElementById('displayStatsList').innerHTML = statsHtml;
 
-            // 3. MOTM
+            // MOTM
             document.getElementById('displayMotmName').innerText = document.getElementById('motmNameInput').value;
             document.getElementById('displayMotmRating').innerText = document.getElementById('motmRatingInput').value;
             let motmHtml = '';
@@ -472,36 +491,36 @@ Juventus | 19:30 | Milan</textarea>
             }
             document.getElementById('displayMotmStats').innerHTML = motmHtml;
 
-            // 4. Quote
+            // Quote
             document.getElementById('displayQuoteText').innerText = document.getElementById('quoteTextInput').value;
             document.getElementById('displayQuoteAuthor').innerText = document.getElementById('quoteAuthorInput').value;
             const role = document.getElementById('quoteRoleInput').value; document.getElementById('displayQuoteRole').innerText = role ? `| ${role}` : "";
 
-            // 5. İlk 11
+            // İlk 11
             let hLineup = ''; document.getElementById('homeLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) hLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else hLineup += `<div>${row}</div>`; }); document.getElementById('displayHomeLineup').innerHTML = hLineup;
             let aLineup = ''; document.getElementById('awayLineupInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) aLineup += `<div><span class="num">${p[0].trim()}</span> ${p[1].trim()}</div>`; else aLineup += `<div>${row}</div>`; }); document.getElementById('displayAwayLineup').innerHTML = aLineup;
 
-            // 6. Sakatlık
+            // Sakatlık
             document.getElementById('displayInjuryTitle').innerText = document.getElementById('injuryTitleInput').value;
             let injHtml = ''; document.getElementById('injuryListInput').value.split('\n').forEach(row => { let p = row.split('|'); if(p.length > 1) injHtml += `<div>❌ ${p[0].trim()} <span class="reason">(${p[1].trim()})</span></div>`; }); document.getElementById('displayInjuryList').innerHTML = injHtml;
 
-            // 7. Puan Durumu (GÜVENLİ CROSSORIGIN IMAGE EKLENDİ)
+            // Puan Durumu (GÜVENLİ VE PROXY DESTEKLİ)
             let stHtml = '';
             document.getElementById('standingsInput').value.split('\n').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
-                if(cols.length >= 5) stHtml += `<tr><td>${cols[0]}</td><td class="team-cell"><img src="${getTeamLogo(cols[1])}" crossorigin="anonymous" class="table-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1975/1975003.png'"> ${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
+                if(cols.length >= 5) stHtml += `<tr><td>${cols[0]}</td><td class="team-cell"><img src="${getTeamLogo(cols[1])}" crossorigin="anonymous" class="table-logo"> ${cols[1]}</td><td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[4]}</td></tr>`;
             });
             document.getElementById('displayStandings').innerHTML = stHtml;
 
-            // 8. Fikstür
+            // Fikstür
             let fixHtml = '';
             document.getElementById('fixturesInput').value.split('\n').forEach(row => {
                 const cols = row.split('|').map(c => c.trim());
-                if(cols.length >= 3) fixHtml += `<div class="fixture-item"><div class="f-team"><img src="${getTeamLogo(cols[0])}" crossorigin="anonymous" class="table-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1975/1975003.png'"> ${cols[0]}</div><div class="f-time">${cols[1]}</div><div class="f-team away">${cols[2]} <img src="${getTeamLogo(cols[2])}" crossorigin="anonymous" class="table-logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/1975/1975003.png'"></div></div>`;
+                if(cols.length >= 3) fixHtml += `<div class="fixture-item"><div class="f-team"><img src="${getTeamLogo(cols[0])}" crossorigin="anonymous" class="table-logo"> ${cols[0]}</div><div class="f-time">${cols[1]}</div><div class="f-team away">${cols[2]} <img src="${getTeamLogo(cols[2])}" crossorigin="anonymous" class="table-logo"></div></div>`;
             });
             document.getElementById('displayFixtures').innerHTML = fixHtml;
 
-            // 9. Transfer
+            // Transfer
             document.getElementById('displayTrTag').innerText = document.getElementById('trTagInput').value;
             document.getElementById('displayTrName').innerText = document.getElementById('trNameInput').value;
             const det1 = document.getElementById('trDet1Input').value.split('|'); if(det1.length>1) document.getElementById('displayTrDet1').innerHTML = `${det1[0]}: <span>${det1[1]}</span>`;
@@ -562,7 +581,7 @@ Juventus | 19:30 | Milan</textarea>
 
         function downloadImage() {
             const element = document.getElementById('exportCanvas');
-            html2canvas(element, { scale: 1.5, useCORS: true, backgroundColor: "#050505", windowWidth: element.scrollWidth, windowHeight: element.scrollHeight }).then(canvas => {
+            html2canvas(element, { scale: 1.5, useCORS: true, allowTaint: true, backgroundColor: "#050505", windowWidth: element.scrollWidth, windowHeight: element.scrollHeight }).then(canvas => {
                 const link = document.createElement('a');
                 link.download = document.getElementById('formatType').value === 'story' ? 'Story_Gonderi.png' : 'AnaSayfa_Gonderi.png';
                 link.href = canvas.toDataURL('image/png');
