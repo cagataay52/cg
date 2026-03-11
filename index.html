@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skor Ağı İçerik Motoru - V20 Eşleşmeler</title>
+    <title>Skor Ağı İçerik Motoru - V21 Hatasız Sürüm</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
@@ -67,7 +67,8 @@
         
         .plate-side { top: 0; left: 0; width: 100%; height: 100%; }
         
-        .plate-news { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; height: fit-content; width: 960px; background: rgba(15,15,15,0.8); backdrop-filter: blur(30px); border: 1px solid var(--plate-border); border-radius: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.9); display: flex; flex-direction: column; overflow: hidden; }
+        /* 📰 HABER LAYOUT'U (display: flex HATASI DÜZELTİLDİ!) */
+        .plate-news { position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto; height: fit-content; width: 960px; background: rgba(15,15,15,0.8); backdrop-filter: blur(30px); border: 1px solid var(--plate-border); border-radius: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.9); flex-direction: column; overflow: hidden; }
         
         .view-block { display: none; width: 100%; }
         .view-block.active { display: block; }
@@ -75,7 +76,7 @@
         /* --- İÇERİK TASARIMLARI --- */
         .center-title { font-size: 48px; font-weight: 900; text-align: center; margin-bottom: 30px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-color); }
         
-        /* 🏆 YENİ: EŞLEŞMELER (MATCHUPS) CSS */
+        /* Eşleşmeler (Matchups) */
         .matchup-list { display: flex; flex-direction: column; gap: 25px; width: 100%; }
         .matchup-card { display: flex; justify-content: space-between; align-items: center; padding: 25px 40px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
         .m-team { display: flex; align-items: center; gap: 20px; font-size: 38px; font-weight: 900; width: 42%; text-transform: uppercase; text-shadow: 0 5px 10px rgba(0,0,0,0.5);}
@@ -131,7 +132,7 @@
         .injury-list span.reason { color: #ff3333; font-style: italic; font-size: 24px; margin-left: 10px; }
         .injury-icon { font-size: 60px; text-align: center; margin-bottom: -10px; }
 
-        /* Haber */
+        /* Haber Şablonu */
         .news-header-bar { background: var(--primary-color); padding: 20px 40px; display: flex; align-items: center; gap: 20px; }
         .news-flashing-dot { width: 25px; height: 25px; background: #fff; border-radius: 50%; box-shadow: 0 0 20px rgba(255,255,255,0.8); }
         .news-badge-text { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: 4px; text-transform: uppercase; }
@@ -194,7 +195,8 @@
         <div class="control-group">
             <label>Tasarım Şablonu</label>
             <select id="templateType" onchange="updateTemplateUI()">
-                <option value="matchups">1. Turnuva Eşleşmeleri 🏆</option> <option value="news">2. Haber / Son Dakika 📰</option>
+                <option value="matchups">1. Turnuva Eşleşmeleri 🏆</option>
+                <option value="news">2. Haber / Son Dakika 📰</option>
                 <option value="standings">3. Puan Durumu (20 Takım) 📊</option>
                 <option value="fixtures">4. Günün Maçları 🗓️</option>
                 <option value="match">5. Maç Sonucu</option>
@@ -239,7 +241,7 @@
 Arsenal | VS | Bayern Münih
 Galatasaray | VS | Milan
 PSG | VS | Barcelona</textarea>
-            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Logolar otomatik çekilir. Ortadaki "VS" yerine tarih veya skor da yazabilirsiniz.</small>
+            <small style="color:var(--primary-color); display:block; margin-top:5px; font-weight:bold;">Logolar otomatik çekilir. Ortadaki "VS" yerine tarih de yazabilirsiniz.</small>
         </div>
 
         <div id="newsControls" class="control-group hidden-control">
@@ -388,7 +390,9 @@ Nelsson | Kırmızı Kart</textarea>
     </div>
 
     <script>
+        // 💾 MANUEL LOGO VERİTABANI
         let manualLogos = {};
+
         function getTeamLogo(name) {
             let lowerName = name.toLocaleLowerCase('tr-TR').trim();
             if (manualLogos[lowerName]) return manualLogos[lowerName];
@@ -487,7 +491,7 @@ Nelsson | Kırmızı Kart</textarea>
         function updateContent() {
             document.getElementById('displayWatermark').innerText = document.getElementById('watermarkInput').value;
             
-            // 🏆 YENİ: EŞLEŞMELER
+            // Eşleşmeler
             if(document.getElementById('matchupsTitleInput')) {
                 document.getElementById('displayMatchupsTitle').innerText = document.getElementById('matchupsTitleInput').value;
                 let muHtml = '';
@@ -621,7 +625,6 @@ Nelsson | Kırmızı Kart</textarea>
             updateContent();
         }
 
-        // İNDİRME FONKSİYONU
         function downloadImage() {
             const btn = document.getElementById('dlBtn');
             const originalText = btn.innerText;
